@@ -1,0 +1,591 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  ArrowRight,
+  Headphones,
+  Keyboard,
+  LayoutGrid,
+  Monitor,
+  Mouse,
+  Rows3,
+  Search,
+  ShoppingCart,
+  Star,
+  Grid2x2,
+  Grid3x3,
+  X,
+} from "lucide-react";
+
+/* ===================== Types & data ===================== */
+
+type Category = "Audio" | "Monitors" | "Mice" | "Keyboards";
+
+type Product = {
+  id: number;
+  name: string;
+  category: Category;
+  price: number;
+  oldPrice?: number;
+  rating: number;
+  reviews: number;
+  colors: string[]; // hex
+  inStock: boolean;
+  image?: string; // مثال: "/images/products/elite-audio.png"
+};
+
+const PRODUCTS: Product[] = [
+  { id: 1, name: "Elite Audio Gear", category: "Audio", price: 40, oldPrice: 45, rating: 5, reviews: 12, colors: ["#ffffff", "#3b82f6", "#ef4444"], inStock: true },
+  { id: 2, name: "Elysian Blend", category: "Audio", price: 25, oldPrice: 40, rating: 5, reviews: 8, colors: ["#111827", "#3b82f6", "#ef4444"], inStock: true },
+  { id: 3, name: "Elysian LCD", category: "Monitors", price: 80, oldPrice: 90, rating: 4, reviews: 21, colors: ["#111827", "#3b82f6"], inStock: true },
+  { id: 4, name: "Hyper Glide Mouse", category: "Mice", price: 30, oldPrice: 50, rating: 5, reviews: 33, colors: ["#ef4444", "#111827"], inStock: true },
+  { id: 5, name: "Hyper Glide Pro", category: "Mice", price: 30, oldPrice: 40, rating: 4, reviews: 17, colors: ["#6b7280", "#ef4444", "#3b82f6"], inStock: false },
+  { id: 6, name: "Key Master Elite", category: "Keyboards", price: 70, oldPrice: 80, rating: 5, reviews: 41, colors: ["#3b82f6", "#ef4444", "#ffffff"], inStock: true },
+  { id: 7, name: "Sonic Wave X", category: "Audio", price: 55, rating: 4, reviews: 9, colors: ["#111827", "#22c55e"], inStock: true },
+  { id: 8, name: "Vision Curve 27", category: "Monitors", price: 120, oldPrice: 150, rating: 5, reviews: 26, colors: ["#111827"], inStock: true },
+  { id: 9, name: "Phantom Click", category: "Mice", price: 22, rating: 4, reviews: 14, colors: ["#ffffff", "#111827"], inStock: true },
+  { id: 10, name: "Type Storm RGB", category: "Keyboards", price: 90, oldPrice: 110, rating: 5, reviews: 52, colors: ["#111827", "#ef4444", "#22c55e"], inStock: false },
+  { id: 11, name: "Nova Headset", category: "Audio", price: 65, rating: 4, reviews: 11, colors: ["#ffffff", "#3b82f6"], inStock: true },
+  { id: 12, name: "Pixel Edge 24", category: "Monitors", price: 95, oldPrice: 105, rating: 4, reviews: 19, colors: ["#111827", "#ef4444"], inStock: true },
+];
+
+const CATEGORY_ICONS = {
+  Audio: Headphones,
+  Monitors: Monitor,
+  Mice: Mouse,
+  Keyboards: Keyboard,
+} as const;
+
+const COLOR_FILTERS = [
+  "#ffffff",
+  "#111827",
+  "#3b82f6",
+  "#ef4444",
+  "#22c55e",
+  "#6b7280",
+];
+
+const SORT_OPTIONS = [
+  { value: "alpha-asc", label: "Alphabetically, A-Z" },
+  { value: "alpha-desc", label: "Alphabetically, Z-A" },
+  { value: "price-asc", label: "Price, low to high" },
+  { value: "price-desc", label: "Price, high to low" },
+] as const;
+
+type SortValue = (typeof SORT_OPTIONS)[number]["value"];
+
+const GRID_COLS = {
+  2: "lg:grid-cols-2",
+  3: "lg:grid-cols-3",
+  4: "lg:grid-cols-4",
+} as const;
+
+const PAGE_SIZE = 6;
+const MAX_PRICE = Math.max(...PRODUCTS.map((p) => p.price));
+
+/* ===================== Page ===================== */
+
+export default function SectionsPage() {
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState<Category | "All">("All");
+  const [inStockOnly, setInStockOnly] = useState(false);
+  const [outOfStockOnly, setOutOfStockOnly] = useState(false);
+  const [maxPrice, setMaxPrice] = useState(MAX_PRICE);
+  const [color, setColor] = useState<string | null>(null);
+  const [sort, setSort] = useState<SortValue>("alpha-asc");
+  const [cols, setCols] = useState<2 | 3 | 4>(3);
+  const [page, setPage] = useState(1);
+
+  const resetPage = () => setPage(1);
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    const list = PRODUCTS.filter((p) => {
+      if (q && !p.name.toLowerCase().includes(q)) return false;
+      if (category !== "All" && p.category !== category) return false;
+      if (inStockOnly && !outOfStockOnly && !p.inStock) return false;
+      if (outOfStockOnly && !inStockOnly && p.inStock) return false;
+      if (p.price > maxPrice) return false;
+      if (color && !p.colors.includes(color)) return false;
+      return true;
+    });
+
+    list.sort((a, b) => {
+      switch (sort) {
+        case "alpha-asc":
+          return a.name.localeCompare(b.name);
+        case "alpha-desc":
+          return b.name.localeCompare(a.name);
+        case "price-asc":
+          return a.price - b.price;
+        case "price-desc":
+          return b.price - a.price;
+      }
+    });
+    return list;
+  }, [query, category, inStockOnly, outOfStockOnly, maxPrice, color, sort]);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const visible = filtered.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE
+  );
+
+  const hasFilters =
+    query || category !== "All" || inStockOnly || outOfStockOnly || color || maxPrice < MAX_PRICE;
+
+  const clearAll = () => {
+    setQuery("");
+    setCategory("All");
+    setInStockOnly(false);
+    setOutOfStockOnly(false);
+    setMaxPrice(MAX_PRICE);
+    setColor(null);
+    resetPage();
+  };
+
+  return (
+    <main className="relative isolate min-h-screen overflow-hidden bg-[#05090f] font-[family-name:var(--font-orbitron)] text-white">
+      {/* ===== Background (same language as Hero) ===== */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, #22d3ee 1px, transparent 1px), linear-gradient(to bottom, #22d3ee 1px, transparent 1px)",
+          backgroundSize: "56px 56px",
+          maskImage:
+            "radial-gradient(ellipse at top, black 20%, transparent 70%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse at top, black 20%, transparent 70%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -left-40 top-0 -z-10 h-[380px] w-[380px] rounded-full bg-cyan-500/15 blur-[120px]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-32 top-1/2 -z-10 h-[340px] w-[340px] rounded-full bg-emerald-500/10 blur-[120px]"
+      />
+
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-14">
+        {/* ===== Title ===== */}
+        <div className="mb-8 text-center lg:text-left">
+          <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/5 px-3 py-1 text-xs font-medium text-cyan-300">
+            <span className="h-2 w-2 rounded-full bg-cyan-400" />
+            Gaming gear
+          </span>
+          <h1 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">
+            Our{" "}
+            <span className="bg-gradient-to-r from-cyan-300 via-cyan-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(34,211,238,0.35)]">
+              Sections
+            </span>
+          </h1>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-[260px_1fr]">
+          {/* ===================== Sidebar ===================== */}
+          <aside className="h-fit space-y-6 rounded-2xl border border-cyan-400/15 bg-[#0a1119]/90 p-4 shadow-[0_0_40px_rgba(6,182,212,0.08)] backdrop-blur lg:sticky lg:top-24">
+            {/* search */}
+            <div className="relative">
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  resetPage();
+                }}
+                placeholder="Search here"
+                aria-label="Search products"
+                className="h-10 w-full rounded-lg border border-white/10 bg-black/40 pl-3 pr-12 text-xs text-white placeholder:text-slate-500 outline-none transition focus:border-cyan-400/60 focus:shadow-[0_0_14px_rgba(6,182,212,0.3)]"
+              />
+              <span
+                aria-hidden
+                className="absolute right-0 top-0 grid h-10 w-10 place-items-center rounded-r-lg bg-cyan-500 text-[#06121a]"
+              >
+                <Search className="h-4 w-4" />
+              </span>
+            </div>
+
+            {/* categories */}
+            <FilterGroup title="Product Categories">
+              <ul className="space-y-1">
+                {(["All", "Audio", "Monitors", "Mice", "Keyboards"] as const).map(
+                  (c) => {
+                    const active = category === c;
+                    const Icon = c === "All" ? LayoutGrid : CATEGORY_ICONS[c];
+                    const count =
+                      c === "All"
+                        ? PRODUCTS.length
+                        : PRODUCTS.filter((p) => p.category === c).length;
+                    return (
+                      <li key={c}>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setCategory(c);
+                            resetPage();
+                          }}
+                          className={`group flex w-full items-center justify-between rounded-lg px-3 py-2 text-xs transition-all duration-300 ${
+                            active
+                              ? "bg-cyan-500 font-bold text-[#06121a] shadow-[0_0_16px_rgba(6,182,212,0.45)]"
+                              : "text-slate-300 hover:bg-white/5 hover:text-cyan-300"
+                          }`}
+                        >
+                          <span className="flex items-center gap-2">
+                            <Icon className="h-3.5 w-3.5" />
+                            {c}
+                          </span>
+                          <span className={active ? "" : "text-slate-500"}>
+                            {count}
+                          </span>
+                        </button>
+                      </li>
+                    );
+                  }
+                )}
+              </ul>
+            </FilterGroup>
+
+            {/* availability */}
+            <FilterGroup title="Availability">
+              <label className="flex cursor-pointer items-center gap-2 text-xs text-slate-300">
+                <input
+                  type="checkbox"
+                  checked={inStockOnly}
+                  onChange={(e) => {
+                    setInStockOnly(e.target.checked);
+                    resetPage();
+                  }}
+                  className="h-3.5 w-3.5 accent-cyan-400"
+                />
+                In Stock ({PRODUCTS.filter((p) => p.inStock).length})
+              </label>
+              <label className="mt-2 flex cursor-pointer items-center gap-2 text-xs text-slate-300">
+                <input
+                  type="checkbox"
+                  checked={outOfStockOnly}
+                  onChange={(e) => {
+                    setOutOfStockOnly(e.target.checked);
+                    resetPage();
+                  }}
+                  className="h-3.5 w-3.5 accent-cyan-400"
+                />
+                Out Of Stock ({PRODUCTS.filter((p) => !p.inStock).length})
+              </label>
+            </FilterGroup>
+
+            {/* price */}
+            <FilterGroup title="Price">
+              <input
+                type="range"
+                min={0}
+                max={MAX_PRICE}
+                value={maxPrice}
+                onChange={(e) => {
+                  setMaxPrice(Number(e.target.value));
+                  resetPage();
+                }}
+                aria-label="Maximum price"
+                className="h-1.5 w-full cursor-pointer accent-cyan-400"
+              />
+              <div className="mt-2 flex items-center justify-between text-[11px] text-slate-400">
+                <span>$0</span>
+                <span className="font-bold text-cyan-300">Up to ${maxPrice}</span>
+              </div>
+            </FilterGroup>
+
+            {/* colors */}
+            <FilterGroup title="Color">
+              <div className="flex flex-wrap gap-2">
+                {COLOR_FILTERS.map((c) => {
+                  const active = color === c;
+                  return (
+                    <button
+                      key={c}
+                      type="button"
+                      aria-label={`Filter by color ${c}`}
+                      aria-pressed={active}
+                      onClick={() => {
+                        setColor(active ? null : c);
+                        resetPage();
+                      }}
+                      style={{ backgroundColor: c }}
+                      className={`h-6 w-6 rounded-full border transition-all duration-300 hover:scale-110 ${
+                        active
+                          ? "border-cyan-300 ring-2 ring-cyan-400 ring-offset-2 ring-offset-[#0a1119]"
+                          : "border-white/20"
+                      }`}
+                    />
+                  );
+                })}
+              </div>
+            </FilterGroup>
+
+            {/* promo banner */}
+            <Link
+              href="/offers"
+              className="group relative block overflow-hidden rounded-xl border border-cyan-400/20 bg-gradient-to-br from-cyan-500/20 via-[#0a1119] to-emerald-500/10 p-4 transition-all duration-500 hover:border-cyan-400/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.25)]"
+            >
+              <p className="text-[11px] font-semibold uppercase tracking-widest text-cyan-300">
+                Hot deals
+              </p>
+              <p className="mt-1 text-base font-extrabold leading-tight">
+                Level up your setup
+              </p>
+              <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-300">
+                See offers
+                <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+              </span>
+            </Link>
+
+            {hasFilters && (
+              <button
+                type="button"
+                onClick={clearAll}
+                className="flex w-full items-center justify-center gap-2 rounded-lg border border-white/10 py-2 text-xs font-semibold text-slate-300 transition hover:border-pink-400/50 hover:text-pink-400"
+              >
+                <X className="h-3.5 w-3.5" />
+                Clear filters
+              </button>
+            )}
+          </aside>
+
+          {/* ===================== Products ===================== */}
+          <section>
+            {/* toolbar */}
+            <div className="mb-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/5 bg-white/[0.03] px-3 py-2">
+              <div className="flex items-center gap-3">
+                <div className="hidden items-center gap-1 sm:flex">
+                  {(
+                    [
+                      [2, Grid2x2],
+                      [3, Grid3x3],
+                      [4, Rows3],
+                    ] as const
+                  ).map(([n, Icon]) => (
+                    <button
+                      key={n}
+                      type="button"
+                      aria-label={`${n} columns`}
+                      aria-pressed={cols === n}
+                      onClick={() => setCols(n)}
+                      className={`hidden h-8 w-8 place-items-center rounded-md transition-all duration-300 lg:grid ${
+                        cols === n
+                          ? "bg-cyan-500 text-[#06121a] shadow-[0_0_14px_rgba(6,182,212,0.5)]"
+                          : "text-slate-400 hover:bg-white/5 hover:text-cyan-300"
+                      }`}
+                    >
+                      <Icon className="h-4 w-4" />
+                    </button>
+                  ))}
+                </div>
+                <span className="text-xs text-slate-400">
+                  <span className="font-bold text-white">{filtered.length}</span>{" "}
+                  Products
+                </span>
+              </div>
+
+              <label className="flex items-center gap-2 text-xs text-slate-400">
+                Sort by:
+                <select
+                  value={sort}
+                  onChange={(e) => {
+                    setSort(e.target.value as SortValue);
+                    resetPage();
+                  }}
+                  className="rounded-md border border-white/10 bg-black/50 px-2 py-1.5 text-xs text-white outline-none transition focus:border-cyan-400/60"
+                >
+                  {SORT_OPTIONS.map((o) => (
+                    <option key={o.value} value={o.value}>
+                      {o.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+
+            {/* grid */}
+            {visible.length > 0 ? (
+              <div
+                className={`grid grid-cols-1 gap-4 sm:grid-cols-2 ${GRID_COLS[cols]}`}
+              >
+                {visible.map((p) => (
+                  <ProductCard key={p.id} product={p} />
+                ))}
+              </div>
+            ) : (
+              <div className="grid place-items-center rounded-2xl border border-dashed border-white/10 py-20 text-center">
+                <p className="text-sm font-semibold text-slate-300">
+                  No products match your filters
+                </p>
+                <button
+                  type="button"
+                  onClick={clearAll}
+                  className="mt-4 rounded-full bg-cyan-500 px-5 py-2 text-xs font-bold text-[#06121a] transition hover:scale-105"
+                >
+                  Clear filters
+                </button>
+              </div>
+            )}
+
+            {/* pagination */}
+            {totalPages > 1 && (
+              <nav
+                aria-label="Pagination"
+                className="mt-8 flex items-center justify-center gap-2"
+              >
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+                  <button
+                    key={n}
+                    type="button"
+                    aria-current={n === currentPage ? "page" : undefined}
+                    onClick={() => setPage(n)}
+                    className={`grid h-9 w-9 place-items-center rounded-lg text-xs font-bold transition-all duration-300 ${
+                      n === currentPage
+                        ? "bg-cyan-500 text-[#06121a] shadow-[0_0_16px_rgba(6,182,212,0.5)]"
+                        : "border border-white/10 text-slate-300 hover:border-cyan-400/50 hover:text-cyan-300"
+                    }`}
+                  >
+                    {n}
+                  </button>
+                ))}
+                {currentPage < totalPages && (
+                  <button
+                    type="button"
+                    aria-label="Next page"
+                    onClick={() => setPage(currentPage + 1)}
+                    className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 text-slate-300 transition hover:border-cyan-400/50 hover:text-cyan-300"
+                  >
+                    <ArrowRight className="h-4 w-4" />
+                  </button>
+                )}
+              </nav>
+            )}
+          </section>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+/* ===================== Sub components ===================== */
+
+function FilterGroup({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <h2 className="mb-3 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-cyan-300">
+        <span className="h-px w-3 bg-cyan-400/60" />
+        {title}
+      </h2>
+      {children}
+    </div>
+  );
+}
+
+function ProductCard({ product: p }: { product: Product }) {
+  const Icon = CATEGORY_ICONS[p.category];
+  const discount = p.oldPrice
+    ? Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100)
+    : 0;
+
+  return (
+    <article className="group relative overflow-hidden rounded-2xl border border-white/5 bg-[#0a1119]/90 transition-all duration-500 hover:-translate-y-1.5 hover:border-cyan-400/40 hover:shadow-[0_0_35px_rgba(6,182,212,0.22)]">
+      {/* image */}
+      <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-[#0d1824] to-[#070d14]">
+        {p.image ? (
+          <Image
+            src={p.image}
+            alt={p.name}
+            fill
+            sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 300px"
+            className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : (
+          <div className="absolute inset-0 grid place-items-center">
+            <div className="absolute h-28 w-28 rounded-full bg-cyan-400/10 blur-2xl transition-all duration-500 group-hover:bg-cyan-400/25" />
+            <Icon className="relative h-16 w-16 text-cyan-400/80 drop-shadow-[0_0_14px_rgba(34,211,238,0.5)] transition-transform duration-500 group-hover:scale-110" />
+          </div>
+        )}
+
+        {discount > 0 && (
+          <span className="absolute left-3 top-3 rounded-md bg-cyan-500 px-2 py-0.5 text-[10px] font-bold text-[#06121a] shadow-[0_0_12px_rgba(6,182,212,0.5)]">
+            -{discount}%
+          </span>
+        )}
+        {!p.inStock && (
+          <span className="absolute right-3 top-3 rounded-md border border-red-400/40 bg-red-500/20 px-2 py-0.5 text-[10px] font-semibold text-red-300 backdrop-blur">
+            Out of stock
+          </span>
+        )}
+      </div>
+
+      {/* info */}
+      <div className="space-y-2 p-4">
+        <h3 className="truncate text-sm font-bold text-white transition-colors group-hover:text-cyan-300">
+          {p.name}
+        </h3>
+
+        <div className="flex items-center gap-1.5">
+          <div className="flex" aria-label={`${p.rating} out of 5 stars`}>
+            {Array.from({ length: 5 }, (_, i) => (
+              <Star
+                key={i}
+                className={`h-3 w-3 ${
+                  i < p.rating
+                    ? "fill-amber-400 text-amber-400"
+                    : "text-slate-600"
+                }`}
+              />
+            ))}
+          </div>
+          <span className="text-[10px] text-slate-500">
+            ({p.reviews} Reviews)
+          </span>
+        </div>
+
+        <div className="flex items-center gap-1.5">
+          {p.colors.map((c) => (
+            <span
+              key={c}
+              style={{ backgroundColor: c }}
+              className="h-2.5 w-2.5 rounded-full border border-white/20"
+            />
+          ))}
+        </div>
+
+        <div className="flex items-end justify-between pt-1">
+          <div className="flex items-baseline gap-2">
+            {p.oldPrice && (
+              <span className="text-xs text-slate-500 line-through">
+                ${p.oldPrice.toFixed(2)}
+              </span>
+            )}
+            <span className="text-lg font-extrabold text-white">
+              ${p.price.toFixed(2)}
+            </span>
+          </div>
+
+          <button
+            type="button"
+            disabled={!p.inStock}
+            aria-label={`Add ${p.name} to cart`}
+            className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-r from-orange-500 to-amber-400 text-[#1a0f00] shadow-[0_0_14px_rgba(249,115,22,0.3)] transition-all duration-300 hover:scale-110 hover:shadow-[0_0_22px_rgba(249,115,22,0.6)] active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100"
+          >
+            <ShoppingCart className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
+    </article>
+  );
+}
