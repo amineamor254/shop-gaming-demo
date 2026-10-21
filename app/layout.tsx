@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   description: "MIAN Games",
 };
 
+/** Provides the shared site shell, fonts, and cart state for every route. */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">

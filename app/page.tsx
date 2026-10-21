@@ -5,6 +5,7 @@ import Blog from "@/components/Blog/page";
 import Offers from "@/components/Offers/page";
 import Contact from "@/components/Contact/page";
 
+/** Composes the storefront's landing-page sections in their display order. */
 export default function Home() {
   return (
     <main>
