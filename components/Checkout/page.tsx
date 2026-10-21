@@ -75,7 +75,7 @@ const INITIAL: Values = {
   terms: false,
 };
 
-// ترتيب الحقول لنقل التركيز إلى أول خطأ
+// Keep this order aligned with the form so focus moves to the first invalid field.
 const FIELD_ORDER: FieldKey[] = [
   "email",
   "phone",
@@ -95,7 +95,8 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /* ===================== Validation ===================== */
 
-// خوارزمية Luhn للتحقق من رقم البطاقة (أرقام الاختبار مثل 4242 4242 4242 4242 تنجح)
+// The Luhn checksum catches common card-number typos; valid test numbers pass.
+// For example, 4242 4242 4242 4242 passes this checksum.
 function luhn(num: string) {
   let sum = 0;
   let alt = false;
@@ -111,15 +112,15 @@ function luhn(num: string) {
   return sum % 10 === 0;
 }
 
-// تنسيق تاريخ الانتهاء MM/YY مع تصحيح الأخطاء الشائعة أثناء الكتابة
+// Normalize common input mistakes while formatting expiry dates as MM/YY.
 function formatExpiry(raw: string) {
   let d = raw.replace(/\D/g, "").slice(0, 6);
 
-  // رقم أول أكبر من 1 (مثل 5) أو شهر أكبر من 12 (مثل 13) → نضيف صفراً قبله
+  // Prefix a zero when the first digit or two-digit month is outside the usual month range.
   if (d.length >= 1 && Number(d[0]) > 1) d = "0" + d;
   else if (d.length >= 2 && Number(d.slice(0, 2)) > 12) d = "0" + d;
 
-  // السنة بأربع خانات (12/2028) → نحذف "20" لتصبح 12/28
+  // Convert four-digit years such as 12/2028 to the displayed two-digit form, 12/28.
   if (d.length > 4 && d.slice(2, 4) === "20") d = d.slice(0, 2) + d.slice(4);
 
   d = d.slice(0, 4);
@@ -168,6 +169,7 @@ function validate(v: Values, payment: PaymentId): Errors {
 
 /* ===================== Page ===================== */
 
+/** Validates checkout details, calculates totals, and presents the order confirmation state. */
 export default function CheckoutPage() {
   const { items, count, subtotal, promo, hydrated, clear } = useCart();
 
@@ -205,11 +207,10 @@ export default function CheckoutPage() {
 
     setStatus("placing");
     try {
-      // TODO: هنا تربط الدفع الفعلي:
-      //  1) أنشئ الطلب في الخادم (POST /api/orders)
-      //  2) للدفع بالبطاقة استعمل حقول مزوّد الدفع الجاهزة (مثل Stripe Elements)
-      //     ولا ترسل أرقام البطاقات إلى خادمك مباشرة.
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // محاكاة
+      // TODO: Connect a server-side order endpoint and secure payment-provider fields, such as Stripe Elements.
+      // Never send raw card numbers directly to your server; use the provider's secure card fields.
+      // TODO: Replace this simulated delay with the real order and payment request.
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       const id = `ORD-${crypto.randomUUID().replace(/-/g, "").slice(0, 9).toUpperCase()}`;
 
@@ -223,7 +224,7 @@ export default function CheckoutPage() {
         payment,
         address: `${values.fullName.trim()}, ${values.address.trim()}, ${values.postal.trim()} ${values.city.trim()}, ${values.country}`,
       });
-      clear(); // تفريغ السلة بعد نجاح الطلب
+      clear();
       setStatus("idle");
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch {
@@ -233,7 +234,7 @@ export default function CheckoutPage() {
 
   return (
     <main className="relative isolate min-h-[70vh] overflow-clip bg-[#05090f] font-[family-name:var(--font-orbitron)] text-white">
-      {/* ===== Background ===== */}
+      {/* ===================== Background ===================== */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06]"
@@ -255,7 +256,7 @@ export default function CheckoutPage() {
       />
 
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-14">
-        {/* ===== Breadcrumb + title ===== */}
+        {/* ===================== Breadcrumb and title ===================== */}
         <nav
           aria-label="Breadcrumb"
           className="mb-6 flex flex-wrap items-center justify-center gap-2 text-xs text-slate-400 lg:justify-start"
@@ -286,7 +287,8 @@ export default function CheckoutPage() {
           </h1>
         </div>
 
-        {/* ===== States ===== */}
+        {/* ===================== Checkout states ===================== */}
+        {/* Wait for persisted cart data before deciding whether to show checkout or an empty-cart state. */}
         {!hydrated ? (
           <div className="grid gap-6 lg:grid-cols-[1fr_380px]" aria-busy="true">
             <div className="space-y-4">
@@ -312,7 +314,6 @@ export default function CheckoutPage() {
           >
             {/* ===================== Steps ===================== */}
             <div className="space-y-6">
-              {/* 1. Contact */}
               <StepCard step={1} title="Contact" icon={Mail}>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <Field label="Email" id="co-email" error={errors.email}>
@@ -344,7 +345,6 @@ export default function CheckoutPage() {
                 </div>
               </StepCard>
 
-              {/* 2. Address */}
               <StepCard step={2} title="Shipping address" icon={MapPin}>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="sm:col-span-2">
@@ -424,7 +424,6 @@ export default function CheckoutPage() {
                 </div>
               </StepCard>
 
-              {/* 3. Delivery */}
               <StepCard step={3} title="Delivery method" icon={Truck}>
                 <div
                   role="radiogroup"
@@ -448,7 +447,6 @@ export default function CheckoutPage() {
                 </div>
               </StepCard>
 
-              {/* 4. Payment */}
               <StepCard step={4} title="Payment" icon={CreditCard}>
                 <div
                   role="radiogroup"
@@ -473,7 +471,7 @@ export default function CheckoutPage() {
 
                 {payment === "card" ? (
                   <div className="mt-5 grid gap-4 sm:grid-cols-2">
-                    {/* TODO: استبدل هذه الحقول بحقول مزوّد الدفع الجاهزة (Stripe Elements مثلاً) */}
+                    {/* TODO: Replace these inputs with the payment provider's secure card fields. */}
                     <div className="sm:col-span-2">
                       <Field label="Card number" id="co-cardNumber" error={errors.cardNumber}>
                         <input
@@ -627,7 +625,6 @@ export default function CheckoutPage() {
                     </div>
                   </div>
 
-                  {/* terms */}
                   <div>
                     <label className="flex cursor-pointer items-start gap-2.5 text-[11px] leading-relaxed text-slate-300">
                       <input
