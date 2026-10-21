@@ -31,11 +31,11 @@ type Part = {
   name: string;
   spec: string;
   price: number;
-  score?: number; // 0-100, used for performance bars
-  power?: number; // watts drawn (cpu / gpu)
-  watts?: number; // psu capacity
-  radiator?: number; // cooling radiator size in mm (0 = air)
-  maxRadiator?: number; // case radiator support in mm
+  score?: number; // 0-100 score used by the performance estimates.
+  power?: number; // CPU or GPU power draw in watts.
+  watts?: number; // Power supply capacity in watts.
+  radiator?: number; // Cooling radiator size in millimeters; 0 represents air cooling.
+  maxRadiator?: number; // Maximum radiator size supported by the case, in millimeters.
   popular?: boolean;
 };
 
@@ -47,7 +47,7 @@ type Category = {
   parts: Part[];
 };
 
-/* ===================== Data (عدّلها لمنتجاتك) ===================== */
+/* ===================== Product data ===================== */
 
 const CATEGORIES: Category[] = [
   {
@@ -303,13 +303,14 @@ const METRICS = [
   { label: "Productivity", w: { cpu: 0.45, gpu: 0.15, ram: 0.25, storage: 0.15 } },
 ] as const;
 
-const BASE_POWER = 100; // motherboard, fans, drives...
+const BASE_POWER = 100; // Estimated draw for the motherboard, fans, drives, and other components.
 const FINANCE_MONTHS = 12;
 
 const money = (n: number) => `$${n.toLocaleString("en-US")}`;
 
 /* ===================== Section ===================== */
 
+/** Lets buyers select PC parts and checks basic power and radiator compatibility. */
 export default function Configurator() {
   const [selection, setSelection] = useState<Selection>(PRESETS[1].picks);
   const [copied, setCopied] = useState(false);
@@ -332,7 +333,7 @@ export default function Configurator() {
     variant: `${chosen.cpu.name} · ${chosen.gpu.name} · ${chosen.ram.name}`,
   };
 
-  // performance
+  // Weighted component scores estimate relative performance across common workloads.
   const performance = METRICS.map((m) => {
     const value =
       m.w.cpu * (chosen.cpu.score ?? 0) +
@@ -342,10 +343,11 @@ export default function Configurator() {
     return { label: m.label, value: Math.round(value) };
   });
 
-  // compatibility checks
+  // Reserve 50% power headroom and round the PSU recommendation up to a 50 W increment.
   const draw = (chosen.cpu.power ?? 0) + (chosen.gpu.power ?? 0) + BASE_POWER;
   const recommendedWatts = Math.ceil((draw * 1.5) / 50) * 50;
   const psuOk = (chosen.psu.watts ?? 0) >= draw * 1.5;
+  // A build is compatible only when its radiator fits within the case's stated limit.
   const radiatorOk = (chosen.cooling.radiator ?? 0) <= (chosen.case.maxRadiator ?? 999);
 
   const warnings: string[] = [];
@@ -377,7 +379,7 @@ export default function Configurator() {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      /* clipboard may be blocked */
+      /* Clipboard access may be unavailable because of browser permissions or context. */
     }
   };
 
@@ -387,7 +389,7 @@ export default function Configurator() {
       aria-labelledby="configurator-title"
       className="relative isolate scroll-mt-16 overflow-clip bg-[#05090f] font-[family-name:var(--font-orbitron)] text-white"
     >
-      {/* ===== Background ===== */}
+      {/* ===================== Background ===================== */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06]"
@@ -409,7 +411,7 @@ export default function Configurator() {
       />
 
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
-        {/* ===== Title ===== */}
+        {/* ===================== Section heading ===================== */}
         <div className="mb-8 text-center lg:text-left">
           <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/5 px-3 py-1 text-xs font-medium text-cyan-300">
             <Sparkles className="h-3.5 w-3.5" />
@@ -430,7 +432,7 @@ export default function Configurator() {
           </p>
         </div>
 
-        {/* ===== Presets ===== */}
+        {/* ===================== Presets ===================== */}
         <div className="mb-8 grid gap-3 sm:grid-cols-3">
           {PRESETS.map((p) => {
             const active = activePreset === p.name;
@@ -468,7 +470,7 @@ export default function Configurator() {
           })}
         </div>
 
-        {/* ===== Step nav ===== */}
+        {/* ===================== Configuration steps ===================== */}
         <nav
           aria-label="Configuration steps"
           className="sticky top-16 z-30 -mx-4 mb-8 overflow-x-auto border-y border-white/5 bg-[#05090f]/85 px-4 py-3 backdrop-blur-xl sm:mx-0 sm:rounded-full sm:border sm:px-3"
@@ -590,7 +592,6 @@ export default function Configurator() {
                   Your build
                 </h3>
 
-                {/* parts list */}
                 <ul className="space-y-2.5">
                   {CATEGORIES.map((c) => (
                     <li key={c.key} className="flex items-start justify-between gap-3 text-xs">
@@ -609,7 +610,6 @@ export default function Configurator() {
                   ))}
                 </ul>
 
-                {/* performance */}
                 <div className="space-y-3 border-t border-white/5 pt-4">
                   <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-slate-400">
                     <Gauge className="h-3.5 w-3.5 text-cyan-400" />
@@ -635,7 +635,6 @@ export default function Configurator() {
                   </p>
                 </div>
 
-                {/* warnings */}
                 {warnings.length > 0 ? (
                   <ul className="space-y-2" role="alert">
                     {warnings.map((w) => (
@@ -655,7 +654,6 @@ export default function Configurator() {
                   </p>
                 )}
 
-                {/* total */}
                 <div className="rounded-xl border border-white/5 bg-black/40 px-4 py-3">
                   <div className="flex items-baseline justify-between">
                     <span className="text-xs text-slate-400">Total</span>
@@ -666,7 +664,6 @@ export default function Configurator() {
                   </p>
                 </div>
 
-                {/* actions */}
                 <AddToCartButton
                   item={buildItem}
                   disabled={warnings.length > 0}
@@ -702,8 +699,8 @@ export default function Configurator() {
         </div>
       </div>
 
-      {/* ===================== Summary bar (mobile) =====================
-          sticky (not fixed): it only shows while you are inside this section */}
+      {/* ===================== Mobile summary bar ===================== */}
+      {/* Sticky positioning confines this summary to the configurator section. */}
       <div className="sticky bottom-0 z-40 border-t border-cyan-400/20 bg-[#070d14]/95 px-4 py-3 backdrop-blur-xl lg:hidden">
         {warnings.length > 0 && (
           <p className="mb-2 flex items-center gap-2 text-[11px] text-orange-300" role="alert">
