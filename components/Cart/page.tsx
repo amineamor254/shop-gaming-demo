@@ -33,7 +33,9 @@ export default function CartPage() {
   const { items, count, subtotal, savings, promo, setPromo, hydrated, clear } = useCart();
 
   const [promoInput, setPromoInput] = useState("");
-  const [promoMsg, setPromoMsg] = useState<{ type: "error" | "success"; text: string } | null>(null);
+  const [promoMsg, setPromoMsg] = useState<{ type: "error" | "success"; text: string } | null>(
+    null
+  );
   const [confirmClear, setConfirmClear] = useState(false);
 
   // الشحن هنا تقديري (العادي)، ويُحسم الاختيار النهائي في صفحة الدفع
@@ -89,18 +91,32 @@ export default function CartPage() {
           WebkitMaskImage: "radial-gradient(ellipse at top, black 20%, transparent 70%)",
         }}
       />
-      <div aria-hidden className="pointer-events-none absolute -left-40 top-0 -z-10 h-[380px] w-[380px] rounded-full bg-cyan-500/15 blur-[120px]" />
-      <div aria-hidden className="pointer-events-none absolute -right-32 top-1/2 -z-10 h-[340px] w-[340px] rounded-full bg-emerald-500/10 blur-[120px]" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -left-40 top-0 -z-10 h-[380px] w-[380px] rounded-full bg-cyan-500/15 blur-[120px]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-32 top-1/2 -z-10 h-[340px] w-[340px] rounded-full bg-emerald-500/10 blur-[120px]"
+      />
 
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-14">
         {/* ===== Breadcrumb + title ===== */}
-        <nav aria-label="Breadcrumb" className="mb-6 flex items-center justify-center gap-2 text-xs text-slate-400 lg:justify-start">
-          <Link href="/#home" className="inline-flex items-center gap-1.5 transition-colors hover:text-cyan-300">
+        <nav
+          aria-label="Breadcrumb"
+          className="mb-6 flex items-center justify-center gap-2 text-xs text-slate-400 lg:justify-start"
+        >
+          <Link
+            href="/#home"
+            className="inline-flex items-center gap-1.5 transition-colors hover:text-cyan-300"
+          >
             <Home className="h-3.5 w-3.5" />
             Home
           </Link>
           <ChevronRight className="h-3 w-3 text-slate-600" />
-          <span aria-current="page" className="font-semibold text-cyan-300">Cart</span>
+          <span aria-current="page" className="font-semibold text-cyan-300">
+            Cart
+          </span>
         </nav>
 
         <div className="mb-8 text-center lg:text-left">
@@ -117,7 +133,10 @@ export default function CartPage() {
           <div className="grid gap-6 lg:grid-cols-[1fr_360px]" aria-busy="true">
             <div className="space-y-3 rounded-2xl border border-white/5 bg-[#0a1119]/90 p-4">
               {[0, 1, 2].map((i) => (
-                <div key={i} className="h-20 animate-pulse rounded-xl bg-white/[0.04] motion-reduce:animate-none" />
+                <div
+                  key={i}
+                  className="h-20 animate-pulse rounded-xl bg-white/[0.04] motion-reduce:animate-none"
+                />
               ))}
             </div>
             <div className="h-72 animate-pulse rounded-2xl bg-white/[0.04] motion-reduce:animate-none" />
@@ -127,7 +146,10 @@ export default function CartPage() {
         ) : (
           <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
             {/* ===================== Items ===================== */}
-            <section aria-label="Cart items" className="h-fit overflow-hidden rounded-2xl border border-cyan-400/15 bg-[#0a1119]/90 shadow-[0_0_40px_rgba(6,182,212,0.08)] backdrop-blur">
+            <section
+              aria-label="Cart items"
+              className="h-fit overflow-hidden rounded-2xl border border-cyan-400/15 bg-[#0a1119]/90 shadow-[0_0_40px_rgba(6,182,212,0.08)] backdrop-blur"
+            >
               <div className="flex items-center justify-between gap-3 border-b border-white/5 px-4 py-3">
                 <h2 className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-cyan-300">
                   <span className="h-px w-3 bg-cyan-400/60" />
@@ -171,7 +193,10 @@ export default function CartPage() {
             {/* ===================== Summary ===================== */}
             <aside className="h-fit lg:sticky lg:top-24">
               <div className="relative">
-                <div aria-hidden className="absolute -inset-3 -z-10 rounded-[2rem] bg-gradient-to-b from-cyan-500/20 via-emerald-500/10 to-transparent blur-2xl" />
+                <div
+                  aria-hidden
+                  className="absolute -inset-3 -z-10 rounded-[2rem] bg-gradient-to-b from-cyan-500/20 via-emerald-500/10 to-transparent blur-2xl"
+                />
 
                 <div className="space-y-5 rounded-2xl border border-cyan-400/20 bg-[#0a1119]/90 p-5 shadow-[0_0_40px_rgba(6,182,212,0.15)] backdrop-blur">
                   <h2 className="text-sm font-extrabold uppercase tracking-widest text-cyan-300">
@@ -184,10 +209,14 @@ export default function CartPage() {
                       <Truck className="h-3.5 w-3.5 text-cyan-400" />
                       {remainingForFree > 0 ? (
                         <>
-                          Add <span className="font-bold text-cyan-300">{money(remainingForFree)}</span> more for free shipping
+                          Add{" "}
+                          <span className="font-bold text-cyan-300">{money(remainingForFree)}</span>{" "}
+                          more for free shipping
                         </>
                       ) : (
-                        <span className="font-semibold text-emerald-300">You get free shipping!</span>
+                        <span className="font-semibold text-emerald-300">
+                          You get free shipping!
+                        </span>
                       )}
                     </p>
                     <div className="h-1.5 overflow-hidden rounded-full bg-white/5">
@@ -217,7 +246,9 @@ export default function CartPage() {
                       </div>
                     ) : (
                       <form onSubmit={applyPromo} className="flex gap-2">
-                        <label htmlFor="promo" className="sr-only">Promo code</label>
+                        <label htmlFor="promo" className="sr-only">
+                          Promo code
+                        </label>
                         <input
                           id="promo"
                           value={promoInput}
@@ -251,10 +282,18 @@ export default function CartPage() {
                   <dl className="space-y-2.5 border-t border-white/5 pt-4 text-xs">
                     <Row label="Subtotal" value={money(subtotal)} />
                     {savings > 0 && (
-                      <Row label="You save" value={`-${money(savings)}`} valueClass="text-emerald-300" />
+                      <Row
+                        label="You save"
+                        value={`-${money(savings)}`}
+                        valueClass="text-emerald-300"
+                      />
                     )}
                     {promo && (
-                      <Row label={`Promo (${promo.code})`} value={`-${money(discount)}`} valueClass="text-emerald-300" />
+                      <Row
+                        label={`Promo (${promo.code})`}
+                        value={`-${money(discount)}`}
+                        valueClass="text-emerald-300"
+                      />
                     )}
                     <Row label="Shipping" value={shipping === 0 ? "Free" : money(shipping)} />
                     <Row label={`Taxes (${Math.round(TAX_RATE * 100)}%)`} value={money(tax)} />
@@ -279,11 +318,17 @@ export default function CartPage() {
                   {/* notes */}
                   <ul className="space-y-2 text-[11px] text-slate-400">
                     {[
-                      { icon: Truck, text: `Free delivery on orders over ${money(FREE_SHIPPING_MIN)}` },
+                      {
+                        icon: Truck,
+                        text: `Free delivery on orders over ${money(FREE_SHIPPING_MIN)}`,
+                      },
                       { icon: ShieldCheck, text: "24 months warranty on all builds" },
                       { icon: RotateCcw, text: "30-day easy returns" },
                     ].map(({ icon: Icon, text }) => (
-                      <li key={text} className="flex items-center gap-2.5 rounded-lg border border-white/5 bg-white/[0.03] px-3 py-2">
+                      <li
+                        key={text}
+                        className="flex items-center gap-2.5 rounded-lg border border-white/5 bg-white/[0.03] px-3 py-2"
+                      >
                         <Icon className="h-3.5 w-3.5 shrink-0 text-cyan-400" />
                         {text}
                       </li>
@@ -327,7 +372,13 @@ function CartRow({ item }: { item: CartItem }) {
       {/* image */}
       <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl border border-white/5 bg-gradient-to-br from-[#0d1824] to-[#070d14]">
         {item.image ? (
-          <Image src={item.image} alt={item.name} fill sizes="64px" className="object-contain p-1.5" />
+          <Image
+            src={item.image}
+            alt={item.name}
+            fill
+            sizes="64px"
+            className="object-contain p-1.5"
+          />
         ) : (
           <div className="absolute inset-0 grid place-items-center">
             <Package className="h-7 w-7 text-cyan-400/80 drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
@@ -346,9 +397,7 @@ function CartRow({ item }: { item: CartItem }) {
             <span className="text-xs text-slate-500 line-through">{money(item.oldPrice)}</span>
           )}
         </div>
-        {item.variant && (
-          <p className="mt-1 truncate text-[11px] text-slate-500">{item.variant}</p>
-        )}
+        {item.variant && <p className="mt-1 truncate text-[11px] text-slate-500">{item.variant}</p>}
       </div>
 
       {/* quantity */}
@@ -421,18 +470,23 @@ function CartRow({ item }: { item: CartItem }) {
 function EmptyCart() {
   return (
     <div className="relative mx-auto max-w-xl">
-      <div aria-hidden className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-b from-cyan-500/15 via-emerald-500/5 to-transparent blur-2xl" />
+      <div
+        aria-hidden
+        className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-b from-cyan-500/15 via-emerald-500/5 to-transparent blur-2xl"
+      />
       <div className="rounded-3xl border border-cyan-400/20 bg-[#0a1119]/90 px-6 py-14 text-center shadow-[0_0_40px_rgba(6,182,212,0.12)] backdrop-blur">
         <div className="relative mx-auto mb-6 grid h-24 w-24 place-items-center">
-          <span aria-hidden className="absolute inset-0 animate-pulse rounded-full border border-cyan-400/30 motion-reduce:animate-none" />
+          <span
+            aria-hidden
+            className="absolute inset-0 animate-pulse rounded-full border border-cyan-400/30 motion-reduce:animate-none"
+          />
           <span aria-hidden className="absolute inset-3 rounded-full bg-cyan-400/10 blur-xl" />
           <ShoppingCart className="relative h-10 w-10 text-cyan-300 drop-shadow-[0_0_14px_rgba(34,211,238,0.6)]" />
         </div>
 
         <h2 className="text-xl font-extrabold">Your cart is empty</h2>
         <p className="mx-auto mt-2 max-w-sm text-xs leading-relaxed text-slate-400">
-          Looks like you have not added anything yet. Explore our gear or build
-          your own custom PC.
+          Looks like you have not added anything yet. Explore our gear or build your own custom PC.
         </p>
 
         <div className="mt-7 flex flex-wrap items-center justify-center gap-3">

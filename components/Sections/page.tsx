@@ -1,6 +1,6 @@
 "use client";
 
-import {useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { SHOP_EVENT, consumeRequestedCategory } from "@/components/Shop/shop-filter";
 import Image from "next/image";
 import Link from "next/link";
@@ -39,18 +39,135 @@ type Product = {
 };
 
 const PRODUCTS: Product[] = [
-  { id: 1, name: "Elite Audio Gear", category: "Audio", price: 40, oldPrice: 45, rating: 5, reviews: 12, colors: ["#ffffff", "#3b82f6", "#ef4444"], inStock: true },
-  { id: 2, name: "Elysian Blend", category: "Audio", price: 25, oldPrice: 40, rating: 5, reviews: 8, colors: ["#111827", "#3b82f6", "#ef4444"], inStock: true },
-  { id: 3, name: "Elysian LCD", category: "Monitors", price: 80, oldPrice: 90, rating: 4, reviews: 21, colors: ["#111827", "#3b82f6"], inStock: true },
-  { id: 4, name: "Hyper Glide Mouse", category: "Mice", price: 30, oldPrice: 50, rating: 5, reviews: 33, colors: ["#ef4444", "#111827"], inStock: true },
-  { id: 5, name: "Hyper Glide Pro", category: "Mice", price: 30, oldPrice: 40, rating: 4, reviews: 17, colors: ["#6b7280", "#ef4444", "#3b82f6"], inStock: false },
-  { id: 6, name: "Key Master Elite", category: "Keyboards", price: 70, oldPrice: 80, rating: 5, reviews: 41, colors: ["#3b82f6", "#ef4444", "#ffffff"], inStock: true },
-  { id: 7, name: "Sonic Wave X", category: "Audio", price: 55, rating: 4, reviews: 9, colors: ["#111827", "#22c55e"], inStock: true },
-  { id: 8, name: "Vision Curve 27", category: "Monitors", price: 120, oldPrice: 150, rating: 5, reviews: 26, colors: ["#111827"], inStock: true },
-  { id: 9, name: "Phantom Click", category: "Mice", price: 22, rating: 4, reviews: 14, colors: ["#ffffff", "#111827"], inStock: true },
-  { id: 10, name: "Type Storm RGB", category: "Keyboards", price: 90, oldPrice: 110, rating: 5, reviews: 52, colors: ["#111827", "#ef4444", "#22c55e"], inStock: false },
-  { id: 11, name: "Nova Headset", category: "Audio", price: 65, rating: 4, reviews: 11, colors: ["#ffffff", "#3b82f6"], inStock: true },
-  { id: 12, name: "Pixel Edge 24", category: "Monitors", price: 95, oldPrice: 105, rating: 4, reviews: 19, colors: ["#111827", "#ef4444"], inStock: true },
+  {
+    id: 1,
+    name: "Elite Audio Gear",
+    category: "Audio",
+    price: 40,
+    oldPrice: 45,
+    rating: 5,
+    reviews: 12,
+    colors: ["#ffffff", "#3b82f6", "#ef4444"],
+    inStock: true,
+  },
+  {
+    id: 2,
+    name: "Elysian Blend",
+    category: "Audio",
+    price: 25,
+    oldPrice: 40,
+    rating: 5,
+    reviews: 8,
+    colors: ["#111827", "#3b82f6", "#ef4444"],
+    inStock: true,
+  },
+  {
+    id: 3,
+    name: "Elysian LCD",
+    category: "Monitors",
+    price: 80,
+    oldPrice: 90,
+    rating: 4,
+    reviews: 21,
+    colors: ["#111827", "#3b82f6"],
+    inStock: true,
+  },
+  {
+    id: 4,
+    name: "Hyper Glide Mouse",
+    category: "Mice",
+    price: 30,
+    oldPrice: 50,
+    rating: 5,
+    reviews: 33,
+    colors: ["#ef4444", "#111827"],
+    inStock: true,
+  },
+  {
+    id: 5,
+    name: "Hyper Glide Pro",
+    category: "Mice",
+    price: 30,
+    oldPrice: 40,
+    rating: 4,
+    reviews: 17,
+    colors: ["#6b7280", "#ef4444", "#3b82f6"],
+    inStock: false,
+  },
+  {
+    id: 6,
+    name: "Key Master Elite",
+    category: "Keyboards",
+    price: 70,
+    oldPrice: 80,
+    rating: 5,
+    reviews: 41,
+    colors: ["#3b82f6", "#ef4444", "#ffffff"],
+    inStock: true,
+  },
+  {
+    id: 7,
+    name: "Sonic Wave X",
+    category: "Audio",
+    price: 55,
+    rating: 4,
+    reviews: 9,
+    colors: ["#111827", "#22c55e"],
+    inStock: true,
+  },
+  {
+    id: 8,
+    name: "Vision Curve 27",
+    category: "Monitors",
+    price: 120,
+    oldPrice: 150,
+    rating: 5,
+    reviews: 26,
+    colors: ["#111827"],
+    inStock: true,
+  },
+  {
+    id: 9,
+    name: "Phantom Click",
+    category: "Mice",
+    price: 22,
+    rating: 4,
+    reviews: 14,
+    colors: ["#ffffff", "#111827"],
+    inStock: true,
+  },
+  {
+    id: 10,
+    name: "Type Storm RGB",
+    category: "Keyboards",
+    price: 90,
+    oldPrice: 110,
+    rating: 5,
+    reviews: 52,
+    colors: ["#111827", "#ef4444", "#22c55e"],
+    inStock: false,
+  },
+  {
+    id: 11,
+    name: "Nova Headset",
+    category: "Audio",
+    price: 65,
+    rating: 4,
+    reviews: 11,
+    colors: ["#ffffff", "#3b82f6"],
+    inStock: true,
+  },
+  {
+    id: 12,
+    name: "Pixel Edge 24",
+    category: "Monitors",
+    price: 95,
+    oldPrice: 105,
+    rating: 4,
+    reviews: 19,
+    colors: ["#111827", "#ef4444"],
+    inStock: true,
+  },
 ];
 
 const CATEGORY_ICONS = {
@@ -60,14 +177,7 @@ const CATEGORY_ICONS = {
   Keyboards: Keyboard,
 } as const;
 
-const COLOR_FILTERS = [
-  "#ffffff",
-  "#111827",
-  "#3b82f6",
-  "#ef4444",
-  "#22c55e",
-  "#6b7280",
-];
+const COLOR_FILTERS = ["#ffffff", "#111827", "#3b82f6", "#ef4444", "#22c55e", "#6b7280"];
 
 const SORT_OPTIONS = [
   { value: "alpha-asc", label: "Alphabetically, A-Z" },
@@ -102,30 +212,29 @@ export default function Sections() {
 
   const resetPage = () => setPage(1);
 
-  
-useEffect(() => {
-  const valid = ["All", "Audio", "Monitors", "Mice", "Keyboards"];
+  useEffect(() => {
+    const valid = ["All", "Audio", "Monitors", "Mice", "Keyboards"];
 
-  const apply = (c: string | null) => {
-    if (!c || !valid.includes(c)) return;
-    setCategory(c as Category | "All");
-    setQuery("");
-    setInStockOnly(false);
-    setOutOfStockOnly(false);
-    setMaxPrice(MAX_PRICE);
-    setColor(null);
-    setPage(1);
-  };
+    const apply = (c: string | null) => {
+      if (!c || !valid.includes(c)) return;
+      setCategory(c as Category | "All");
+      setQuery("");
+      setInStockOnly(false);
+      setOutOfStockOnly(false);
+      setMaxPrice(MAX_PRICE);
+      setColor(null);
+      setPage(1);
+    };
 
-  apply(consumeRequestedCategory()); // 
+    apply(consumeRequestedCategory()); //
 
-  const onRequest = (e: Event) => {
-    apply((e as CustomEvent<string>).detail);
-    consumeRequestedCategory();
-  };
-  window.addEventListener(SHOP_EVENT, onRequest);
-  return () => window.removeEventListener(SHOP_EVENT, onRequest);
-}, []);
+    const onRequest = (e: Event) => {
+      apply((e as CustomEvent<string>).detail);
+      consumeRequestedCategory();
+    };
+    window.addEventListener(SHOP_EVENT, onRequest);
+    return () => window.removeEventListener(SHOP_EVENT, onRequest);
+  }, []);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -156,10 +265,7 @@ useEffect(() => {
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const currentPage = Math.min(page, totalPages);
-  const visible = filtered.slice(
-    (currentPage - 1) * PAGE_SIZE,
-    currentPage * PAGE_SIZE
-  );
+  const visible = filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
   const hasFilters =
     query || category !== "All" || inStockOnly || outOfStockOnly || color || maxPrice < MAX_PRICE;
@@ -188,10 +294,8 @@ useEffect(() => {
           backgroundImage:
             "linear-gradient(to right, #22d3ee 1px, transparent 1px), linear-gradient(to bottom, #22d3ee 1px, transparent 1px)",
           backgroundSize: "56px 56px",
-          maskImage:
-            "radial-gradient(ellipse at top, black 20%, transparent 70%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse at top, black 20%, transparent 70%)",
+          maskImage: "radial-gradient(ellipse at top, black 20%, transparent 70%)",
+          WebkitMaskImage: "radial-gradient(ellipse at top, black 20%, transparent 70%)",
         }}
       />
       <div
@@ -248,40 +352,34 @@ useEffect(() => {
             {/* categories */}
             <FilterGroup title="Product Categories">
               <ul className="space-y-1">
-                {(["All", "Audio", "Monitors", "Mice", "Keyboards"] as const).map(
-                  (c) => {
-                    const active = category === c;
-                    const Icon = c === "All" ? LayoutGrid : CATEGORY_ICONS[c];
-                    const count =
-                      c === "All"
-                        ? PRODUCTS.length
-                        : PRODUCTS.filter((p) => p.category === c).length;
-                    return (
-                      <li key={c}>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setCategory(c);
-                            resetPage();
-                          }}
-                          className={`group flex w-full items-center justify-between rounded-lg px-3 py-2 text-xs transition-all duration-300 ${
-                            active
-                              ? "bg-cyan-500 font-bold text-[#06121a] shadow-[0_0_16px_rgba(6,182,212,0.45)]"
-                              : "text-slate-300 hover:bg-white/5 hover:text-cyan-300"
-                          }`}
-                        >
-                          <span className="flex items-center gap-2">
-                            <Icon className="h-3.5 w-3.5" />
-                            {c}
-                          </span>
-                          <span className={active ? "" : "text-slate-500"}>
-                            {count}
-                          </span>
-                        </button>
-                      </li>
-                    );
-                  }
-                )}
+                {(["All", "Audio", "Monitors", "Mice", "Keyboards"] as const).map((c) => {
+                  const active = category === c;
+                  const Icon = c === "All" ? LayoutGrid : CATEGORY_ICONS[c];
+                  const count =
+                    c === "All" ? PRODUCTS.length : PRODUCTS.filter((p) => p.category === c).length;
+                  return (
+                    <li key={c}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setCategory(c);
+                          resetPage();
+                        }}
+                        className={`group flex w-full items-center justify-between rounded-lg px-3 py-2 text-xs transition-all duration-300 ${
+                          active
+                            ? "bg-cyan-500 font-bold text-[#06121a] shadow-[0_0_16px_rgba(6,182,212,0.45)]"
+                            : "text-slate-300 hover:bg-white/5 hover:text-cyan-300"
+                        }`}
+                      >
+                        <span className="flex items-center gap-2">
+                          <Icon className="h-3.5 w-3.5" />
+                          {c}
+                        </span>
+                        <span className={active ? "" : "text-slate-500"}>{count}</span>
+                      </button>
+                    </li>
+                  );
+                })}
               </ul>
             </FilterGroup>
 
@@ -368,9 +466,7 @@ useEffect(() => {
               <p className="text-[11px] font-semibold uppercase tracking-widest text-cyan-300">
                 Hot deals
               </p>
-              <p className="mt-1 text-base font-extrabold leading-tight">
-                Level up your setup
-              </p>
+              <p className="mt-1 text-base font-extrabold leading-tight">Level up your setup</p>
               <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-300">
                 See offers
                 <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
@@ -419,8 +515,7 @@ useEffect(() => {
                   ))}
                 </div>
                 <span className="text-xs text-slate-400">
-                  <span className="font-bold text-white">{filtered.length}</span>{" "}
-                  Products
+                  <span className="font-bold text-white">{filtered.length}</span> Products
                 </span>
               </div>
 
@@ -445,9 +540,7 @@ useEffect(() => {
 
             {/* grid */}
             {visible.length > 0 ? (
-              <div
-                className={`grid grid-cols-1 gap-4 sm:grid-cols-2 ${GRID_COLS[cols]}`}
-              >
+              <div className={`grid grid-cols-1 gap-4 sm:grid-cols-2 ${GRID_COLS[cols]}`}>
                 {visible.map((p) => (
                   <ProductCard key={p.id} product={p} />
                 ))}
@@ -469,10 +562,7 @@ useEffect(() => {
 
             {/* pagination */}
             {totalPages > 1 && (
-              <nav
-                aria-label="Pagination"
-                className="mt-8 flex items-center justify-center gap-2"
-              >
+              <nav aria-label="Pagination" className="mt-8 flex items-center justify-center gap-2">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
                   <button
                     key={n}
@@ -509,13 +599,7 @@ useEffect(() => {
 
 /* ===================== Sub components ===================== */
 
-function FilterGroup({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) {
+function FilterGroup({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
       <h3 className="mb-3 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-cyan-300">
@@ -529,9 +613,7 @@ function FilterGroup({
 
 function ProductCard({ product: p }: { product: Product }) {
   const Icon = CATEGORY_ICONS[p.category];
-  const discount = p.oldPrice
-    ? Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100)
-    : 0;
+  const discount = p.oldPrice ? Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100) : 0;
 
   return (
     <article className="group relative overflow-hidden rounded-2xl border border-white/5 bg-[#0a1119]/90 transition-all duration-500 hover:-translate-y-1.5 hover:border-cyan-400/40 hover:shadow-[0_0_35px_rgba(6,182,212,0.22)]">
@@ -576,16 +658,12 @@ function ProductCard({ product: p }: { product: Product }) {
               <Star
                 key={i}
                 className={`h-3 w-3 ${
-                  i < p.rating
-                    ? "fill-amber-400 text-amber-400"
-                    : "text-slate-600"
+                  i < p.rating ? "fill-amber-400 text-amber-400" : "text-slate-600"
                 }`}
               />
             ))}
           </div>
-          <span className="text-[10px] text-slate-500">
-            ({p.reviews} Reviews)
-          </span>
+          <span className="text-[10px] text-slate-500">({p.reviews} Reviews)</span>
         </div>
 
         <div className="flex items-center gap-1.5">
@@ -601,13 +679,9 @@ function ProductCard({ product: p }: { product: Product }) {
         <div className="flex items-end justify-between pt-1">
           <div className="flex items-baseline gap-2">
             {p.oldPrice && (
-              <span className="text-xs text-slate-500 line-through">
-                ${p.oldPrice.toFixed(2)}
-              </span>
+              <span className="text-xs text-slate-500 line-through">${p.oldPrice.toFixed(2)}</span>
             )}
-            <span className="text-lg font-extrabold text-white">
-              ${p.price.toFixed(2)}
-            </span>
+            <span className="text-lg font-extrabold text-white">${p.price.toFixed(2)}</span>
           </div>
 
           <AddToCartButton

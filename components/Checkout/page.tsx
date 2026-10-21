@@ -77,8 +77,18 @@ const INITIAL: Values = {
 
 // ترتيب الحقول لنقل التركيز إلى أول خطأ
 const FIELD_ORDER: FieldKey[] = [
-  "email", "phone", "fullName", "address", "city", "postal", "country",
-  "cardNumber", "cardName", "expiry", "cvc", "terms",
+  "email",
+  "phone",
+  "fullName",
+  "address",
+  "city",
+  "postal",
+  "country",
+  "cardNumber",
+  "cardName",
+  "expiry",
+  "cvc",
+  "terms",
 ];
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -122,7 +132,8 @@ function validate(v: Values, payment: PaymentId): Errors {
   if (!EMAIL_RE.test(v.email.trim())) e.email = "Please enter a valid email address.";
 
   const phoneDigits = v.phone.replace(/\D/g, "");
-  if (phoneDigits.length < 6 || phoneDigits.length > 15) e.phone = "Please enter a valid phone number.";
+  if (phoneDigits.length < 6 || phoneDigits.length > 15)
+    e.phone = "Please enter a valid phone number.";
 
   if (v.fullName.trim().length < 2) e.fullName = "Please enter your full name.";
   if (v.address.trim().length < 5) e.address = "Please enter your street address.";
@@ -200,10 +211,7 @@ export default function CheckoutPage() {
       //     ولا ترسل أرقام البطاقات إلى خادمك مباشرة.
       await new Promise((resolve) => setTimeout(resolve, 1000)); // محاكاة
 
-            const id = `ORD-${crypto.randomUUID()
-        .replace(/-/g, "")
-        .slice(0, 9)
-        .toUpperCase()}`;
+      const id = `ORD-${crypto.randomUUID().replace(/-/g, "").slice(0, 9).toUpperCase()}`;
 
       setOrder({
         id,
@@ -237,20 +245,36 @@ export default function CheckoutPage() {
           WebkitMaskImage: "radial-gradient(ellipse at top, black 20%, transparent 70%)",
         }}
       />
-      <div aria-hidden className="pointer-events-none absolute -left-40 top-0 -z-10 h-[380px] w-[380px] rounded-full bg-cyan-500/15 blur-[120px]" />
-      <div aria-hidden className="pointer-events-none absolute -right-32 top-1/2 -z-10 h-[340px] w-[340px] rounded-full bg-emerald-500/10 blur-[120px]" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -left-40 top-0 -z-10 h-[380px] w-[380px] rounded-full bg-cyan-500/15 blur-[120px]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-32 top-1/2 -z-10 h-[340px] w-[340px] rounded-full bg-emerald-500/10 blur-[120px]"
+      />
 
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-14">
         {/* ===== Breadcrumb + title ===== */}
-        <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center justify-center gap-2 text-xs text-slate-400 lg:justify-start">
-          <Link href="/#home" className="inline-flex items-center gap-1.5 transition-colors hover:text-cyan-300">
+        <nav
+          aria-label="Breadcrumb"
+          className="mb-6 flex flex-wrap items-center justify-center gap-2 text-xs text-slate-400 lg:justify-start"
+        >
+          <Link
+            href="/#home"
+            className="inline-flex items-center gap-1.5 transition-colors hover:text-cyan-300"
+          >
             <Home className="h-3.5 w-3.5" />
             Home
           </Link>
           <ChevronRight className="h-3 w-3 text-slate-600" />
-          <Link href="/cart" className="transition-colors hover:text-cyan-300">Cart</Link>
+          <Link href="/cart" className="transition-colors hover:text-cyan-300">
+            Cart
+          </Link>
           <ChevronRight className="h-3 w-3 text-slate-600" />
-          <span aria-current="page" className="font-semibold text-cyan-300">Checkout</span>
+          <span aria-current="page" className="font-semibold text-cyan-300">
+            Checkout
+          </span>
         </nav>
 
         <div className="mb-8 text-center lg:text-left">
@@ -267,7 +291,10 @@ export default function CheckoutPage() {
           <div className="grid gap-6 lg:grid-cols-[1fr_380px]" aria-busy="true">
             <div className="space-y-4">
               {[0, 1, 2].map((i) => (
-                <div key={i} className="h-44 animate-pulse rounded-2xl bg-white/[0.04] motion-reduce:animate-none" />
+                <div
+                  key={i}
+                  className="h-44 animate-pulse rounded-2xl bg-white/[0.04] motion-reduce:animate-none"
+                />
               ))}
             </div>
             <div className="h-80 animate-pulse rounded-2xl bg-white/[0.04] motion-reduce:animate-none" />
@@ -399,7 +426,11 @@ export default function CheckoutPage() {
 
               {/* 3. Delivery */}
               <StepCard step={3} title="Delivery method" icon={Truck}>
-                <div role="radiogroup" aria-label="Delivery method" className="grid gap-3 sm:grid-cols-2">
+                <div
+                  role="radiogroup"
+                  aria-label="Delivery method"
+                  className="grid gap-3 sm:grid-cols-2"
+                >
                   {SHIPPING_METHODS.map((m) => {
                     const cost = shippingCost(m.id, totals.afterDiscount);
                     return (
@@ -419,7 +450,11 @@ export default function CheckoutPage() {
 
               {/* 4. Payment */}
               <StepCard step={4} title="Payment" icon={CreditCard}>
-                <div role="radiogroup" aria-label="Payment method" className="grid gap-3 sm:grid-cols-2">
+                <div
+                  role="radiogroup"
+                  aria-label="Payment method"
+                  className="grid gap-3 sm:grid-cols-2"
+                >
                   <RadioCard
                     checked={payment === "card"}
                     onSelect={() => setPayment("card")}
@@ -496,7 +531,9 @@ export default function CheckoutPage() {
                         autoComplete="cc-csc"
                         maxLength={4}
                         value={values.cvc}
-                        onChange={(e) => setField("cvc", e.target.value.replace(/\D/g, "").slice(0, 4))}
+                        onChange={(e) =>
+                          setField("cvc", e.target.value.replace(/\D/g, "").slice(0, 4))
+                        }
                         aria-invalid={!!errors.cvc}
                         aria-describedby={errors.cvc ? "co-cvc-error" : undefined}
                         placeholder="123"
@@ -515,14 +552,20 @@ export default function CheckoutPage() {
             {/* ===================== Summary ===================== */}
             <aside className="h-fit lg:sticky lg:top-24">
               <div className="relative">
-                <div aria-hidden className="absolute -inset-3 -z-10 rounded-[2rem] bg-gradient-to-b from-cyan-500/20 via-emerald-500/10 to-transparent blur-2xl" />
+                <div
+                  aria-hidden
+                  className="absolute -inset-3 -z-10 rounded-[2rem] bg-gradient-to-b from-cyan-500/20 via-emerald-500/10 to-transparent blur-2xl"
+                />
 
                 <div className="space-y-5 rounded-2xl border border-cyan-400/20 bg-[#0a1119]/90 p-5 shadow-[0_0_40px_rgba(6,182,212,0.15)] backdrop-blur">
                   <div className="flex items-center justify-between">
                     <h2 className="text-sm font-extrabold uppercase tracking-widest text-cyan-300">
                       Your order
                     </h2>
-                    <Link href="/cart" className="text-[11px] font-semibold text-slate-400 transition-colors hover:text-cyan-300">
+                    <Link
+                      href="/cart"
+                      className="text-[11px] font-semibold text-slate-400 transition-colors hover:text-cyan-300"
+                    >
                       Edit cart
                     </Link>
                   </div>
@@ -532,7 +575,13 @@ export default function CheckoutPage() {
                       <li key={item.id} className="flex items-center gap-3">
                         <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg border border-white/5 bg-gradient-to-br from-[#0d1824] to-[#070d14]">
                           {item.image ? (
-                            <Image src={item.image} alt="" fill sizes="48px" className="object-contain p-1" />
+                            <Image
+                              src={item.image}
+                              alt=""
+                              fill
+                              sizes="48px"
+                              className="object-contain p-1"
+                            />
                           ) : (
                             <div className="absolute inset-0 grid place-items-center">
                               <Package className="h-5 w-5 text-cyan-400/80" />
@@ -548,7 +597,9 @@ export default function CheckoutPage() {
                             <p className="truncate text-[10px] text-slate-500">{item.variant}</p>
                           )}
                         </div>
-                        <span className="shrink-0 text-xs font-bold">{money(item.price * item.qty)}</span>
+                        <span className="shrink-0 text-xs font-bold">
+                          {money(item.price * item.qty)}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -562,7 +613,10 @@ export default function CheckoutPage() {
                         valueClass="text-emerald-300"
                       />
                     )}
-                    <SummaryRow label="Shipping" value={totals.shipping === 0 ? "Free" : money(totals.shipping)} />
+                    <SummaryRow
+                      label="Shipping"
+                      value={totals.shipping === 0 ? "Free" : money(totals.shipping)}
+                    />
                     <SummaryRow label="Taxes" value={money(totals.tax)} />
                   </dl>
 
@@ -598,14 +652,21 @@ export default function CheckoutPage() {
                       </span>
                     </label>
                     {errors.terms && (
-                      <p id="co-terms-error" role="alert" className="mt-1.5 text-[11px] text-red-300">
+                      <p
+                        id="co-terms-error"
+                        role="alert"
+                        className="mt-1.5 text-[11px] text-red-300"
+                      >
                         {errors.terms}
                       </p>
                     )}
                   </div>
 
                   {status === "failed" && (
-                    <p role="alert" className="rounded-lg border border-red-400/30 bg-red-500/10 p-2.5 text-[11px] text-red-200">
+                    <p
+                      role="alert"
+                      className="rounded-lg border border-red-400/30 bg-red-500/10 p-2.5 text-[11px] text-red-200"
+                    >
                       Something went wrong while placing your order. Please try again.
                     </p>
                   )}
@@ -618,7 +679,10 @@ export default function CheckoutPage() {
                   >
                     {status === "placing" ? (
                       <>
-                        <span aria-hidden className="h-4 w-4 animate-spin rounded-full border-2 border-[#06121a]/30 border-t-[#06121a] motion-reduce:animate-none" />
+                        <span
+                          aria-hidden
+                          className="h-4 w-4 animate-spin rounded-full border-2 border-[#06121a]/30 border-t-[#06121a] motion-reduce:animate-none"
+                        />
                         <span className="relative z-10">Placing order...</span>
                       </>
                     ) : (
@@ -659,7 +723,10 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-1.5 block text-[10px] font-bold uppercase tracking-widest text-slate-400">
+      <label
+        htmlFor={id}
+        className="mb-1.5 block text-[10px] font-bold uppercase tracking-widest text-slate-400"
+      >
         {label}
       </label>
       {children}
@@ -775,10 +842,16 @@ function SummaryRow({
 function EmptyCheckout() {
   return (
     <div className="relative mx-auto max-w-xl">
-      <div aria-hidden className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-b from-cyan-500/15 via-emerald-500/5 to-transparent blur-2xl" />
+      <div
+        aria-hidden
+        className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-b from-cyan-500/15 via-emerald-500/5 to-transparent blur-2xl"
+      />
       <div className="rounded-3xl border border-cyan-400/20 bg-[#0a1119]/90 px-6 py-14 text-center shadow-[0_0_40px_rgba(6,182,212,0.12)] backdrop-blur">
         <div className="relative mx-auto mb-6 grid h-24 w-24 place-items-center">
-          <span aria-hidden className="absolute inset-0 animate-pulse rounded-full border border-cyan-400/30 motion-reduce:animate-none" />
+          <span
+            aria-hidden
+            className="absolute inset-0 animate-pulse rounded-full border border-cyan-400/30 motion-reduce:animate-none"
+          />
           <span aria-hidden className="absolute inset-3 rounded-full bg-cyan-400/10 blur-xl" />
           <ShoppingCart className="relative h-10 w-10 text-cyan-300 drop-shadow-[0_0_14px_rgba(34,211,238,0.6)]" />
         </div>
@@ -811,20 +884,27 @@ function OrderSuccess({ order }: { order: Order }) {
 
   return (
     <div className="relative mx-auto max-w-2xl">
-      <div aria-hidden className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-b from-cyan-500/20 via-emerald-500/10 to-transparent blur-2xl" />
+      <div
+        aria-hidden
+        className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-b from-cyan-500/20 via-emerald-500/10 to-transparent blur-2xl"
+      />
 
       <div className="rounded-3xl border border-cyan-400/20 bg-[#0a1119]/90 p-6 shadow-[0_0_50px_rgba(6,182,212,0.15)] backdrop-blur sm:p-10">
         <div role="status" className="text-center">
           <span className="relative mx-auto mb-5 grid h-20 w-20 place-items-center">
-            <span aria-hidden className="absolute inset-0 animate-ping rounded-full bg-cyan-400/20 motion-reduce:animate-none" />
+            <span
+              aria-hidden
+              className="absolute inset-0 animate-ping rounded-full bg-cyan-400/20 motion-reduce:animate-none"
+            />
             <span className="relative grid h-20 w-20 place-items-center rounded-full bg-cyan-500 text-[#06121a] shadow-[0_0_35px_rgba(6,182,212,0.7)]">
               <Check className="h-10 w-10" />
             </span>
           </span>
           <h2 className="text-2xl font-extrabold sm:text-3xl">Thank you for your order!</h2>
           <p className="mx-auto mt-3 max-w-md text-xs leading-relaxed text-slate-400">
-            We sent a confirmation to <span className="font-semibold text-cyan-300">{order.email}</span>.
-            Your build is now in our queue.
+            We sent a confirmation to{" "}
+            <span className="font-semibold text-cyan-300">{order.email}</span>. Your build is now in
+            our queue.
           </p>
           <p className="mt-4 inline-block rounded-lg border border-dashed border-cyan-400/40 bg-cyan-400/5 px-4 py-2 text-sm font-bold tracking-widest text-cyan-300">
             {order.id}
@@ -845,7 +925,10 @@ function OrderSuccess({ order }: { order: Order }) {
           </ul>
 
           <dl className="space-y-2.5 border-t border-white/5 pt-4 text-xs">
-            <SummaryRow label="Subtotal" value={money(order.totals.afterDiscount + order.totals.discount)} />
+            <SummaryRow
+              label="Subtotal"
+              value={money(order.totals.afterDiscount + order.totals.discount)}
+            />
             {order.promoCode && (
               <SummaryRow
                 label={`Promo (${order.promoCode})`}
@@ -853,7 +936,10 @@ function OrderSuccess({ order }: { order: Order }) {
                 valueClass="text-emerald-300"
               />
             )}
-            <SummaryRow label="Shipping" value={order.totals.shipping === 0 ? "Free" : money(order.totals.shipping)} />
+            <SummaryRow
+              label="Shipping"
+              value={order.totals.shipping === 0 ? "Free" : money(order.totals.shipping)}
+            />
             <SummaryRow label="Taxes" value={money(order.totals.tax)} />
           </dl>
 
@@ -864,13 +950,17 @@ function OrderSuccess({ order }: { order: Order }) {
 
           <div className="grid gap-3 text-xs sm:grid-cols-2">
             <div className="rounded-xl border border-white/5 bg-white/[0.03] p-4">
-              <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-cyan-300">Delivery</p>
+              <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-cyan-300">
+                Delivery
+              </p>
               <p className="font-semibold">{method?.label}</p>
               <p className="text-slate-400">{method?.eta}</p>
               <p className="mt-2 text-slate-400">{order.address}</p>
             </div>
             <div className="rounded-xl border border-white/5 bg-white/[0.03] p-4">
-              <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-cyan-300">Payment</p>
+              <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-cyan-300">
+                Payment
+              </p>
               <p className="font-semibold">
                 {order.payment === "card" ? "Credit / debit card" : "Cash on delivery"}
               </p>

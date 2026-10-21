@@ -40,7 +40,16 @@ const SOCIALS = [
     label: "Instagram",
     href: "#",
     icon: (
-      <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <svg
+        viewBox="0 0 24 24"
+        className="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
         <rect x="3" y="3" width="18" height="18" rx="5" />
         <circle cx="12" cy="12" r="4" />
         <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
@@ -136,14 +145,26 @@ export default function Contact() {
         }}
       />
       {/* pulsing map pin */}
-      <div aria-hidden className="pointer-events-none absolute left-[38%] top-1/2 -z-10 hidden lg:block">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-[38%] top-1/2 -z-10 hidden lg:block"
+      >
         <span className="absolute -inset-6 animate-ping rounded-full bg-cyan-400/20 motion-reduce:animate-none" />
         <span className="relative block h-3 w-3 rounded-full bg-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.9)]" />
       </div>
-      <div aria-hidden className="pointer-events-none absolute -left-40 top-10 -z-10 h-[380px] w-[380px] rounded-full bg-cyan-500/15 blur-[120px]" />
-      <div aria-hidden className="pointer-events-none absolute -right-32 bottom-0 -z-10 h-[340px] w-[340px] rounded-full bg-emerald-500/10 blur-[120px]" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -left-40 top-10 -z-10 h-[380px] w-[380px] rounded-full bg-cyan-500/15 blur-[120px]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-32 bottom-0 -z-10 h-[340px] w-[340px] rounded-full bg-emerald-500/10 blur-[120px]"
+      />
       {/* top glowing line */}
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent"
+      />
 
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24">
         {/* ===================== Info ===================== */}
@@ -159,8 +180,8 @@ export default function Contact() {
             <span className="text-cyan-400 drop-shadow-[0_0_12px_rgba(34,211,238,0.8)]">.</span>
           </h2>
           <p className="mx-auto mt-4 max-w-md text-center text-sm leading-relaxed text-slate-400 lg:mx-0 lg:text-left">
-            Questions about a build, an order or a warranty? Send us a message and
-            our team will get back to you within one business day.
+            Questions about a build, an order or a warranty? Send us a message and our team will get
+            back to you within one business day.
           </p>
 
           <div className="mt-10 space-y-8 border-l-2 border-cyan-400 pl-6 shadow-[-8px_0_20px_-12px_rgba(34,211,238,0.8)]">
@@ -174,7 +195,9 @@ export default function Contact() {
                 {CONTACT.hours.map((h) => (
                   <div key={h.days} className="flex max-w-xs justify-between gap-6">
                     <dt className="text-slate-400">{h.days}</dt>
-                    <dd className={`font-semibold ${h.time === "Closed" ? "text-orange-300" : "text-slate-200"}`}>
+                    <dd
+                      className={`font-semibold ${h.time === "Closed" ? "text-orange-300" : "text-slate-200"}`}
+                    >
                       {h.time}
                     </dd>
                   </div>
@@ -224,7 +247,10 @@ export default function Contact() {
           </div>
 
           {/* socials */}
-          <ul className="mt-8 flex items-center justify-center gap-2 lg:justify-start" aria-label="Social media">
+          <ul
+            className="mt-8 flex items-center justify-center gap-2 lg:justify-start"
+            aria-label="Social media"
+          >
             {SOCIALS.map((s) => (
               <li key={s.label}>
                 <a
@@ -332,7 +358,10 @@ export default function Contact() {
                 </Field>
 
                 {status === "failed" && (
-                  <p role="alert" className="rounded-lg border border-red-400/30 bg-red-500/10 p-2.5 text-[11px] text-red-200">
+                  <p
+                    role="alert"
+                    className="rounded-lg border border-red-400/30 bg-red-500/10 p-2.5 text-[11px] text-red-200"
+                  >
                     Something went wrong. Please try again in a moment.
                   </p>
                 )}
@@ -344,7 +373,10 @@ export default function Contact() {
                 >
                   {status === "sending" ? (
                     <>
-                      <span aria-hidden className="h-4 w-4 animate-spin rounded-full border-2 border-[#06121a]/30 border-t-[#06121a] motion-reduce:animate-none" />
+                      <span
+                        aria-hidden
+                        className="h-4 w-4 animate-spin rounded-full border-2 border-[#06121a]/30 border-t-[#06121a] motion-reduce:animate-none"
+                      />
                       <span className="relative z-10">Sending...</span>
                     </>
                   ) : (
@@ -384,7 +416,10 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-1.5 block text-[10px] font-bold uppercase tracking-widest text-slate-400">
+      <label
+        htmlFor={id}
+        className="mb-1.5 block text-[10px] font-bold uppercase tracking-widest text-slate-400"
+      >
         {label}
       </label>
       {children}

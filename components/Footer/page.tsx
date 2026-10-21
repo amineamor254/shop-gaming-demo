@@ -66,7 +66,16 @@ const SOCIALS = [
     label: "Instagram",
     href: "#",
     icon: (
-      <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <svg
+        viewBox="0 0 24 24"
+        className="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
         <rect x="3" y="3" width="18" height="18" rx="5" />
         <circle cx="12" cy="12" r="4" />
         <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
@@ -86,7 +95,16 @@ const SOCIALS = [
     label: "YouTube",
     href: "#",
     icon: (
-      <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <svg
+        viewBox="0 0 24 24"
+        className="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
         <path d="M2.5 17a24.1 24.1 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.6 49.6 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.1 24.1 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.6 49.6 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
         <path d="m10 15 5-3-5-3z" />
       </svg>
@@ -142,10 +160,19 @@ export default function Footer() {
           WebkitMaskImage: "radial-gradient(ellipse at bottom, black 20%, transparent 70%)",
         }}
       />
-      <div aria-hidden className="pointer-events-none absolute -left-32 bottom-0 -z-10 h-[320px] w-[320px] rounded-full bg-cyan-500/10 blur-[120px]" />
-      <div aria-hidden className="pointer-events-none absolute -right-24 top-0 -z-10 h-[280px] w-[280px] rounded-full bg-emerald-500/10 blur-[120px]" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -left-32 bottom-0 -z-10 h-[320px] w-[320px] rounded-full bg-cyan-500/10 blur-[120px]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-24 top-0 -z-10 h-[280px] w-[280px] rounded-full bg-emerald-500/10 blur-[120px]"
+      />
       {/* top glowing line (same as header) */}
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent"
+      />
 
       <div className="mx-auto max-w-7xl px-4 pb-8 pt-14 sm:px-6">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_0.9fr_1.3fr]">
@@ -330,9 +357,7 @@ export default function Footer() {
         aria-label="Back to top"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         className={`fixed bottom-24 right-4 z-40 grid h-11 w-11 place-items-center rounded-full bg-cyan-500 text-[#06121a] shadow-[0_0_22px_rgba(6,182,212,0.5)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_32px_rgba(6,182,212,0.8)] active:scale-95 sm:right-6 lg:bottom-6 ${
-          showTop
-            ? "translate-y-0 opacity-100"
-            : "pointer-events-none translate-y-4 opacity-0"
+          showTop ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
         }`}
       >
         <ArrowUp className="h-5 w-5" />

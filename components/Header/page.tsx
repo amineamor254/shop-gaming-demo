@@ -201,7 +201,9 @@ export default function Header() {
             >
               <Store
                 className={`h-4 w-4 transition-transform duration-300 ${
-                  shopOpen ? "-translate-y-0.5 scale-110" : "group-hover:-translate-y-0.5 group-hover:scale-110"
+                  shopOpen
+                    ? "-translate-y-0.5 scale-110"
+                    : "group-hover:-translate-y-0.5 group-hover:scale-110"
                 }`}
               />
               <span>Shop</span>

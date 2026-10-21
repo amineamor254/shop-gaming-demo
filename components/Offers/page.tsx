@@ -124,8 +124,14 @@ export default function Offers() {
           WebkitMaskImage: "radial-gradient(ellipse at center, black 20%, transparent 70%)",
         }}
       />
-      <div aria-hidden className="pointer-events-none absolute -right-40 top-10 -z-10 h-[400px] w-[400px] rounded-full bg-cyan-500/15 blur-[120px]" />
-      <div aria-hidden className="pointer-events-none absolute -left-32 bottom-0 -z-10 h-[360px] w-[360px] rounded-full bg-emerald-500/10 blur-[120px]" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-40 top-10 -z-10 h-[400px] w-[400px] rounded-full bg-cyan-500/15 blur-[120px]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -left-32 bottom-0 -z-10 h-[360px] w-[360px] rounded-full bg-emerald-500/10 blur-[120px]"
+      />
 
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
         {/* ===== Title ===== */}
@@ -134,18 +140,14 @@ export default function Offers() {
             <Percent className="h-3.5 w-3.5" />
             Hot deals
           </span>
-          <h2
-            id="offers-title"
-            className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl"
-          >
+          <h2 id="offers-title" className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">
             Special{" "}
             <span className="bg-gradient-to-r from-cyan-300 via-cyan-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(34,211,238,0.35)]">
               Offers
             </span>
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-400 lg:mx-0">
-            Level up your setup for less. Use the codes below at checkout or in
-            the configurator.
+            Level up your setup for less. Use the codes below at checkout or in the configurator.
           </p>
         </div>
 
@@ -208,7 +210,10 @@ export default function Offers() {
             </div>
 
             {/* decorative discount badge */}
-            <div aria-hidden className="relative mx-auto grid aspect-square w-full max-w-[260px] place-items-center">
+            <div
+              aria-hidden
+              className="relative mx-auto grid aspect-square w-full max-w-[260px] place-items-center"
+            >
               <div className="absolute inset-0 animate-[spin_24s_linear_infinite] rounded-full border border-dashed border-cyan-400/30 motion-reduce:animate-none" />
               <div className="absolute inset-6 rounded-full border border-cyan-400/20" />
               <div className="absolute inset-12 rounded-full bg-cyan-500/10 blur-xl" />
@@ -246,9 +251,7 @@ export default function Offers() {
                 <h3 className="mt-4 text-base font-bold transition-colors group-hover:text-cyan-300">
                   {o.title}
                 </h3>
-                <p className="mt-2 flex-1 text-xs leading-relaxed text-slate-400">
-                  {o.text}
-                </p>
+                <p className="mt-2 flex-1 text-xs leading-relaxed text-slate-400">{o.text}</p>
 
                 {/* coupon */}
                 <div className="mt-5 flex items-center justify-between gap-2 rounded-xl border border-dashed border-cyan-400/30 bg-black/40 px-3 py-2">

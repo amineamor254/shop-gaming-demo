@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { PROMOS } from "./cart-config";
 
 /* ===================== Types ===================== */
@@ -65,9 +58,7 @@ function isValidPromo(x: unknown): x is Promo {
   if (typeof x !== "object" || x === null) return false;
   const p = x as Record<string, unknown>;
   return (
-    typeof p.code === "string" &&
-    typeof p.percent === "number" &&
-    PROMOS[p.code] === p.percent
+    typeof p.code === "string" && typeof p.percent === "number" && PROMOS[p.code] === p.percent
   );
 }
 
@@ -80,38 +71,38 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [promo, setPromoState] = useState<Promo | null>(null);
   const [hydrated, setHydrated] = useState(false);
 
-// تحميل السلة والكود من المتصفح مرة واحدة
-useEffect(() => {
-  const timeoutId = window.setTimeout(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
+  // تحميل السلة والكود من المتصفح مرة واحدة
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
 
-      if (raw) {
-        const parsed: unknown = JSON.parse(raw);
+        if (raw) {
+          const parsed: unknown = JSON.parse(raw);
 
-        if (Array.isArray(parsed)) {
-          setItems(parsed.filter(isValidItem));
+          if (Array.isArray(parsed)) {
+            setItems(parsed.filter(isValidItem));
+          }
         }
-      }
 
-      const rawPromo = localStorage.getItem(PROMO_KEY);
+        const rawPromo = localStorage.getItem(PROMO_KEY);
 
-      if (rawPromo) {
-        const parsedPromo: unknown = JSON.parse(rawPromo);
+        if (rawPromo) {
+          const parsedPromo: unknown = JSON.parse(rawPromo);
 
-        if (isValidPromo(parsedPromo)) {
-          setPromoState(parsedPromo);
+          if (isValidPromo(parsedPromo)) {
+            setPromoState(parsedPromo);
+          }
         }
+      } catch {
+        /* تجاهل بيانات تالفة */
+      } finally {
+        setHydrated(true);
       }
-    } catch {
-      /* تجاهل بيانات تالفة */
-    } finally {
-      setHydrated(true);
-    }
-  }, 0);
+    }, 0);
 
-  return () => window.clearTimeout(timeoutId);
-}, []);
+    return () => window.clearTimeout(timeoutId);
+  }, []);
 
   // حفظ السلة عند كل تغيير
   useEffect(() => {
@@ -141,8 +132,8 @@ useEffect(() => {
         try {
           const parsed: unknown = JSON.parse(e.newValue);
           if (Array.isArray(parsed)) {
-  setItems(parsed.filter(isValidItem));
-}
+            setItems(parsed.filter(isValidItem));
+          }
         } catch {
           /* تجاهل */
         }
@@ -164,18 +155,14 @@ useEffect(() => {
     setItems((prev) => {
       const existing = prev.find((i) => i.id === item.id);
       if (existing) {
-        return prev.map((i) =>
-          i.id === item.id ? { ...i, qty: clampQty(i.qty + qty) } : i
-        );
+        return prev.map((i) => (i.id === item.id ? { ...i, qty: clampQty(i.qty + qty) } : i));
       }
       return [...prev, { ...item, qty: clampQty(qty) }];
     });
   }, []);
 
   const updateQty = useCallback((id: string, qty: number) => {
-    setItems((prev) =>
-      prev.map((i) => (i.id === id ? { ...i, qty: clampQty(qty) } : i))
-    );
+    setItems((prev) => prev.map((i) => (i.id === id ? { ...i, qty: clampQty(qty) } : i)));
   }, []);
 
   const removeItem = useCallback((id: string) => {

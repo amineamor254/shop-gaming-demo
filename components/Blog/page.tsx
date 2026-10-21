@@ -175,9 +175,18 @@ export default function Blog() {
           WebkitMaskImage: "radial-gradient(ellipse at top, black 20%, transparent 70%)",
         }}
       />
-      <div aria-hidden className="pointer-events-none absolute -right-40 top-20 -z-10 h-[400px] w-[400px] rounded-full bg-cyan-500/15 blur-[120px]" />
-      <div aria-hidden className="pointer-events-none absolute -left-32 bottom-0 -z-10 h-[360px] w-[360px] rounded-full bg-emerald-500/10 blur-[120px]" />
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-40 top-20 -z-10 h-[400px] w-[400px] rounded-full bg-cyan-500/15 blur-[120px]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -left-32 bottom-0 -z-10 h-[360px] w-[360px] rounded-full bg-emerald-500/10 blur-[120px]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent"
+      />
 
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
         {/* ===== Title row ===== */}
@@ -187,10 +196,7 @@ export default function Blog() {
               <span className="h-2 w-2 rounded-full bg-cyan-400" />
               Blog
             </span>
-            <h2
-              id="blog-title"
-              className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl"
-            >
+            <h2 id="blog-title" className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">
               Latest{" "}
               <span className="bg-gradient-to-r from-cyan-300 via-cyan-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(34,211,238,0.35)]">
                 Stories
@@ -290,8 +296,13 @@ function PostVisual({ post, iconClass }: { post: Post; iconClass: string }) {
           WebkitMaskImage: "radial-gradient(circle at center, black 20%, transparent 70%)",
         }}
       />
-      <div aria-hidden className="absolute h-32 w-32 rounded-full bg-cyan-400/15 blur-3xl transition-all duration-500 group-hover:bg-cyan-400/30" />
-      <Icon className={`relative text-cyan-300 drop-shadow-[0_0_18px_rgba(34,211,238,0.6)] transition-transform duration-500 group-hover:scale-110 ${iconClass}`} />
+      <div
+        aria-hidden
+        className="absolute h-32 w-32 rounded-full bg-cyan-400/15 blur-3xl transition-all duration-500 group-hover:bg-cyan-400/30"
+      />
+      <Icon
+        className={`relative text-cyan-300 drop-shadow-[0_0_18px_rgba(34,211,238,0.6)] transition-transform duration-500 group-hover:scale-110 ${iconClass}`}
+      />
     </div>
   );
 }
@@ -299,13 +310,19 @@ function PostVisual({ post, iconClass }: { post: Post; iconClass: string }) {
 function FeaturedPost({ post }: { post: Post }) {
   return (
     <article className="group relative">
-      <div aria-hidden className="absolute -inset-3 -z-10 rounded-[2rem] bg-gradient-to-r from-cyan-500/15 via-emerald-500/10 to-transparent blur-2xl" />
+      <div
+        aria-hidden
+        className="absolute -inset-3 -z-10 rounded-[2rem] bg-gradient-to-r from-cyan-500/15 via-emerald-500/10 to-transparent blur-2xl"
+      />
 
       <div className="grid overflow-hidden rounded-3xl border border-cyan-400/20 bg-[#0a1119]/90 shadow-[0_0_50px_rgba(6,182,212,0.12)] backdrop-blur transition-all duration-500 hover:border-cyan-400/40 hover:shadow-[0_0_60px_rgba(6,182,212,0.25)] lg:grid-cols-[1.1fr_0.9fr]">
         {/* visual */}
         <div className="relative min-h-[240px] overflow-hidden lg:min-h-[340px]">
           <PostVisual post={post} iconClass="h-24 w-24 sm:h-32 sm:w-32" />
-          <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-[#0a1119]/60 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-[#0a1119]/40" />
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-gradient-to-t from-[#0a1119]/60 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-[#0a1119]/40"
+          />
         </div>
 
         {/* text */}
@@ -313,7 +330,10 @@ function FeaturedPost({ post }: { post: Post }) {
           {post.tags && (
             <ul className="mb-3 flex flex-wrap gap-x-3 gap-y-1" aria-label="Tags">
               {post.tags.map((t) => (
-                <li key={t} className="text-[10px] font-bold uppercase tracking-widest text-cyan-400">
+                <li
+                  key={t}
+                  className="text-[10px] font-bold uppercase tracking-widest text-cyan-400"
+                >
                   #{t}
                 </li>
               ))}
@@ -353,7 +373,10 @@ function PostCard({ post }: { post: Post }) {
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/5 bg-[#0a1119]/90 transition-all duration-500 hover:-translate-y-1.5 hover:border-cyan-400/40 hover:shadow-[0_0_35px_rgba(6,182,212,0.22)]">
       <div className="relative aspect-[4/3] overflow-hidden">
         <PostVisual post={post} iconClass="h-14 w-14" />
-        <div aria-hidden className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0a1119] to-transparent" />
+        <div
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0a1119] to-transparent"
+        />
       </div>
 
       <div className="flex flex-1 flex-col p-4">

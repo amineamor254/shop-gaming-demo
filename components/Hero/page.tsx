@@ -27,7 +27,10 @@ const SPECS = ["RTX 5060 Ti", "Ryzen 7 9700X", "32GB DDR5"];
 
 export default function Hero() {
   return (
-    <section id="home" className=" scroll-mt-16 relative isolate overflow-hidden bg-[#05090f] font-[family-name:var(--font-orbitron)] text-white">
+    <section
+      id="home"
+      className=" scroll-mt-16 relative isolate overflow-hidden bg-[#05090f] font-[family-name:var(--font-orbitron)] text-white"
+    >
       {/* ===== Background effects ===== */}
       {/* grid pattern */}
       <div
@@ -37,10 +40,8 @@ export default function Hero() {
           backgroundImage:
             "linear-gradient(to right, #22d3ee 1px, transparent 1px), linear-gradient(to bottom, #22d3ee 1px, transparent 1px)",
           backgroundSize: "56px 56px",
-          maskImage:
-            "radial-gradient(ellipse at center, black 30%, transparent 75%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+          maskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+          WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
         }}
       />
       {/* glow blobs */}
@@ -80,8 +81,8 @@ export default function Hero() {
             Built for performance. Tested for victory.
           </p>
           <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-slate-400 lg:mx-0">
-            Top-tier FPS, zero lag, zero compromise. Whether you play ranked or
-            just for fun, your system is ready to dominate.
+            Top-tier FPS, zero lag, zero compromise. Whether you play ranked or just for fun, your
+            system is ready to dominate.
           </p>
 
           {/* buttons */}
@@ -180,9 +181,7 @@ export default function Hero() {
                   <span className="text-2xl font-extrabold text-white">5499</span>
                   <span className="text-[11px] font-semibold text-cyan-400">RON</span>
                 </div>
-                <span className="text-[11px] text-slate-500">
-                  from 458 RON/mo
-                </span>
+                <span className="text-[11px] text-slate-500">from 458 RON/mo</span>
               </div>
 
               <div>
@@ -216,24 +215,24 @@ export default function Hero() {
               {/* actions */}
               <div className="flex gap-2">
                 <AddToCartButton
-                 item={{
-                          id: "hero-featured-pc",
-                          name: "Mian Vandal",
-                          price: 5499,
-                          variant: SPECS.join(" · "),
-                        }}
-                        addedContent={<>Added ✓</>}
-                        className="group/btn relative inline-flex flex-1 items-center justify-center gap-2 overflow-hidden rounded-lg bg-gradient-to-r from-orange-500 to-amber-400 px-4 py-2.5 text-sm font-bold text-[#1a0f00] shadow-[0_0_20px_rgba(249,115,22,0.35)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(249,115,22,0.6)] active:scale-95"
-                      >
-                        <ShoppingCart className="h-4 w-4" />
-                        Add to cart
-                        <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 group-hover/btn:translate-x-full" />
-                      </AddToCartButton>
+                  item={{
+                    id: "hero-featured-pc",
+                    name: "Mian Vandal",
+                    price: 5499,
+                    variant: SPECS.join(" · "),
+                  }}
+                  addedContent={<>Added ✓</>}
+                  className="group/btn relative inline-flex flex-1 items-center justify-center gap-2 overflow-hidden rounded-lg bg-gradient-to-r from-orange-500 to-amber-400 px-4 py-2.5 text-sm font-bold text-[#1a0f00] shadow-[0_0_20px_rgba(249,115,22,0.35)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(249,115,22,0.6)] active:scale-95"
+                >
+                  <ShoppingCart className="h-4 w-4" />
+                  Add to cart
+                  <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 group-hover/btn:translate-x-full" />
+                </AddToCartButton>
 
-                      <Link
-                        href="#sections"
-                        className="inline-flex items-center rounded-lg border border-cyan-400/30 px-4 py-2.5 text-sm font-semibold text-cyan-300 transition-all duration-300 hover:bg-cyan-400/10 hover:text-cyan-200"
-                      >
+                <Link
+                  href="#sections"
+                  className="inline-flex items-center rounded-lg border border-cyan-400/30 px-4 py-2.5 text-sm font-semibold text-cyan-300 transition-all duration-300 hover:bg-cyan-400/10 hover:text-cyan-200"
+                >
                   Details
                 </Link>
               </div>
