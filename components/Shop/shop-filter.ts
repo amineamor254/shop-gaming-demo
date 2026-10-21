@@ -33,7 +33,7 @@ export function requestCategory(category: ShopCategoryKey) {
     // Keep the selection when the product section is not mounted yet, such as after leaving the cart.
     sessionStorage.setItem(STORAGE_KEY, category);
   } catch {
-    /* التخزين قد يكون ممنوعاً */
+    /* Session storage may be unavailable or disabled by the browser. */
   }
   window.dispatchEvent(new CustomEvent(SHOP_EVENT, { detail: category }));
 }
