@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Check, Clock, Mail, MapPin, Phone, Send } from "lucide-react";
 
-/* ===================== Data (عدّلها لعلامتك) ===================== */
+/* ===================== Store contact data ===================== */
 
 const CONTACT = {
   hours: [
@@ -16,7 +16,7 @@ const CONTACT = {
   phone: "+000 123 456 789",
 };
 
-// أيقونات SVG مدمجة (لا تعتمد على إصدار lucide)
+// Inline social icons avoid relying on icon names that may vary between library versions.
 const SOCIALS = [
   {
     label: "Facebook",
@@ -74,6 +74,7 @@ function validate(v: Values): Errors {
 
 /* ===================== Section ===================== */
 
+/** Displays store contact details and a validated message form. */
 export default function Contact() {
   const [values, setValues] = useState<Values>({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<Errors>({});
@@ -93,7 +94,7 @@ export default function Contact() {
     setErrors(found);
     if (Object.keys(found).length > 0) return;
 
-    // حقل مخفي يملؤه الروبوتات فقط: نتجاهل الرسالة بصمت
+    // Bots often fill hidden fields; ignore those submissions without revealing the filter.
     if (honeypot) {
       setStatus("success");
       return;
@@ -101,13 +102,8 @@ export default function Contact() {
 
     setStatus("sending");
     try {
-      // TODO: أرسل البيانات إلى خدمتك (API route, Resend, Formspree, ...)
-      // await fetch("/api/contact", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(values),
-      // });
-      await new Promise((resolve) => setTimeout(resolve, 900)); // محاكاة الإرسال
+      // TODO: Replace this delay with a request to your contact endpoint or form provider.
+      await new Promise((resolve) => setTimeout(resolve, 900));
 
       setStatus("success");
       setValues({ name: "", email: "", message: "" });
@@ -122,7 +118,7 @@ export default function Contact() {
       aria-labelledby="contact-title"
       className="relative isolate scroll-mt-16 overflow-clip bg-[#05090f] font-[family-name:var(--font-orbitron)] text-white"
     >
-      {/* ===== Background: grid + "city map" lines ===== */}
+      {/* ===================== Background ===================== */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06]"
@@ -144,7 +140,6 @@ export default function Contact() {
           WebkitMaskImage: "radial-gradient(ellipse at 35% 50%, black 10%, transparent 65%)",
         }}
       />
-      {/* pulsing map pin */}
       <div
         aria-hidden
         className="pointer-events-none absolute left-[38%] top-1/2 -z-10 hidden lg:block"
@@ -160,7 +155,6 @@ export default function Contact() {
         aria-hidden
         className="pointer-events-none absolute -right-32 bottom-0 -z-10 h-[340px] w-[340px] rounded-full bg-emerald-500/10 blur-[120px]"
       />
-      {/* top glowing line */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent"
@@ -185,7 +179,6 @@ export default function Contact() {
           </p>
 
           <div className="mt-10 space-y-8 border-l-2 border-cyan-400 pl-6 shadow-[-8px_0_20px_-12px_rgba(34,211,238,0.8)]">
-            {/* hours */}
             <div>
               <h3 className="mb-3 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-cyan-300">
                 <Clock className="h-3.5 w-3.5" />
@@ -205,7 +198,6 @@ export default function Contact() {
               </dl>
             </div>
 
-            {/* address */}
             <div>
               <h3 className="mb-3 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-cyan-300">
                 <MapPin className="h-3.5 w-3.5" />
@@ -218,7 +210,6 @@ export default function Contact() {
               </address>
             </div>
 
-            {/* contacts */}
             <div>
               <h3 className="mb-3 text-[11px] font-bold uppercase tracking-widest text-cyan-300">
                 Contacts
@@ -246,7 +237,6 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* socials */}
           <ul
             className="mt-8 flex items-center justify-center gap-2 lg:justify-start"
             aria-label="Social media"
@@ -267,7 +257,6 @@ export default function Contact() {
 
         {/* ===================== Form ===================== */}
         <div className="group relative mx-auto w-full max-w-md lg:mx-0 lg:ml-auto">
-          {/* corner brackets */}
           {[
             "-left-3 -top-3 border-l-2 border-t-2",
             "-right-3 -top-3 border-r-2 border-t-2",
@@ -303,7 +292,7 @@ export default function Contact() {
               </div>
             ) : (
               <form onSubmit={onSubmit} noValidate className="space-y-5">
-                {/* honeypot (مخفي عن المستخدمين) */}
+                {/* This field stays hidden from people and catches basic bot submissions. */}
                 <div aria-hidden className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
                   <label htmlFor="contact-website">Website</label>
                   <input
