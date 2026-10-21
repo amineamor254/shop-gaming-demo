@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import AddToCartButton from "@/components/Cart/AddToCartButton";
 
-/* ===================== Types & data ===================== */
+/* ===================== Types and data ===================== */
 
 type Category = "Audio" | "Monitors" | "Mice" | "Keyboards";
 
@@ -33,9 +33,9 @@ type Product = {
   oldPrice?: number;
   rating: number;
   reviews: number;
-  colors: string[]; // hex
+  colors: string[]; // Hex color values.
   inStock: boolean;
-  image?: string; // مثال: "/images/products/elite-audio.png"
+  image?: string; // For example, "/images/products/elite-audio.png".
 };
 
 const PRODUCTS: Product[] = [
@@ -199,6 +199,7 @@ const MAX_PRICE = Math.max(...PRODUCTS.map((p) => p.price));
 
 /* ===================== Section ===================== */
 
+/** Renders the searchable, filterable, and paginated product catalog. */
 export default function Sections() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<Category | "All">("All");
@@ -213,6 +214,7 @@ export default function Sections() {
   const resetPage = () => setPage(1);
 
   useEffect(() => {
+    // Apply a saved category on mount and listen for selections sent by the header.
     const valid = ["All", "Audio", "Monitors", "Mice", "Keyboards"];
 
     const apply = (c: string | null) => {
@@ -226,7 +228,7 @@ export default function Sections() {
       setPage(1);
     };
 
-    apply(consumeRequestedCategory()); //
+    apply(consumeRequestedCategory());
 
     const onRequest = (e: Event) => {
       apply((e as CustomEvent<string>).detail);
@@ -286,7 +288,7 @@ export default function Sections() {
       aria-labelledby="sections-title"
       className="relative isolate scroll-mt-16 overflow-clip bg-[#05090f] font-[family-name:var(--font-orbitron)] text-white"
     >
-      {/* ===== Background (same language as Hero) ===== */}
+      {/* ===================== Background ===================== */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06]"
@@ -308,7 +310,7 @@ export default function Sections() {
       />
 
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
-        {/* ===== Title ===== */}
+        {/* ===================== Section heading ===================== */}
         <div className="mb-8 text-center lg:text-left">
           <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/5 px-3 py-1 text-xs font-medium text-cyan-300">
             <span className="h-2 w-2 rounded-full bg-cyan-400" />
@@ -328,7 +330,6 @@ export default function Sections() {
         <div className="grid gap-6 lg:grid-cols-[260px_1fr]">
           {/* ===================== Sidebar ===================== */}
           <aside className="h-fit space-y-6 rounded-2xl border border-cyan-400/15 bg-[#0a1119]/90 p-4 shadow-[0_0_40px_rgba(6,182,212,0.08)] backdrop-blur lg:sticky lg:top-24">
-            {/* search */}
             <div className="relative">
               <input
                 type="text"
@@ -349,7 +350,6 @@ export default function Sections() {
               </span>
             </div>
 
-            {/* categories */}
             <FilterGroup title="Product Categories">
               <ul className="space-y-1">
                 {(["All", "Audio", "Monitors", "Mice", "Keyboards"] as const).map((c) => {
@@ -383,7 +383,6 @@ export default function Sections() {
               </ul>
             </FilterGroup>
 
-            {/* availability */}
             <FilterGroup title="Availability">
               <label className="flex cursor-pointer items-center gap-2 text-xs text-slate-300">
                 <input
@@ -411,7 +410,6 @@ export default function Sections() {
               </label>
             </FilterGroup>
 
-            {/* price */}
             <FilterGroup title="Price">
               <input
                 type="range"
@@ -431,7 +429,6 @@ export default function Sections() {
               </div>
             </FilterGroup>
 
-            {/* colors */}
             <FilterGroup title="Color">
               <div className="flex flex-wrap gap-2">
                 {COLOR_FILTERS.map((c) => {
@@ -458,7 +455,6 @@ export default function Sections() {
               </div>
             </FilterGroup>
 
-            {/* promo banner */}
             <Link
               href="#offers"
               className="group relative block overflow-hidden rounded-xl border border-cyan-400/20 bg-gradient-to-br from-cyan-500/20 via-[#0a1119] to-emerald-500/10 p-4 transition-all duration-500 hover:border-cyan-400/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.25)]"
@@ -487,7 +483,6 @@ export default function Sections() {
 
           {/* ===================== Products ===================== */}
           <div>
-            {/* toolbar */}
             <div className="mb-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/5 bg-white/[0.03] px-3 py-2">
               <div className="flex items-center gap-3">
                 <div className="hidden items-center gap-1 sm:flex">
@@ -538,7 +533,6 @@ export default function Sections() {
               </label>
             </div>
 
-            {/* grid */}
             {visible.length > 0 ? (
               <div className={`grid grid-cols-1 gap-4 sm:grid-cols-2 ${GRID_COLS[cols]}`}>
                 {visible.map((p) => (
@@ -560,7 +554,6 @@ export default function Sections() {
               </div>
             )}
 
-            {/* pagination */}
             {totalPages > 1 && (
               <nav aria-label="Pagination" className="mt-8 flex items-center justify-center gap-2">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
@@ -617,7 +610,6 @@ function ProductCard({ product: p }: { product: Product }) {
 
   return (
     <article className="group relative overflow-hidden rounded-2xl border border-white/5 bg-[#0a1119]/90 transition-all duration-500 hover:-translate-y-1.5 hover:border-cyan-400/40 hover:shadow-[0_0_35px_rgba(6,182,212,0.22)]">
-      {/* image */}
       <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-[#0d1824] to-[#070d14]">
         {p.image ? (
           <Image
@@ -646,7 +638,6 @@ function ProductCard({ product: p }: { product: Product }) {
         )}
       </div>
 
-      {/* info */}
       <div className="space-y-2 p-4">
         <h3 className="truncate text-sm font-bold text-white transition-colors group-hover:text-cyan-300">
           {p.name}
