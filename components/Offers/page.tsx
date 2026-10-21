@@ -16,9 +16,9 @@ import {
   Zap,
 } from "lucide-react";
 
-/* ===================== Data (عدّلها لعروضك) ===================== */
+/* ===================== Offer data ===================== */
 
-// نهاية العرض الرئيسي (عدّل التاريخ). بعد انتهائه يظهر العداد أصفاراً.
+// TODO: Set the end date for your featured sale; the countdown shows zeros after it expires.
 const FLASH_SALE_END = "2026-12-31T23:59:59";
 
 const FLASH_SALE = {
@@ -73,11 +73,12 @@ const PERKS = [
 
 /* ===================== Section ===================== */
 
+/** Displays featured promotions, a hydration-safe countdown, and copyable offer codes. */
 export default function Offers() {
   const [msLeft, setMsLeft] = useState<number | null>(null);
   const [copied, setCopied] = useState<string | null>(null);
 
-  // عداد تنازلي (يبدأ بعد التحميل لتفادي اختلاف الخادم والمتصفح)
+  // Start the timer after hydration so the server and initial client render use the same placeholder.
   useEffect(() => {
     const end = new Date(FLASH_SALE_END).getTime();
     const tick = () => setMsLeft(Math.max(0, end - Date.now()));
@@ -102,7 +103,7 @@ export default function Offers() {
       setCopied(code);
       setTimeout(() => setCopied((c) => (c === code ? null : c)), 2000);
     } catch {
-      /* clipboard may be blocked */
+      /* Clipboard access may be unavailable because of browser permissions or context. */
     }
   };
 
@@ -112,7 +113,7 @@ export default function Offers() {
       aria-labelledby="offers-title"
       className="relative isolate scroll-mt-16 overflow-clip bg-[#05090f] font-[family-name:var(--font-orbitron)] text-white"
     >
-      {/* ===== Background ===== */}
+      {/* ===================== Background ===================== */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06]"
@@ -134,7 +135,7 @@ export default function Offers() {
       />
 
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
-        {/* ===== Title ===== */}
+        {/* ===================== Section heading ===================== */}
         <div className="mb-10 text-center lg:text-left">
           <span className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-500/10 px-3 py-1 text-xs font-medium text-orange-300">
             <Percent className="h-3.5 w-3.5" />
@@ -151,10 +152,9 @@ export default function Offers() {
           </p>
         </div>
 
-        {/* ===== Featured flash sale ===== */}
+        {/* ===================== Featured flash sale ===================== */}
         <div className="relative mb-8 overflow-hidden rounded-3xl border border-cyan-400/25 bg-gradient-to-br from-cyan-500/15 via-[#0a1119] to-emerald-500/10 p-6 shadow-[0_0_50px_rgba(6,182,212,0.15)] sm:p-10">
           <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr]">
-            {/* text + countdown */}
             <div className="text-center lg:text-left">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-orange-400/40 bg-orange-500/20 px-2.5 py-1 text-[11px] font-semibold text-orange-300">
                 <Zap className="h-3 w-3" />
@@ -171,7 +171,6 @@ export default function Offers() {
                 {FLASH_SALE.text}
               </p>
 
-              {/* countdown */}
               <div
                 role="timer"
                 aria-label="Time left for the flash sale"
@@ -209,7 +208,6 @@ export default function Offers() {
               </Link>
             </div>
 
-            {/* decorative discount badge */}
             <div
               aria-hidden
               className="relative mx-auto grid aspect-square w-full max-w-[260px] place-items-center"
@@ -229,7 +227,7 @@ export default function Offers() {
           </div>
         </div>
 
-        {/* ===== Offer cards ===== */}
+        {/* ===================== Offer cards ===================== */}
         <div className="grid gap-4 md:grid-cols-3">
           {OFFERS.map((o) => {
             const Icon = o.icon;
@@ -253,7 +251,6 @@ export default function Offers() {
                 </h3>
                 <p className="mt-2 flex-1 text-xs leading-relaxed text-slate-400">{o.text}</p>
 
-                {/* coupon */}
                 <div className="mt-5 flex items-center justify-between gap-2 rounded-xl border border-dashed border-cyan-400/30 bg-black/40 px-3 py-2">
                   <span className="flex items-center gap-2 text-xs font-bold tracking-widest text-cyan-300">
                     <Tag className="h-3.5 w-3.5" />
@@ -289,7 +286,7 @@ export default function Offers() {
           })}
         </div>
 
-        {/* ===== Perks ===== */}
+        {/* ===================== Store perks ===================== */}
         <ul className="mt-8 grid gap-3 sm:grid-cols-3">
           {PERKS.map(({ icon: Icon, title, text }) => (
             <li
