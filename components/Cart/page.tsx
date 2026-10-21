@@ -29,6 +29,7 @@ import {
 
 /* ===================== Page ===================== */
 
+/** Renders cart contents, promo controls, and the shared order summary. */
 export default function CartPage() {
   const { items, count, subtotal, savings, promo, setPromo, hydrated, clear } = useCart();
 
@@ -38,7 +39,7 @@ export default function CartPage() {
   );
   const [confirmClear, setConfirmClear] = useState(false);
 
-  // الشحن هنا تقديري (العادي)، ويُحسم الاختيار النهائي في صفحة الدفع
+  // Use standard shipping as an estimate; buyers choose the final method at checkout.
   const { discount, afterDiscount, shipping, tax, total } = calcTotals({
     subtotal,
     promoPercent: promo?.percent ?? 0,
@@ -72,14 +73,14 @@ export default function CartPage() {
       setTimeout(() => setConfirmClear(false), 3000);
       return;
     }
-    clear(); // يفرّغ السلة ويزيل كود الخصم
+    clear();
     setPromoMsg(null);
     setConfirmClear(false);
   };
 
   return (
     <main className="relative isolate min-h-[70vh] overflow-clip bg-[#05090f] font-[family-name:var(--font-orbitron)] text-white">
-      {/* ===== Background ===== */}
+      {/* ===================== Background ===================== */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06]"
@@ -101,7 +102,7 @@ export default function CartPage() {
       />
 
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-14">
-        {/* ===== Breadcrumb + title ===== */}
+        {/* ===================== Breadcrumb and title ===================== */}
         <nav
           aria-label="Breadcrumb"
           className="mb-6 flex items-center justify-center gap-2 text-xs text-slate-400 lg:justify-start"
@@ -128,7 +129,7 @@ export default function CartPage() {
           </h1>
         </div>
 
-        {/* ===== Loading (قبل قراءة السلة من التخزين) ===== */}
+        {/* ===================== Loading before saved cart data is available ===================== */}
         {!hydrated ? (
           <div className="grid gap-6 lg:grid-cols-[1fr_360px]" aria-busy="true">
             <div className="space-y-3 rounded-2xl border border-white/5 bg-[#0a1119]/90 p-4">
@@ -203,7 +204,7 @@ export default function CartPage() {
                     Order summary
                   </h2>
 
-                  {/* free shipping progress */}
+                  {/* ===================== Free shipping progress ===================== */}
                   <div>
                     <p className="mb-2 flex items-center gap-2 text-[11px] text-slate-300">
                       <Truck className="h-3.5 w-3.5 text-cyan-400" />
@@ -227,7 +228,7 @@ export default function CartPage() {
                     </div>
                   </div>
 
-                  {/* promo */}
+                  {/* ===================== Promo code ===================== */}
                   <div>
                     {promo ? (
                       <div className="flex items-center justify-between rounded-lg border border-dashed border-emerald-400/50 bg-emerald-500/10 px-3 py-2 text-xs text-emerald-300">
@@ -278,7 +279,7 @@ export default function CartPage() {
                     </p>
                   </div>
 
-                  {/* totals */}
+                  {/* ===================== Totals ===================== */}
                   <dl className="space-y-2.5 border-t border-white/5 pt-4 text-xs">
                     <Row label="Subtotal" value={money(subtotal)} />
                     {savings > 0 && (
@@ -315,7 +316,7 @@ export default function CartPage() {
                     <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 group-hover/btn:translate-x-full" />
                   </Link>
 
-                  {/* notes */}
+                  {/* ===================== Store policies ===================== */}
                   <ul className="space-y-2 text-[11px] text-slate-400">
                     {[
                       {
@@ -369,7 +370,6 @@ function CartRow({ item }: { item: CartItem }) {
 
   return (
     <li className="group flex flex-wrap items-center gap-4 p-4 transition-colors duration-300 hover:bg-white/[0.02] sm:flex-nowrap">
-      {/* image */}
       <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl border border-white/5 bg-gradient-to-br from-[#0d1824] to-[#070d14]">
         {item.image ? (
           <Image
@@ -386,7 +386,6 @@ function CartRow({ item }: { item: CartItem }) {
         )}
       </div>
 
-      {/* info */}
       <div className="min-w-0 flex-1 basis-40">
         <h3 className="truncate text-sm font-bold transition-colors group-hover:text-cyan-300">
           {item.name}
@@ -400,7 +399,6 @@ function CartRow({ item }: { item: CartItem }) {
         {item.variant && <p className="mt-1 truncate text-[11px] text-slate-500">{item.variant}</p>}
       </div>
 
-      {/* quantity */}
       <div
         role="group"
         aria-label={`Quantity for ${item.name}`}
@@ -448,13 +446,11 @@ function CartRow({ item }: { item: CartItem }) {
         </button>
       </div>
 
-      {/* line total */}
       <div className="w-24 text-right">
         <p className="text-[10px] uppercase tracking-wider text-slate-500">Total</p>
         <p className="text-sm font-extrabold">{money(lineTotal)}</p>
       </div>
 
-      {/* remove */}
       <button
         type="button"
         aria-label={`Remove ${item.name} from cart`}

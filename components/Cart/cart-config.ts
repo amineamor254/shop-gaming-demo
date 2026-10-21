@@ -1,15 +1,14 @@
 /**
- * إعدادات السلة والدفع في مكان واحد.
- * يستخدمها: CartContext و صفحة السلة و صفحة Checkout.
+ * Centralizes the values and calculations shared by the cart and checkout.
  */
 
-/* ===================== Config (عدّلها لمتجرك) ===================== */
+/* ===================== Store configuration ===================== */
 
-export const TAX_RATE = 0.1; // 10% (ضع 0 إن كانت الأسعار شاملة الضريبة)
-export const FREE_SHIPPING_MIN = 100; // الشحن العادي مجاني فوق هذا المبلغ
+export const TAX_RATE = 0.1; // Set to 0 when listed prices already include tax.
+export const FREE_SHIPPING_MIN = 100; // Standard shipping is free at or above this subtotal.
 export const FLAT_SHIPPING = 9;
 
-// أكواد الخصم (نفس أكواد قسم Offers). القيمة = نسبة الخصم
+// Keep these codes aligned with the offers shown in the storefront.
 export const PROMOS: Record<string, number> = {
   FLASH25: 25,
   BUNDLE20: 20,
@@ -42,15 +41,16 @@ export const COUNTRIES = [
 
 /* ===================== Helpers ===================== */
 
+/** Formats a numeric amount as a dollar value. */
 export const money = (n: number) => `$${n.toFixed(2)}`;
 
-/** تكلفة الشحن حسب الطريقة والمبلغ بعد الخصم */
+/** Calculates shipping from the selected method and discounted subtotal. */
 export function shippingCost(id: ShippingId, afterDiscount: number) {
   if (id === "express") return EXPRESS_SHIPPING;
   return afterDiscount >= FREE_SHIPPING_MIN ? 0 : FLAT_SHIPPING;
 }
 
-/** حساب كل المبالغ من مكان واحد حتى تتطابق السلة مع Checkout */
+/** Calculates discount, shipping, tax, and total consistently for cart and checkout. */
 export function calcTotals({
   subtotal,
   promoPercent = 0,

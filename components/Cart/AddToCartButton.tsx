@@ -10,15 +10,15 @@ type Props = {
   className?: string;
   disabled?: boolean;
   "aria-label"?: string;
-  /** المحتوى الافتراضي للزر */
+  /** Button content shown before an item is added. */
   children: React.ReactNode;
-  /** يظهر لثانيتين بعد الإضافة (الافتراضي: علامة ✓) */
+  /** Confirmation content shown briefly after adding an item; defaults to a check icon. */
   addedContent?: React.ReactNode;
 };
 
 /**
- * زر "أضف إلى السلة" قابل لإعادة الاستخدام.
- * مرّر له بيانات المنتج في `item` والتنسيق في `className`.
+ * Adds the supplied item to the cart and briefly shows confirmation content.
+ * Expects item data and accepts optional quantity, styling, and button content.
  */
 export default function AddToCartButton({
   item,

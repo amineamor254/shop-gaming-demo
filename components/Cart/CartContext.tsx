@@ -6,12 +6,12 @@ import { PROMOS } from "./cart-config";
 /* ===================== Types ===================== */
 
 export type CartItem = {
-  id: string; // معرّف فريد للمنتج (أو للتركيبة)
+  id: string; // Unique product or configuration identifier.
   name: string;
   price: number;
   oldPrice?: number;
-  image?: string; // مثال: "/images/products/elite-audio.png"
-  variant?: string; // لون، حجم، تفاصيل التركيبة...
+  image?: string; // For example, "/images/products/elite-audio.png".
+  variant?: string; // Optional color, size, or configuration details.
   qty: number;
 };
 
@@ -21,16 +21,16 @@ export type Promo = { code: string; percent: number };
 
 type CartContextValue = {
   items: CartItem[];
-  count: number; // مجموع الكميات
+  count: number; // Total quantity across all items.
   subtotal: number;
-  savings: number; // التوفير مقارنة بالأسعار القديمة
-  promo: Promo | null; // كود الخصم المطبَّق (يبقى بين السلة والدفع)
-  hydrated: boolean; // تم تحميل السلة من التخزين
+  savings: number; // Savings compared with original prices.
+  promo: Promo | null; // Applied discount code, shared by the cart and checkout.
+  hydrated: boolean; // True after saved cart data has been loaded.
   addItem: (item: NewCartItem, qty?: number) => void;
   updateQty: (id: string, qty: number) => void;
   removeItem: (id: string) => void;
   setPromo: (promo: Promo | null) => void;
-  clear: () => void; // يفرّغ السلة ويزيل الكود
+  clear: () => void; // Clears the cart and applied promo code.
 };
 
 /* ===================== Config ===================== */
@@ -53,7 +53,7 @@ function isValidItem(x: unknown): x is CartItem {
   );
 }
 
-// نقبل الكود فقط إذا كان موجوداً فعلاً بنفس النسبة
+// Accept persisted promo data only when its code and percentage match the current catalog.
 function isValidPromo(x: unknown): x is Promo {
   if (typeof x !== "object" || x === null) return false;
   const p = x as Record<string, unknown>;
@@ -66,12 +66,13 @@ function isValidPromo(x: unknown): x is Promo {
 
 const CartContext = createContext<CartContextValue | null>(null);
 
+/** Provides cart state, persistence, and cross-tab synchronization to its children. */
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [promo, setPromoState] = useState<Promo | null>(null);
   const [hydrated, setHydrated] = useState(false);
 
-  // تحميل السلة والكود من المتصفح مرة واحدة
+  // Defer storage reads until after the first render to keep server and client markup consistent.
   useEffect(() => {
     const timeoutId = window.setTimeout(() => {
       try {
@@ -95,7 +96,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           }
         }
       } catch {
-        /* تجاهل بيانات تالفة */
+        /* Ignore malformed saved data and let the cart start empty. */
       } finally {
         setHydrated(true);
       }
@@ -104,28 +105,28 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     return () => window.clearTimeout(timeoutId);
   }, []);
 
-  // حفظ السلة عند كل تغيير
+  // Wait for storage hydration before writing so the initial empty state cannot overwrite saved data.
   useEffect(() => {
     if (!hydrated) return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
     } catch {
-      /* التخزين قد يكون ممنوعاً */
+      /* Storage may be unavailable or disabled by the browser. */
     }
   }, [items, hydrated]);
 
-  // حفظ كود الخصم
+  // Keep the applied promo available when the buyer moves between cart and checkout.
   useEffect(() => {
     if (!hydrated) return;
     try {
       if (promo) localStorage.setItem(PROMO_KEY, JSON.stringify(promo));
       else localStorage.removeItem(PROMO_KEY);
     } catch {
-      /* تجاهل */
+      /* Storage may be unavailable or disabled by the browser. */
     }
   }, [promo, hydrated]);
 
-  // مزامنة السلة بين تبويبات المتصفح
+  // The browser storage event keeps other open tabs in sync with cart and promo changes.
   useEffect(() => {
     const onStorage = (e: StorageEvent) => {
       if (e.key === STORAGE_KEY && e.newValue) {
@@ -135,7 +136,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
             setItems(parsed.filter(isValidItem));
           }
         } catch {
-          /* تجاهل */
+          /* Ignore malformed updates from another tab. */
         }
       }
       if (e.key === PROMO_KEY) {
@@ -143,7 +144,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           const parsed: unknown = e.newValue ? JSON.parse(e.newValue) : null;
           setPromoState(isValidPromo(parsed) ? parsed : null);
         } catch {
-          /* تجاهل */
+          /* Ignore malformed promo updates from another tab. */
         }
       }
     };
@@ -201,6 +202,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 
+/** Returns the shared cart state and throws when called outside CartProvider. */
 export function useCart() {
   const ctx = useContext(CartContext);
   if (!ctx) throw new Error("useCart must be used inside <CartProvider>");
