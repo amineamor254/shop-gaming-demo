@@ -27,11 +27,11 @@ import {
 
 type NavItem = {
   label: string;
-  id: string; // يجب أن يطابق id القسم في الصفحة (حروف صغيرة)
+  id: string; // Match the lowercase id on the corresponding page section.
   icon: React.ComponentType<{ className?: string }>;
 };
 
-// أضف كل قسم جديد هنا مع id مطابق لـ <section id="...">
+// Add each section here with an id that matches its <section id="...">.
 const NAV_ITEMS: NavItem[] = [
   { label: "Home", id: "home", icon: Home },
   { label: "Settings", id: "configurator", icon: Settings },
@@ -41,6 +41,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Contact", id: "contact", icon: MessageCircle },
 ];
 
+/** Renders responsive navigation, cart status, and the shop category menu. */
 export default function Header() {
   const pathname = usePathname();
   const { count } = useCart();
@@ -54,7 +55,7 @@ export default function Header() {
   const shopRef = useRef<HTMLDivElement>(null);
   const shopTriggerRef = useRef<HTMLButtonElement>(null);
 
-  // تغيير شكل الـ header عند التمرير
+  // Use a compact header after the page moves past its top edge.
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
     onScroll();
@@ -62,7 +63,7 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // تمييز القسم الظاهر حالياً (في الصفحة الرئيسية فقط)
+  // Track visible home-page sections so the matching navigation link stays active.
   useEffect(() => {
     if (pathname !== "/") return;
 
@@ -83,7 +84,7 @@ export default function Header() {
     return () => observer.disconnect();
   }, [pathname]);
 
-  // إغلاق قائمة Shop: نقر خارجها أو زر Escape
+  // Close the dropdown on outside click or Escape, restoring trigger focus on Escape.
   useEffect(() => {
     if (!shopOpen) return;
 
@@ -112,7 +113,7 @@ export default function Header() {
   };
 
   const selectCategory = (key: ShopCategoryKey) => {
-    requestCategory(key); // يطبّق الفلتر في قسم Sections
+    requestCategory(key);
     closeAllMenus();
   };
 
@@ -124,11 +125,9 @@ export default function Header() {
           : "border-white/5 bg-[#0a1119]/95 backdrop-blur-md"
       }`}
     >
-      {/* line gradient */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
 
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
-        {/* logo */}
         <Link href="/#home" className="group flex shrink-0 items-center gap-2.5">
           <span className="grid h-10 w-10 place-items-center rounded-lg bg-cyan-500 shadow-[0_0_18px_rgba(6,182,212,0.45)] transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3">
             <svg viewBox="0 0 24 24" className="h-6 w-6 fill-[#06121a]" aria-hidden>
@@ -145,7 +144,6 @@ export default function Header() {
           </span>
         </Link>
 
-        {/* Desktop Navigation Links */}
         <nav
           aria-label="Main Navigation"
           className="hidden items-center gap-1 rounded-full border border-white/5 bg-white/[0.03] p-1 lg:flex"
@@ -173,7 +171,7 @@ export default function Header() {
             );
           })}
 
-          {/* ===== Shop dropdown ===== */}
+          {/* ===================== Shop dropdown ===================== */}
           <div
             ref={shopRef}
             className="relative"
@@ -214,7 +212,7 @@ export default function Header() {
               />
             </button>
 
-            {/* panel (pt-3 يملأ الفراغ حتى لا تُغلق القائمة عند تحريك الفأرة) */}
+            {/* The top padding bridges the hover gap so the dropdown stays open while the pointer moves. */}
             <div
               id="shop-menu"
               className={`absolute right-0 top-full z-50 w-[min(92vw,400px)] origin-top-right pt-3 transition-all duration-200 motion-reduce:transition-none ${
@@ -271,7 +269,6 @@ export default function Header() {
           </div>
         </nav>
 
-        {/* Side Buttons */}
         <div className="flex items-center gap-2 sm:gap-3">
           <button
             type="button"
@@ -294,7 +291,7 @@ export default function Header() {
             )}
           </Link>
 
-          {/* TODO: اربط الزر بصفحة تسجيل الدخول عندما تبنيها */}
+          {/* TODO: Connect the login link to the authentication service. */}
           <Link
             href="/login"
             className="relative hidden overflow-hidden rounded-full bg-cyan-500 px-5 py-2.5 text-sm font-bold text-[#06121a] shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_28px_rgba(6,182,212,0.7)] active:scale-95 sm:inline-block"
@@ -303,7 +300,6 @@ export default function Header() {
             <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 hover:translate-x-full" />
           </Link>
 
-          {/* Mobile Menu Button */}
           <button
             type="button"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
@@ -316,7 +312,6 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <div
         className={`grid overflow-hidden transition-all duration-300 ease-out lg:hidden ${
           mobileOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
@@ -346,7 +341,6 @@ export default function Header() {
               );
             })}
 
-            {/* Shop accordion */}
             <button
               type="button"
               aria-expanded={mobileShopOpen}
