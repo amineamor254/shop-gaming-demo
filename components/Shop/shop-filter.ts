@@ -2,8 +2,7 @@ import type { ComponentType } from "react";
 import { Headphones, Keyboard, LayoutGrid, Monitor, Mouse } from "lucide-react";
 
 /**
- * فئات المتجر + وسيلة بسيطة لإرسال الفئة من قائمة Shop (في الـ Header)
- * إلى قسم Sections حتى يطبّق الفلتر تلقائياً.
+ * Defines shop categories and communicates the selected category to the product section.
  */
 
 export type ShopCategoryKey = "All" | "Audio" | "Monitors" | "Mice" | "Keyboards";
@@ -24,11 +23,14 @@ export const SHOP_CATEGORIES: {
 export const SHOP_EVENT = "shop:category";
 const STORAGE_KEY = "shop-category";
 
-/** يُستدعى من الـ Header عند اختيار فئة */
+/**
+ * Requests a category from the header or another page.
+ * Stores it as well as dispatching an event so the product section can consume it after mounting.
+ */
 export function requestCategory(category: ShopCategoryKey) {
   if (typeof window === "undefined") return;
   try {
-    // نحفظها أيضاً ليقرأها قسم Sections إن لم يكن معروضاً بعد (مثلاً عند القدوم من /cart)
+    // Keep the selection when the product section is not mounted yet, such as after leaving the cart.
     sessionStorage.setItem(STORAGE_KEY, category);
   } catch {
     /* التخزين قد يكون ممنوعاً */
@@ -36,7 +38,7 @@ export function requestCategory(category: ShopCategoryKey) {
   window.dispatchEvent(new CustomEvent(SHOP_EVENT, { detail: category }));
 }
 
-/** يقرأ الفئة المطلوبة (إن وُجدت) ثم يمسحها */
+/** Returns and clears a pending category selection saved for a later page render. */
 export function consumeRequestedCategory(): string | null {
   if (typeof window === "undefined") return null;
   try {
