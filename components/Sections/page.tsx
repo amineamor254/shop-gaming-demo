@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import {useEffect, useMemo, useState } from "react";
+import { SHOP_EVENT, consumeRequestedCategory } from "@/components/Shop/shop-filter";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -18,6 +19,7 @@ import {
   Grid3x3,
   X,
 } from "lucide-react";
+import AddToCartButton from "@/components/Cart/AddToCartButton";
 
 /* ===================== Types & data ===================== */
 
@@ -85,9 +87,9 @@ const GRID_COLS = {
 const PAGE_SIZE = 6;
 const MAX_PRICE = Math.max(...PRODUCTS.map((p) => p.price));
 
-/* ===================== Page ===================== */
+/* ===================== Section ===================== */
 
-export default function SectionsPage() {
+export default function Sections() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<Category | "All">("All");
   const [inStockOnly, setInStockOnly] = useState(false);
@@ -99,6 +101,31 @@ export default function SectionsPage() {
   const [page, setPage] = useState(1);
 
   const resetPage = () => setPage(1);
+
+  
+useEffect(() => {
+  const valid = ["All", "Audio", "Monitors", "Mice", "Keyboards"];
+
+  const apply = (c: string | null) => {
+    if (!c || !valid.includes(c)) return;
+    setCategory(c as Category | "All");
+    setQuery("");
+    setInStockOnly(false);
+    setOutOfStockOnly(false);
+    setMaxPrice(MAX_PRICE);
+    setColor(null);
+    setPage(1);
+  };
+
+  apply(consumeRequestedCategory()); // 
+
+  const onRequest = (e: Event) => {
+    apply((e as CustomEvent<string>).detail);
+    consumeRequestedCategory();
+  };
+  window.addEventListener(SHOP_EVENT, onRequest);
+  return () => window.removeEventListener(SHOP_EVENT, onRequest);
+}, []);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -148,7 +175,11 @@ export default function SectionsPage() {
   };
 
   return (
-    <main className="relative isolate min-h-screen overflow-hidden bg-[#05090f] font-[family-name:var(--font-orbitron)] text-white">
+    <section
+      id="sections"
+      aria-labelledby="sections-title"
+      className="relative isolate scroll-mt-16 overflow-clip bg-[#05090f] font-[family-name:var(--font-orbitron)] text-white"
+    >
       {/* ===== Background (same language as Hero) ===== */}
       <div
         aria-hidden
@@ -172,19 +203,22 @@ export default function SectionsPage() {
         className="pointer-events-none absolute -right-32 top-1/2 -z-10 h-[340px] w-[340px] rounded-full bg-emerald-500/10 blur-[120px]"
       />
 
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-14">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
         {/* ===== Title ===== */}
         <div className="mb-8 text-center lg:text-left">
           <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/5 px-3 py-1 text-xs font-medium text-cyan-300">
             <span className="h-2 w-2 rounded-full bg-cyan-400" />
             Gaming gear
           </span>
-          <h1 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">
+          <h2
+            id="sections-title"
+            className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl"
+          >
             Our{" "}
             <span className="bg-gradient-to-r from-cyan-300 via-cyan-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(34,211,238,0.35)]">
               Sections
             </span>
-          </h1>
+          </h2>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[260px_1fr]">
@@ -328,7 +362,7 @@ export default function SectionsPage() {
 
             {/* promo banner */}
             <Link
-              href="/offers"
+              href="#offers"
               className="group relative block overflow-hidden rounded-xl border border-cyan-400/20 bg-gradient-to-br from-cyan-500/20 via-[#0a1119] to-emerald-500/10 p-4 transition-all duration-500 hover:border-cyan-400/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.25)]"
             >
               <p className="text-[11px] font-semibold uppercase tracking-widest text-cyan-300">
@@ -356,7 +390,7 @@ export default function SectionsPage() {
           </aside>
 
           {/* ===================== Products ===================== */}
-          <section>
+          <div>
             {/* toolbar */}
             <div className="mb-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/5 bg-white/[0.03] px-3 py-2">
               <div className="flex items-center gap-3">
@@ -466,10 +500,10 @@ export default function SectionsPage() {
                 )}
               </nav>
             )}
-          </section>
+          </div>
         </div>
       </div>
-    </main>
+    </section>
   );
 }
 
@@ -484,10 +518,10 @@ function FilterGroup({
 }) {
   return (
     <div>
-      <h2 className="mb-3 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-cyan-300">
+      <h3 className="mb-3 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-cyan-300">
         <span className="h-px w-3 bg-cyan-400/60" />
         {title}
-      </h2>
+      </h3>
       {children}
     </div>
   );
@@ -576,14 +610,21 @@ function ProductCard({ product: p }: { product: Product }) {
             </span>
           </div>
 
-          <button
-            type="button"
+          <AddToCartButton
+            item={{
+              id: `product-${p.id}`,
+              name: p.name,
+              price: p.price,
+              oldPrice: p.oldPrice,
+              image: p.image,
+              variant: p.category,
+            }}
             disabled={!p.inStock}
             aria-label={`Add ${p.name} to cart`}
             className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-r from-orange-500 to-amber-400 text-[#1a0f00] shadow-[0_0_14px_rgba(249,115,22,0.3)] transition-all duration-300 hover:scale-110 hover:shadow-[0_0_22px_rgba(249,115,22,0.6)] active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100"
           >
             <ShoppingCart className="h-4 w-4" />
-          </button>
+          </AddToCartButton>
         </div>
       </div>
     </article>

@@ -20,6 +20,7 @@ import {
   ShieldCheck,
   Zap,
 } from "lucide-react";
+import AddToCartButton from "@/components/Cart/AddToCartButton";
 
 /* ===================== Types ===================== */
 
@@ -161,9 +162,9 @@ const FINANCE_MONTHS = 12;
 
 const money = (n: number) => `$${n.toLocaleString("en-US")}`;
 
-/* ===================== Page ===================== */
+/* ===================== Section ===================== */
 
-export default function ConfiguratorPage() {
+export default function Configurator() {
   const [selection, setSelection] = useState<Selection>(PRESETS[1].picks);
   const [copied, setCopied] = useState(false);
 
@@ -177,6 +178,13 @@ export default function ConfiguratorPage() {
 
   const total = CATEGORIES.reduce((sum, c) => sum + chosen[c.key].price, 0);
   const monthly = Math.ceil(total / FINANCE_MONTHS);
+
+  const buildItem = {
+  id: `build-${Object.values(selection).join("-")}`,
+  name: "Custom PC Build",
+  price: total,
+  variant: `${chosen.cpu.name} · ${chosen.gpu.name} · ${chosen.ram.name}`,
+};
 
   // performance
   const performance = METRICS.map((m) => {
@@ -229,7 +237,11 @@ export default function ConfiguratorPage() {
   };
 
   return (
-    <main className="relative isolate min-h-screen overflow-hidden bg-[#05090f] pb-28 font-[family-name:var(--font-orbitron)] text-white lg:pb-0">
+    <section
+      id="configurator"
+      aria-labelledby="configurator-title"
+      className="relative isolate scroll-mt-16 overflow-clip bg-[#05090f] font-[family-name:var(--font-orbitron)] text-white"
+    >
       {/* ===== Background ===== */}
       <div
         aria-hidden
@@ -245,19 +257,22 @@ export default function ConfiguratorPage() {
       <div aria-hidden className="pointer-events-none absolute -left-40 top-0 -z-10 h-[400px] w-[400px] rounded-full bg-cyan-500/15 blur-[120px]" />
       <div aria-hidden className="pointer-events-none absolute -right-32 top-1/3 -z-10 h-[360px] w-[360px] rounded-full bg-emerald-500/10 blur-[120px]" />
 
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-14">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
         {/* ===== Title ===== */}
         <div className="mb-8 text-center lg:text-left">
           <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/5 px-3 py-1 text-xs font-medium text-cyan-300">
             <Sparkles className="h-3.5 w-3.5" />
             PC Configurator
           </span>
-          <h1 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
+          <h2
+            id="configurator-title"
+            className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl"
+          >
             Build your{" "}
             <span className="bg-gradient-to-r from-cyan-300 via-cyan-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(34,211,238,0.35)]">
               dream PC
             </span>
-          </h1>
+          </h2>
           <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-400 lg:mx-0">
             Pick a ready preset or customize every part. We check compatibility
             and update your price and performance live.
@@ -312,7 +327,7 @@ export default function ConfiguratorPage() {
             {CATEGORIES.map((c, i) => (
               <li key={c.key}>
                 <a
-                  href={`#${c.key}`}
+                  href={`#cfg-${c.key}`}
                   className="group flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium text-slate-300 transition-all duration-300 hover:bg-white/5 hover:text-cyan-300"
                 >
                   <span className="grid h-5 w-5 place-items-center rounded-full bg-cyan-500/15 text-[10px] font-bold text-cyan-300 transition group-hover:bg-cyan-500 group-hover:text-[#06121a]">
@@ -331,16 +346,16 @@ export default function ConfiguratorPage() {
             {CATEGORIES.map((cat, i) => {
               const Icon = cat.icon;
               return (
-                <section key={cat.key} id={cat.key} className="scroll-mt-36">
+                <div key={cat.key} id={`cfg-${cat.key}`} className="scroll-mt-36">
                   <div className="mb-4 flex items-start gap-3">
                     <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-cyan-500/15 text-cyan-300 shadow-[0_0_16px_rgba(6,182,212,0.2)]">
                       <Icon className="h-5 w-5" />
                     </span>
                     <div>
-                      <h2 className="text-lg font-extrabold">
+                      <h3 className="text-lg font-extrabold">
                         <span className="mr-2 text-cyan-400">{i + 1}.</span>
                         {cat.title}
-                      </h2>
+                      </h3>
                       <p className="text-xs text-slate-400">{cat.hint}</p>
                     </div>
                   </div>
@@ -375,7 +390,7 @@ export default function ConfiguratorPage() {
                           )}
 
                           <div className="flex items-start justify-between gap-2">
-                            <h3 className="text-sm font-bold">{part.name}</h3>
+                            <span className="text-sm font-bold">{part.name}</span>
                             <span
                               className={`grid h-5 w-5 shrink-0 place-items-center rounded-full border transition-all duration-300 ${
                                 active
@@ -387,9 +402,9 @@ export default function ConfiguratorPage() {
                             </span>
                           </div>
 
-                          <p className="mt-1 text-[11px] leading-relaxed text-slate-400">
+                          <span className="mt-1 text-[11px] leading-relaxed text-slate-400">
                             {part.spec}
-                          </p>
+                          </span>
 
                           <div className="mt-4 flex items-end justify-between">
                             <span className="text-lg font-extrabold">{money(part.price)}</span>
@@ -408,19 +423,19 @@ export default function ConfiguratorPage() {
                       );
                     })}
                   </div>
-                </section>
+                </div>
               );
             })}
           </div>
 
           {/* ===================== Summary (desktop) ===================== */}
-          <aside className="hidden h-fit lg:sticky lg:top-24 lg:block">
+          <aside className="hidden h-fit lg:sticky lg:top-36 lg:block">
             <div className="relative">
               <div aria-hidden className="absolute -inset-3 -z-10 rounded-[2rem] bg-gradient-to-b from-cyan-500/20 via-emerald-500/10 to-transparent blur-2xl" />
               <div className="space-y-5 rounded-2xl border border-cyan-400/20 bg-[#0a1119]/90 p-5 shadow-[0_0_40px_rgba(6,182,212,0.15)] backdrop-blur">
-                <h2 className="text-sm font-extrabold uppercase tracking-widest text-cyan-300">
+                <h3 className="text-sm font-extrabold uppercase tracking-widest text-cyan-300">
                   Your build
-                </h2>
+                </h3>
 
                 {/* parts list */}
                 <ul className="space-y-2.5">
@@ -455,7 +470,7 @@ export default function ConfiguratorPage() {
                       </div>
                       <div className="h-1.5 overflow-hidden rounded-full bg-white/5">
                         <div
-                          className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-sky-500 shadow-[0_0_10px_rgba(34,211,238,0.6)] transition-all duration-700"
+                          className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-sky-500 shadow-[0_0_10px_rgba(34,211,238,0.6)] transition-all duration-700 motion-reduce:transition-none"
                           style={{ width: `${m.value}%` }}
                         />
                       </div>
@@ -498,16 +513,19 @@ export default function ConfiguratorPage() {
                 </div>
 
                 {/* actions */}
-                <button
-                  type="button"
-                  disabled={warnings.length > 0}
-                  className="group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-lg bg-gradient-to-r from-orange-500 to-amber-400 px-4 py-3 text-sm font-bold text-[#1a0f00] shadow-[0_0_20px_rgba(249,115,22,0.35)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(249,115,22,0.6)] active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100"
+                <AddToCartButton
+                 item={buildItem}
+                disabled={warnings.length > 0}
+                addedContent={<>Added ✓</>}
+                className="group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-lg bg-gradient-to-r from-orange-500 to-amber-400 px-4 py-3 text-sm font-bold text-[#1a0f00] shadow-[0_0_20px_rgba(249,115,22,0.35)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(249,115,22,0.6)] active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100"
                 >
-                  <ShoppingCart className="h-4 w-4" />
-                  Add to cart
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                  <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 group-hover/btn:translate-x-full" />
-                </button>
+              <ShoppingCart className="h-4 w-4" />
+              Add to cart
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+              <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 group-hover/btn:translate-x-full" />
+
+      </AddToCartButton>
+
 
                 <button
                   type="button"
@@ -532,8 +550,9 @@ export default function ConfiguratorPage() {
         </div>
       </div>
 
-      {/* ===================== Summary bar (mobile) ===================== */}
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-cyan-400/20 bg-[#070d14]/95 px-4 py-3 backdrop-blur-xl lg:hidden">
+      {/* ===================== Summary bar (mobile) =====================
+          sticky (not fixed): it only shows while you are inside this section */}
+      <div className="sticky bottom-0 z-40 border-t border-cyan-400/20 bg-[#070d14]/95 px-4 py-3 backdrop-blur-xl lg:hidden">
         {warnings.length > 0 && (
           <p className="mb-2 flex items-center gap-2 text-[11px] text-orange-300" role="alert">
             <AlertTriangle className="h-3.5 w-3.5 shrink-0" />
@@ -545,16 +564,17 @@ export default function ConfiguratorPage() {
             <p className="text-[10px] uppercase tracking-wider text-slate-500">Total</p>
             <p className="text-xl font-extrabold">{money(total)}</p>
           </div>
-          <button
-            type="button"
+          <AddToCartButton
+            item={buildItem}
             disabled={warnings.length > 0}
+            addedContent={<>Added ✓</>}
             className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-orange-500 to-amber-400 px-5 py-2.5 text-sm font-bold text-[#1a0f00] shadow-[0_0_20px_rgba(249,115,22,0.35)] transition active:scale-95 disabled:cursor-not-allowed disabled:opacity-40"
-          >
-            <ShoppingCart className="h-4 w-4" />
-            Add to cart
-          </button>
+    >
+          <ShoppingCart className="h-4 w-4" />
+          Add to cart
+      </AddToCartButton>
         </div>
       </div>
-    </main>
+    </section>
   );
 }
