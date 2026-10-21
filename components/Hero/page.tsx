@@ -13,8 +13,7 @@ import {
 } from "lucide-react";
 import AddToCartButton from "@/components/Cart/AddToCartButton";
 
-// ضع مسار صورة الجهاز هنا، مثال: "/images/mian-vandal.png" (داخل مجلد public)
-// إذا تركته فارغاً سيظهر شكل بديل بالـ CSS
+// Set this to an image path in public; leave it empty to show the CSS fallback.
 const PRODUCT_IMAGE = "/images/mian-vandal.png";
 
 const STATS = [
@@ -25,14 +24,14 @@ const STATS = [
 
 const SPECS = ["RTX 5060 Ti", "Ryzen 7 9700X", "32GB DDR5"];
 
+/** Introduces the featured gaming PC and links to the builder and product catalog. */
 export default function Hero() {
   return (
     <section
       id="home"
       className=" scroll-mt-16 relative isolate overflow-hidden bg-[#05090f] font-[family-name:var(--font-orbitron)] text-white"
     >
-      {/* ===== Background effects ===== */}
-      {/* grid pattern */}
+      {/* ===================== Background effects ===================== */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.07]"
@@ -44,7 +43,6 @@ export default function Hero() {
           WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
         }}
       />
-      {/* glow blobs */}
       <div
         aria-hidden
         className="pointer-events-none absolute -left-40 top-10 -z-10 h-[420px] w-[420px] rounded-full bg-cyan-500/20 blur-[120px]"
@@ -55,9 +53,8 @@ export default function Hero() {
       />
 
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:py-24">
-        {/* ===== Left: text ===== */}
+        {/* ===================== Hero copy ===================== */}
         <div className="text-center lg:text-left">
-          {/* badge */}
           <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/5 px-3 py-1 text-xs font-medium text-cyan-300">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75" />
@@ -66,7 +63,6 @@ export default function Hero() {
             Top-rated builds
           </span>
 
-          {/* title */}
           <h1 className="mt-6 font-[family-name:var(--font-orbitron)] text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
             <span className="block text-white">PC Gaming</span>
             <span className="block bg-gradient-to-r from-cyan-300 via-cyan-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(34,211,238,0.35)]">
@@ -85,7 +81,6 @@ export default function Hero() {
             system is ready to dominate.
           </p>
 
-          {/* buttons */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
             <Link
               href="#configurator"
@@ -105,7 +100,6 @@ export default function Hero() {
             </Link>
           </div>
 
-          {/* stats */}
           <div className="mt-10 grid max-w-md grid-cols-3 gap-3 sm:mx-auto lg:mx-0">
             {STATS.map(({ icon: Icon, value, label }) => (
               <div
@@ -122,16 +116,14 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* ===== Right: product card ===== */}
+        {/* ===================== Featured product ===================== */}
         <div className="relative mx-auto w-full max-w-sm">
-          {/* glow behind card */}
           <div
             aria-hidden
             className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-b from-cyan-500/20 via-emerald-500/10 to-transparent blur-2xl"
           />
 
           <article className="group overflow-hidden rounded-2xl border border-cyan-400/20 bg-[#0a1119]/90 shadow-[0_0_40px_rgba(6,182,212,0.15)] backdrop-blur transition-all duration-500 hover:-translate-y-2 hover:border-cyan-400/50 hover:shadow-[0_0_60px_rgba(6,182,212,0.3)]">
-            {/* image area */}
             <div className="relative aspect-[4/5] overflow-hidden bg-[#070d14]">
               {PRODUCT_IMAGE ? (
                 <Image
@@ -143,7 +135,7 @@ export default function Hero() {
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               ) : (
-                /* CSS placeholder: RGB fans */
+                /* The fallback recreates RGB fan lighting when no product image is configured. */
                 <div className="absolute inset-0 grid place-items-center">
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(239,68,68,0.25),transparent_50%),radial-gradient(circle_at_70%_70%,rgba(34,197,94,0.25),transparent_50%)]" />
                   <div className="relative grid grid-cols-2 gap-5">
@@ -163,19 +155,15 @@ export default function Hero() {
                 </div>
               )}
 
-              {/* bottom fade */}
               <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0a1119] to-transparent" />
 
-              {/* badge */}
               <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-orange-400/40 bg-orange-500/20 px-2.5 py-1 text-[11px] font-semibold text-orange-300 backdrop-blur">
                 <Flame className="h-3 w-3" />
                 Best seller
               </span>
             </div>
 
-            {/* info */}
             <div className="space-y-4 p-4">
-              {/* price */}
               <div className="flex items-center justify-between rounded-xl border border-white/5 bg-black/40 px-4 py-3">
                 <div className="flex items-baseline gap-1.5">
                   <span className="text-2xl font-extrabold text-white">5499</span>
@@ -212,7 +200,6 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* actions */}
               <div className="flex gap-2">
                 <AddToCartButton
                   item={{
@@ -241,7 +228,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* bottom glowing line (same style as header) */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
     </section>
   );
