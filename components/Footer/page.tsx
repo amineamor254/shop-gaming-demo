@@ -14,7 +14,7 @@ import {
   Wallet,
 } from "lucide-react";
 
-/* ===================== Data (عدّلها لعلامتك) ===================== */
+/* ===================== Store data ===================== */
 
 const SITE = {
   name: "MIAN",
@@ -34,7 +34,7 @@ const COMPANY_LINKS = [
   { label: "Contact", href: "/#contact" },
 ];
 
-// TODO: اربطها بصفحاتك عند إنشائها (الآن "#" حتى لا تظهر 404)
+// TODO: Add destination pages for these policies and replace their placeholder links.
 const SERVICE_LINKS = [
   { label: "Privacy Policy", href: "#" },
   { label: "Terms & Conditions", href: "#" },
@@ -51,7 +51,7 @@ const BOTTOM_LINKS = [
   { label: "Contact us", href: "/#contact" },
 ];
 
-// أيقونات تواصل SVG مدمجة (لا تعتمد على إصدار lucide)
+// Inline social icons avoid relying on icon names that may vary between library versions.
 const SOCIALS = [
   {
     label: "Facebook",
@@ -112,7 +112,7 @@ const SOCIALS = [
   },
 ];
 
-// شارات دفع عامة (استبدلها بشعارات طرق الدفع التي تدعمها)
+// TODO: Replace these generic badges with the payment methods supported by your store.
 const PAYMENTS = [
   { label: "Card", icon: CreditCard },
   { label: "Wallet", icon: Wallet },
@@ -123,6 +123,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /* ===================== Footer ===================== */
 
+/** Renders store details, navigation, newsletter signup, and footer utilities. */
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "error" | "success">("idle");
@@ -141,14 +142,14 @@ export default function Footer() {
       setStatus("error");
       return;
     }
-    // TODO: أرسل البريد إلى مزوّد النشرة البريدية (Mailchimp, Resend, ...)
+    // TODO: Send validated addresses to your newsletter provider (for example, Mailchimp or Resend).
     setStatus("success");
     setEmail("");
   };
 
   return (
     <footer className="relative isolate overflow-clip border-t border-cyan-400/10 bg-[#05090f] font-[family-name:var(--font-orbitron)] text-white">
-      {/* ===== Background (same language as Hero) ===== */}
+      {/* ===================== Background ===================== */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.05]"
@@ -168,7 +169,6 @@ export default function Footer() {
         aria-hidden
         className="pointer-events-none absolute -right-24 top-0 -z-10 h-[280px] w-[280px] rounded-full bg-emerald-500/10 blur-[120px]"
       />
-      {/* top glowing line (same as header) */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent"
@@ -176,7 +176,7 @@ export default function Footer() {
 
       <div className="mx-auto max-w-7xl px-4 pb-8 pt-14 sm:px-6">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_0.9fr_1.3fr]">
-          {/* ===== Brand ===== */}
+          {/* ===================== Store details ===================== */}
           <div>
             <Link href="/#home" className="group inline-flex items-center gap-2.5">
               <span className="grid h-10 w-10 place-items-center rounded-lg bg-cyan-500 shadow-[0_0_18px_rgba(6,182,212,0.45)] transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3">
@@ -224,13 +224,13 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* ===== Our Company ===== */}
+          {/* ===================== Company links ===================== */}
           <FooterColumn title="Our Company" links={COMPANY_LINKS} />
 
-          {/* ===== Customer Service ===== */}
+          {/* ===================== Customer service links ===================== */}
           <FooterColumn title="Customer Service" links={SERVICE_LINKS} />
 
-          {/* ===== Newsletter ===== */}
+          {/* ===================== Newsletter signup ===================== */}
           <div>
             <h2 className="mb-4 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-cyan-300">
               <span className="h-px w-3 bg-cyan-400/60" />
@@ -291,7 +291,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* ===== Middle row: socials + mini nav ===== */}
+        {/* ===================== Social links and footer navigation ===================== */}
         <div className="mt-10 flex flex-col items-center justify-between gap-5 border-t border-white/5 pt-6 md:flex-row">
           <div className="flex items-center gap-3">
             <span className="text-[11px] font-bold uppercase tracking-widest text-slate-300">
@@ -328,7 +328,7 @@ export default function Footer() {
           </nav>
         </div>
 
-        {/* ===== Bottom row: copyright + payments ===== */}
+        {/* ===================== Copyright and payment methods ===================== */}
         <div className="mt-6 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-6 text-center md:flex-row md:text-left">
           <p className="text-[11px] text-slate-500">
             © {new Date().getFullYear()} All rights reserved.{" "}
@@ -351,7 +351,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* ===== Scroll to top ===== */}
+      {/* ===================== Scroll to top ===================== */}
       <button
         type="button"
         aria-label="Back to top"
