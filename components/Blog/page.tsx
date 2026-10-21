@@ -16,7 +16,7 @@ import {
   Zap,
 } from "lucide-react";
 
-/* ===================== Types & data (عدّلها لمقالاتك) ===================== */
+/* ===================== Post data ===================== */
 
 type Post = {
   id: number;
@@ -29,8 +29,8 @@ type Post = {
   tags?: string[];
   featured?: boolean;
   icon: React.ComponentType<{ className?: string }>;
-  gradient: string; // خلفية بديلة إن لم توجد صورة
-  image?: string; // مثال: "/images/blog/pc-build-guide.jpg"
+  gradient: string; // Fallback background used when no image is configured.
+  image?: string; // For example, "/images/blog/pc-build-guide.jpg".
 };
 
 const POSTS: Post[] = [
@@ -140,11 +140,12 @@ const POSTS: Post[] = [
 
 const INITIAL_VISIBLE = 4;
 
-// TODO: عندما تنشئ صفحات المقالات استبدلها بـ `/blog/${slug}`
+// TODO: Replace this placeholder with `/blog/${slug}` after creating article pages.
 const postHref = () => "#blog";
 
 /* ===================== Section ===================== */
 
+/** Displays the featured article and category-filtered blog posts. */
 export default function Blog() {
   const [category, setCategory] = useState("All");
   const [showAll, setShowAll] = useState(false);
@@ -163,7 +164,7 @@ export default function Blog() {
       aria-labelledby="blog-title"
       className="relative isolate scroll-mt-16 overflow-clip bg-[#05090f] font-[family-name:var(--font-orbitron)] text-white"
     >
-      {/* ===== Background ===== */}
+      {/* ===================== Background ===================== */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06]"
@@ -189,7 +190,7 @@ export default function Blog() {
       />
 
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
-        {/* ===== Title row ===== */}
+        {/* ===================== Section heading ===================== */}
         <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
           <div className="text-center sm:text-left">
             <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/5 px-3 py-1 text-xs font-medium text-cyan-300">
@@ -221,10 +222,10 @@ export default function Blog() {
           )}
         </div>
 
-        {/* ===== Featured post ===== */}
+        {/* ===================== Featured post ===================== */}
         <FeaturedPost post={featured} />
 
-        {/* ===== Category chips ===== */}
+        {/* ===================== Category filters ===================== */}
         <div
           role="group"
           aria-label="Filter articles by category"
@@ -253,7 +254,7 @@ export default function Blog() {
           })}
         </div>
 
-        {/* ===== Post grid ===== */}
+        {/* ===================== Article grid ===================== */}
         {visible.length > 0 ? (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {visible.map((p) => (
@@ -284,7 +285,6 @@ function PostVisual({ post, iconClass }: { post: Post; iconClass: string }) {
     />
   ) : (
     <div className={`absolute inset-0 grid place-items-center bg-gradient-to-br ${post.gradient}`}>
-      {/* decorative grid */}
       <div
         aria-hidden
         className="absolute inset-0 opacity-20"
@@ -316,7 +316,6 @@ function FeaturedPost({ post }: { post: Post }) {
       />
 
       <div className="grid overflow-hidden rounded-3xl border border-cyan-400/20 bg-[#0a1119]/90 shadow-[0_0_50px_rgba(6,182,212,0.12)] backdrop-blur transition-all duration-500 hover:border-cyan-400/40 hover:shadow-[0_0_60px_rgba(6,182,212,0.25)] lg:grid-cols-[1.1fr_0.9fr]">
-        {/* visual */}
         <div className="relative min-h-[240px] overflow-hidden lg:min-h-[340px]">
           <PostVisual post={post} iconClass="h-24 w-24 sm:h-32 sm:w-32" />
           <div
@@ -325,7 +324,6 @@ function FeaturedPost({ post }: { post: Post }) {
           />
         </div>
 
-        {/* text */}
         <div className="flex flex-col justify-center bg-gradient-to-br from-cyan-500/10 via-transparent to-emerald-500/5 p-6 sm:p-10">
           {post.tags && (
             <ul className="mb-3 flex flex-wrap gap-x-3 gap-y-1" aria-label="Tags">
