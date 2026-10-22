@@ -26,7 +26,7 @@ export default function Hero() {
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.07]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, #22d3ee 1px, transparent 1px), linear-gradient(to bottom, #22d3ee 1px, transparent 1px)",
+            "linear-gradient(to right, var(--color-brand-primary-400) 1px, transparent 1px), linear-gradient(to bottom, var(--color-brand-primary-400) 1px, transparent 1px)",
           backgroundSize: "56px 56px",
           maskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
           WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
@@ -34,7 +34,7 @@ export default function Hero() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-40 top-10 -z-10 h-[420px] w-[420px] rounded-full bg-cyan-500/20 blur-[120px]"
+        className="pointer-events-none absolute -left-40 top-10 -z-10 h-[420px] w-[420px] rounded-full bg-brand-primary-500/20 blur-[120px]"
       />
       <div
         aria-hidden
@@ -44,20 +44,20 @@ export default function Hero() {
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:py-24">
         {/* ===================== Hero copy ===================== */}
         <div className="text-center lg:text-left">
-          <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/5 px-3 py-1 text-xs font-medium text-cyan-300">
+          <span className="inline-flex items-center gap-2 rounded-full border border-brand-primary-400/20 bg-brand-primary-400/5 px-3 py-1 text-xs font-medium text-brand-primary-300">
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-primary-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-primary-400" />
             </span>
             Top-rated builds
           </span>
 
           <h1 className="mt-6 font-[family-name:var(--font-orbitron)] text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
             <span className="block text-white">PC Gaming</span>
-            <span className="block bg-gradient-to-r from-cyan-300 via-cyan-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(34,211,238,0.35)]">
+            <span className="block bg-gradient-to-r from-brand-primary-300 via-brand-primary-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_color-mix(in_srgb,var(--color-brand-primary-400)_35%,transparent)]">
               Custom
             </span>
-            <span className="block bg-gradient-to-r from-cyan-300 via-cyan-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(34,211,238,0.35)]">
+            <span className="block bg-gradient-to-r from-brand-primary-300 via-brand-primary-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_color-mix(in_srgb,var(--color-brand-primary-400)_35%,transparent)]">
               Premium
             </span>
           </h1>
@@ -73,7 +73,7 @@ export default function Hero() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
             <Link
               href="#configurator"
-              className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-cyan-500 px-6 py-3 text-sm font-bold text-[#06121a] shadow-[0_0_25px_rgba(6,182,212,0.45)] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_35px_rgba(6,182,212,0.75)] active:scale-95"
+              className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-brand-primary-500 px-6 py-3 text-sm font-bold text-[#06121a] shadow-[0_0_25px_color-mix(in_srgb,var(--color-brand-primary-500)_45%,transparent)] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_35px_color-mix(in_srgb,var(--color-brand-primary-500)_75%,transparent)] active:scale-95"
             >
               <Sparkles className="h-4 w-4" />
               <span className="relative z-10">PC Configurator</span>
@@ -83,7 +83,7 @@ export default function Hero() {
 
             <Link
               href="#sections"
-              className="inline-flex items-center rounded-full border border-cyan-400/40 px-6 py-3 text-sm font-semibold text-cyan-300 transition-all duration-300 hover:border-cyan-300 hover:bg-cyan-400/10 hover:shadow-[0_0_20px_rgba(34,211,238,0.25)]"
+              className="inline-flex items-center rounded-full border border-brand-primary-400/40 px-6 py-3 text-sm font-semibold text-brand-primary-300 transition-all duration-300 hover:border-brand-primary-300 hover:bg-brand-primary-400/10 hover:shadow-[0_0_20px_color-mix(in_srgb,var(--color-brand-primary-400)_25%,transparent)]"
             >
               View Systems
             </Link>
@@ -93,10 +93,10 @@ export default function Hero() {
             {FEATURED_PRODUCT.stats.map(({ icon: Icon, value, label }) => (
               <div
                 key={label}
-                className="group rounded-xl border border-white/5 bg-white/[0.03] p-3 text-left transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/30 hover:bg-cyan-400/5"
+                className="group rounded-xl border border-white/5 bg-white/[0.03] p-3 text-left transition-all duration-300 hover:-translate-y-1 hover:border-brand-primary-400/30 hover:bg-brand-primary-400/5"
               >
                 <div className="flex items-center gap-2">
-                  <Icon className="h-4 w-4 text-cyan-400 transition-transform duration-300 group-hover:scale-110" />
+                  <Icon className="h-4 w-4 text-brand-primary-400 transition-transform duration-300 group-hover:scale-110" />
                   <span className="text-base font-bold text-white">{value}</span>
                 </div>
                 <p className="mt-1 text-[11px] text-slate-500">{label}</p>
@@ -109,10 +109,10 @@ export default function Hero() {
         <div className="relative mx-auto w-full max-w-sm">
           <div
             aria-hidden
-            className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-b from-cyan-500/20 via-emerald-500/10 to-transparent blur-2xl"
+            className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-b from-brand-primary-500/20 via-emerald-500/10 to-transparent blur-2xl"
           />
 
-          <article className="group overflow-hidden rounded-2xl border border-cyan-400/20 bg-[#0a1119]/90 shadow-[0_0_40px_rgba(6,182,212,0.15)] backdrop-blur transition-all duration-500 hover:-translate-y-2 hover:border-cyan-400/50 hover:shadow-[0_0_60px_rgba(6,182,212,0.3)]">
+          <article className="group overflow-hidden rounded-2xl border border-brand-primary-400/20 bg-[#0a1119]/90 shadow-[0_0_40px_color-mix(in_srgb,var(--color-brand-primary-500)_15%,transparent)] backdrop-blur transition-all duration-500 hover:-translate-y-2 hover:border-brand-primary-400/50 hover:shadow-[0_0_60px_color-mix(in_srgb,var(--color-brand-primary-500)_30%,transparent)]">
             <div className="relative aspect-[4/5] overflow-hidden bg-[#070d14]">
               {FEATURED_PRODUCT.image ? (
                 <Image
@@ -146,7 +146,7 @@ export default function Hero() {
 
               <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0a1119] to-transparent" />
 
-              <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-orange-400/40 bg-orange-500/20 px-2.5 py-1 text-[11px] font-semibold text-orange-300 backdrop-blur">
+              <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-brand-accent-400/40 bg-brand-accent-500/20 px-2.5 py-1 text-[11px] font-semibold text-brand-accent-300 backdrop-blur">
                 <Flame className="h-3 w-3" />
                 Best seller
               </span>
@@ -156,7 +156,7 @@ export default function Hero() {
               <div className="flex items-center justify-between rounded-xl border border-white/5 bg-black/40 px-4 py-3">
                 <div className="flex items-baseline gap-1.5">
                   <span className="text-2xl font-extrabold text-white">{FEATURED_PRODUCT.price.toLocaleString("en-US")}</span>
-                  <span className="text-[11px] font-semibold text-cyan-400">{SITE.currencySymbol}</span>
+                  <span className="text-[11px] font-semibold text-brand-primary-400">{SITE.currencySymbol}</span>
                 </div>
                 <span className="text-[11px] text-slate-500">from {formatConfiguratorMoney(FEATURED_PRODUCT.monthlyPrice)}/mo</span>
               </div>
@@ -170,8 +170,8 @@ export default function Hero() {
                       key={s}
                       className={`rounded-md border px-2 py-0.5 text-[10px] font-semibold ${
                         i === 0
-                          ? "border-orange-400/30 bg-orange-400/10 text-orange-300"
-                          : "border-cyan-400/20 bg-cyan-400/10 text-cyan-300"
+                          ? "border-brand-accent-400/30 bg-brand-accent-400/10 text-brand-accent-300"
+                          : "border-brand-primary-400/20 bg-brand-primary-400/10 text-brand-primary-300"
                       }`}
                     >
                       {s}
@@ -198,7 +198,7 @@ export default function Hero() {
                     variant: FEATURED_PRODUCT.specs.join(" · "),
                   }}
                   addedContent={<>Added ✓</>}
-                  className="group/btn relative inline-flex flex-1 items-center justify-center gap-2 overflow-hidden rounded-lg bg-gradient-to-r from-orange-500 to-amber-400 px-4 py-2.5 text-sm font-bold text-[#1a0f00] shadow-[0_0_20px_rgba(249,115,22,0.35)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(249,115,22,0.6)] active:scale-95"
+                  className="group/btn relative inline-flex flex-1 items-center justify-center gap-2 overflow-hidden rounded-lg bg-gradient-to-r from-brand-accent-500 to-amber-400 px-4 py-2.5 text-sm font-bold text-[#1a0f00] shadow-[0_0_20px_color-mix(in_srgb,var(--color-brand-accent-500)_35%,transparent)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_color-mix(in_srgb,var(--color-brand-accent-500)_60%,transparent)] active:scale-95"
                 >
                   <ShoppingCart className="h-4 w-4" />
                   Add to cart
@@ -207,7 +207,7 @@ export default function Hero() {
 
                 <Link
                   href="#sections"
-                  className="inline-flex items-center rounded-lg border border-cyan-400/30 px-4 py-2.5 text-sm font-semibold text-cyan-300 transition-all duration-300 hover:bg-cyan-400/10 hover:text-cyan-200"
+                  className="inline-flex items-center rounded-lg border border-brand-primary-400/30 px-4 py-2.5 text-sm font-semibold text-brand-primary-300 transition-all duration-300 hover:bg-brand-primary-400/10 hover:text-brand-primary-200"
                 >
                   Details
                 </Link>
@@ -217,7 +217,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-brand-primary-400/40 to-transparent" />
     </section>
   );
 }
