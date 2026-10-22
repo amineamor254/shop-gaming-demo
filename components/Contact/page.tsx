@@ -212,7 +212,7 @@ export default function Contact() {
 
             <div>
               <h3 className="mb-3 text-[11px] font-bold uppercase tracking-widest text-cyan-300">
-                Your Brand
+                Contacts
               </h3>
               <ul className="space-y-2 text-sm">
                 <li>
