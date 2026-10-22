@@ -38,7 +38,7 @@ export const POSTS: Post[] = [
     tags: ["CPU", "AI", "NextGenTech"],
     featured: true,
     icon: Cpu,
-    gradient: "from-cyan-500/30 via-[#0d1824] to-[#070d14]",
+    gradient: "from-brand-primary-500/30 via-[#0d1824] to-[#070d14]",
   },
   {
     id: 2,
@@ -49,7 +49,7 @@ export const POSTS: Post[] = [
     date: "Oct 8, 2026",
     readTime: "9 min read",
     icon: Monitor,
-    gradient: "from-orange-500/25 via-[#0d1824] to-[#070d14]",
+    gradient: "from-brand-accent-500/25 via-[#0d1824] to-[#070d14]",
   },
   {
     id: 3,
@@ -82,7 +82,7 @@ export const POSTS: Post[] = [
     date: "Sep 21, 2026",
     readTime: "5 min read",
     icon: HardDrive,
-    gradient: "from-cyan-500/25 via-[#0d1824] to-[#070d14]",
+    gradient: "from-brand-primary-500/25 via-[#0d1824] to-[#070d14]",
   },
   {
     id: 6,
@@ -93,7 +93,7 @@ export const POSTS: Post[] = [
     date: "Sep 15, 2026",
     readTime: "6 min read",
     icon: Zap,
-    gradient: "from-orange-500/25 via-[#0d1824] to-[#070d14]",
+    gradient: "from-brand-accent-500/25 via-[#0d1824] to-[#070d14]",
   },
   {
     id: 7,
@@ -126,6 +126,6 @@ export const POSTS: Post[] = [
     date: "Aug 26, 2026",
     readTime: "6 min read",
     icon: Monitor,
-    gradient: "from-cyan-500/25 via-[#0d1824] to-[#070d14]",
+    gradient: "from-brand-primary-500/25 via-[#0d1824] to-[#070d14]",
   },
 ];
