@@ -898,8 +898,9 @@ function OrderSuccess({ order }: { order: Order }) {
             </span>
           </span>
           <h2 className="text-2xl font-extrabold sm:text-3xl">Thank you for your order!</h2>
+          {/* // TODO: Send the real confirmation email here. */}
           <p className="mx-auto mt-3 max-w-md text-xs leading-relaxed text-slate-400">
-            We sent a confirmation to{" "}
+            A confirmation will be sent to{" "}
             <span className="font-semibold text-cyan-300">{order.email}</span>. Your build is now in
             our queue.
           </p>
