@@ -137,9 +137,9 @@ export default function Header() {
             </svg>
           </span>
           <span className="leading-none">
-            <span className="block text-lg font-extrabold tracking-wider text-white">MIAN</span>
+            <span className="block text-lg font-extrabold tracking-wider text-white">BRAND</span>
             <span className="block text-[10px] font-medium uppercase tracking-[0.25em] text-cyan-400/70">
-              Games
+              Store
             </span>
           </span>
         </Link>
