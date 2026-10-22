@@ -14,15 +14,15 @@ import {
 import AddToCartButton from "@/components/Cart/AddToCartButton";
 
 // Set this to an image path in public; leave it empty to show the CSS fallback.
-const PRODUCT_IMAGE = "/images/mian-vandal.png";
+const PRODUCT_IMAGE = "";
 
 const STATS = [
   { icon: Trophy, value: "240+", label: "Builds delivered" },
-  { icon: Cpu, value: "RTX 50", label: "Latest series" },
+  { icon: Cpu, value: "Next-gen", label: "Latest GPUs" },
   { icon: Clock, value: "24", label: "Months warranty" },
 ];
 
-const SPECS = ["RTX 5060 Ti", "Ryzen 7 9700X", "32GB DDR5"];
+const SPECS = ["High-end GPU", "8-Core CPU", "32GB DDR5"];
 
 /** Introduces the featured gaming PC and links to the builder and product catalog. */
 export default function Hero() {
@@ -128,7 +128,7 @@ export default function Hero() {
               {PRODUCT_IMAGE ? (
                 <Image
                   src={PRODUCT_IMAGE}
-                  alt="Mian Vandal gaming PC"
+                  alt="Apex Prime gaming PC"
                   fill
                   priority
                   sizes="(max-width: 1024px) 90vw, 400px"
@@ -166,14 +166,14 @@ export default function Hero() {
             <div className="space-y-4 p-4">
               <div className="flex items-center justify-between rounded-xl border border-white/5 bg-black/40 px-4 py-3">
                 <div className="flex items-baseline gap-1.5">
-                  <span className="text-2xl font-extrabold text-white">5499</span>
-                  <span className="text-[11px] font-semibold text-cyan-400">RON</span>
+                  <span className="text-2xl font-extrabold text-white">1,499</span>
+                  <span className="text-[11px] font-semibold text-cyan-400">$</span>
                 </div>
-                <span className="text-[11px] text-slate-500">from 458 RON/mo</span>
+                <span className="text-[11px] text-slate-500">from $125/mo</span>
               </div>
 
               <div>
-                <h3 className="text-lg font-bold text-white">Mian Vandal</h3>
+                <h3 className="text-lg font-bold text-white">Apex Prime</h3>
 
                 <div className="mt-2 flex flex-wrap gap-1.5">
                   {SPECS.map((s, i) => (
@@ -204,8 +204,8 @@ export default function Hero() {
                 <AddToCartButton
                   item={{
                     id: "hero-featured-pc",
-                    name: "Mian Vandal",
-                    price: 5499,
+                    name: "Apex Prime",
+                    price: 1499,
                     variant: SPECS.join(" · "),
                   }}
                   addedContent={<>Added ✓</>}
