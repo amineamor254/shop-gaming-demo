@@ -80,7 +80,7 @@ function passwordStrength(pw: string) {
 }
 
 const STRENGTH_LABELS = ["Too weak", "Weak", "Fair", "Good", "Strong"];
-const STRENGTH_COLORS = ["bg-red-400", "bg-orange-400", "bg-amber-400", "bg-emerald-400", "bg-cyan-400"];
+const STRENGTH_COLORS = ["bg-red-400", "bg-brand-accent-400", "bg-amber-400", "bg-emerald-400", "bg-brand-primary-400"];
 
 function validate(mode: Mode, v: Values): Errors {
   const e: Errors = {};
@@ -161,7 +161,7 @@ export default function AuthPage() {
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, #22d3ee 1px, transparent 1px), linear-gradient(to bottom, #22d3ee 1px, transparent 1px)",
+            "linear-gradient(to right, var(--color-brand-primary-400) 1px, transparent 1px), linear-gradient(to bottom, var(--color-brand-primary-400) 1px, transparent 1px)",
           backgroundSize: "56px 56px",
           maskImage: "radial-gradient(ellipse at center, black 20%, transparent 70%)",
           WebkitMaskImage: "radial-gradient(ellipse at center, black 20%, transparent 70%)",
@@ -169,7 +169,7 @@ export default function AuthPage() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-40 top-0 -z-10 h-[380px] w-[380px] rounded-full bg-cyan-500/15 blur-[120px]"
+        className="pointer-events-none absolute -left-40 top-0 -z-10 h-[380px] w-[380px] rounded-full bg-brand-primary-500/15 blur-[120px]"
       />
       <div
         aria-hidden
@@ -184,13 +184,13 @@ export default function AuthPage() {
         >
           <Link
             href="/#home"
-            className="inline-flex items-center gap-1.5 transition-colors hover:text-cyan-300"
+            className="inline-flex items-center gap-1.5 transition-colors hover:text-brand-primary-300"
           >
             <Home className="h-3.5 w-3.5" />
             Home
           </Link>
           <ChevronRight className="h-3 w-3 text-slate-600" />
-          <span aria-current="page" className="font-semibold text-cyan-300">
+          <span aria-current="page" className="font-semibold text-brand-primary-300">
             Account
           </span>
         </nav>
@@ -198,13 +198,13 @@ export default function AuthPage() {
         <div className="grid items-center gap-12 lg:grid-cols-2">
           {/* ===================== Benefits (desktop only) ===================== */}
           <div className="hidden lg:block">
-            <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/5 px-3 py-1 text-xs font-medium text-cyan-300">
-              <span className="h-2 w-2 rounded-full bg-cyan-400" />
+            <span className="inline-flex items-center gap-2 rounded-full border border-brand-primary-400/20 bg-brand-primary-400/5 px-3 py-1 text-xs font-medium text-brand-primary-300">
+              <span className="h-2 w-2 rounded-full bg-brand-primary-400" />
               My account
             </span>
             <p className="mt-4 text-4xl font-extrabold leading-tight tracking-tight">
               Your account,{" "}
-              <span className="bg-gradient-to-r from-cyan-300 via-cyan-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(34,211,238,0.35)]">
+              <span className="bg-gradient-to-r from-brand-primary-300 via-brand-primary-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_color-mix(in_srgb,var(--color-brand-primary-400)_35%,transparent)]">
                 your builds
               </span>
             </p>
@@ -213,9 +213,9 @@ export default function AuthPage() {
               {BENEFITS.map(({ icon: Icon, title, text }) => (
                 <li
                   key={title}
-                  className="group flex items-center gap-4 rounded-xl border border-white/5 bg-white/[0.03] p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-400/30 hover:bg-cyan-400/5"
+                  className="group flex items-center gap-4 rounded-xl border border-white/5 bg-white/[0.03] p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-primary-400/30 hover:bg-brand-primary-400/5"
                 >
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-cyan-500/15 text-cyan-300 transition-transform duration-300 group-hover:scale-110">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-primary-500/15 text-brand-primary-300 transition-transform duration-300 group-hover:scale-110">
                     <Icon className="h-5 w-5" />
                   </span>
                   <span>
@@ -231,10 +231,10 @@ export default function AuthPage() {
           <div className="relative mx-auto w-full max-w-md">
             <div
               aria-hidden
-              className="absolute -inset-3 -z-10 rounded-[2rem] bg-gradient-to-b from-cyan-500/20 via-emerald-500/10 to-transparent blur-2xl"
+              className="absolute -inset-3 -z-10 rounded-[2rem] bg-gradient-to-b from-brand-primary-500/20 via-emerald-500/10 to-transparent blur-2xl"
             />
 
-            <div className="rounded-2xl border border-cyan-400/20 bg-[#0a1119]/90 p-6 shadow-[0_0_40px_rgba(6,182,212,0.15)] backdrop-blur sm:p-8">
+            <div className="rounded-2xl border border-brand-primary-400/20 bg-[#0a1119]/90 p-6 shadow-[0_0_40px_color-mix(in_srgb,var(--color-brand-primary-500)_15%,transparent)] backdrop-blur sm:p-8">
               {done ? (
                 <SuccessPanel
                   done={done}
@@ -265,8 +265,8 @@ export default function AuthPage() {
                           onClick={() => switchMode(m)}
                           className={`rounded-full px-4 py-2 text-xs font-bold transition-all duration-300 ${
                             mode === m
-                              ? "bg-cyan-500 text-[#06121a] shadow-[0_0_20px_rgba(6,182,212,0.5)]"
-                              : "text-slate-300 hover:bg-white/5 hover:text-cyan-300"
+                              ? "bg-brand-primary-500 text-[#06121a] shadow-[0_0_20px_color-mix(in_srgb,var(--color-brand-primary-500)_50%,transparent)]"
+                              : "text-slate-300 hover:bg-white/5 hover:text-brand-primary-300"
                           }`}
                         >
                           {label}
@@ -336,7 +336,7 @@ export default function AuthPage() {
                               onClick={() => setShowPassword((v) => !v)}
                               aria-label={showPassword ? "Hide password" : "Show password"}
                               aria-pressed={showPassword}
-                              className="absolute right-2 top-1/2 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-md text-slate-400 transition-colors hover:text-cyan-300"
+                              className="absolute right-2 top-1/2 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-md text-slate-400 transition-colors hover:text-brand-primary-300"
                             >
                               {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                             </button>
@@ -388,14 +388,14 @@ export default function AuthPage() {
                               type="checkbox"
                               checked={values.remember}
                               onChange={(e) => setField("remember", e.target.checked)}
-                              className="h-3.5 w-3.5 accent-cyan-400"
+                              className="h-3.5 w-3.5 accent-brand-primary-400"
                             />
                             Remember me
                           </label>
                           <button
                             type="button"
                             onClick={() => switchMode("reset")}
-                            className="font-semibold text-cyan-300 transition-colors hover:text-cyan-200"
+                            className="font-semibold text-brand-primary-300 transition-colors hover:text-brand-primary-200"
                           >
                             Forgot password?
                           </button>
@@ -412,7 +412,7 @@ export default function AuthPage() {
                               onChange={(e) => setField("terms", e.target.checked)}
                               aria-invalid={!!errors.terms}
                               aria-describedby={errors.terms ? "auth-terms-error" : undefined}
-                              className="mt-0.5 h-3.5 w-3.5 shrink-0 accent-cyan-400"
+                              className="mt-0.5 h-3.5 w-3.5 shrink-0 accent-brand-primary-400"
                             />
                             <span>
                               I agree to the{" "}
@@ -420,7 +420,7 @@ export default function AuthPage() {
                                 href="/legal/terms"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-cyan-300 underline-offset-2 hover:underline"
+                                className="text-brand-primary-300 underline-offset-2 hover:underline"
                               >
                                 terms &amp; conditions
                               </Link>{" "}
@@ -429,7 +429,7 @@ export default function AuthPage() {
                                 href="/legal/privacy"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-cyan-300 underline-offset-2 hover:underline"
+                                className="text-brand-primary-300 underline-offset-2 hover:underline"
                               >
                                 privacy policy
                               </Link>
@@ -456,7 +456,7 @@ export default function AuthPage() {
                       <button
                         type="submit"
                         disabled={status === "sending"}
-                        className="group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-cyan-500 px-6 py-3 text-sm font-bold text-[#06121a] shadow-[0_0_25px_rgba(6,182,212,0.45)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_35px_rgba(6,182,212,0.75)] active:scale-95 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100"
+                        className="group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-brand-primary-500 px-6 py-3 text-sm font-bold text-[#06121a] shadow-[0_0_25px_color-mix(in_srgb,var(--color-brand-primary-500)_45%,transparent)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_35px_color-mix(in_srgb,var(--color-brand-primary-500)_75%,transparent)] active:scale-95 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100"
                       >
                         {status === "sending" ? (
                           <>
@@ -486,7 +486,7 @@ export default function AuthPage() {
                       <button
                         type="button"
                         onClick={() => switchMode("signin")}
-                        className="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-cyan-300 transition-colors hover:text-cyan-200"
+                        className="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-brand-primary-300 transition-colors hover:text-brand-primary-200"
                       >
                         <ArrowRight className="h-3.5 w-3.5 rotate-180" />
                         Back to sign in
@@ -506,8 +506,8 @@ export default function AuthPage() {
 /* ===================== Sub components ===================== */
 
 const inputClass = (hasError: boolean) =>
-  `w-full rounded-lg border bg-black/40 py-2.5 pl-10 pr-3.5 text-sm text-white outline-none transition placeholder:text-slate-600 focus:shadow-[0_0_14px_rgba(6,182,212,0.3)] ${
-    hasError ? "border-red-400/60" : "border-white/10 focus:border-cyan-400/60"
+  `w-full rounded-lg border bg-black/40 py-2.5 pl-10 pr-3.5 text-sm text-white outline-none transition placeholder:text-slate-600 focus:shadow-[0_0_14px_color-mix(in_srgb,var(--color-brand-primary-500)_30%,transparent)] ${
+    hasError ? "border-red-400/60" : "border-white/10 focus:border-brand-primary-400/60"
   }`;
 
 /** Wraps an input and shows a decorative icon on its left side. */
@@ -566,7 +566,7 @@ function SuccessPanel({
 
   return (
     <div role="status" className="py-6 text-center">
-      <span className="mx-auto mb-5 grid h-16 w-16 place-items-center rounded-full bg-cyan-500 text-[#06121a] shadow-[0_0_30px_rgba(6,182,212,0.6)]">
+      <span className="mx-auto mb-5 grid h-16 w-16 place-items-center rounded-full bg-brand-primary-500 text-[#06121a] shadow-[0_0_30px_color-mix(in_srgb,var(--color-brand-primary-500)_60%,transparent)]">
         <Check className="h-8 w-8" />
       </span>
 
@@ -576,7 +576,7 @@ function SuccessPanel({
       <p className="mx-auto mt-2 max-w-xs text-xs leading-relaxed text-slate-400">
         {isReset ? (
           <>
-            If an account exists for <span className="font-semibold text-cyan-300">{done.email}</span>,
+            If an account exists for <span className="font-semibold text-brand-primary-300">{done.email}</span>,
             you will receive a link to reset your password.
           </>
         ) : (
@@ -589,7 +589,7 @@ function SuccessPanel({
           <button
             type="button"
             onClick={onBackToSignIn}
-            className="rounded-full border border-cyan-400/40 px-5 py-2.5 text-xs font-semibold text-cyan-300 transition-all duration-300 hover:border-cyan-300 hover:bg-cyan-400/10"
+            className="rounded-full border border-brand-primary-400/40 px-5 py-2.5 text-xs font-semibold text-brand-primary-300 transition-all duration-300 hover:border-brand-primary-300 hover:bg-brand-primary-400/10"
           >
             Back to sign in
           </button>
@@ -597,14 +597,14 @@ function SuccessPanel({
           <>
             <Link
               href="/#sections"
-              className="inline-flex items-center gap-2 rounded-full bg-cyan-500 px-5 py-2.5 text-xs font-bold text-[#06121a] shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_30px_rgba(6,182,212,0.7)] active:scale-95"
+              className="inline-flex items-center gap-2 rounded-full bg-brand-primary-500 px-5 py-2.5 text-xs font-bold text-[#06121a] shadow-[0_0_20px_color-mix(in_srgb,var(--color-brand-primary-500)_40%,transparent)] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_30px_color-mix(in_srgb,var(--color-brand-primary-500)_70%,transparent)] active:scale-95"
             >
               Continue shopping
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/#home"
-              className="rounded-full border border-cyan-400/40 px-5 py-2.5 text-xs font-semibold text-cyan-300 transition-all duration-300 hover:border-cyan-300 hover:bg-cyan-400/10"
+              className="rounded-full border border-brand-primary-400/40 px-5 py-2.5 text-xs font-semibold text-brand-primary-300 transition-all duration-300 hover:border-brand-primary-300 hover:bg-brand-primary-400/10"
             >
               Back to home
             </Link>
