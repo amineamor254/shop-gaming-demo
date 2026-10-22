@@ -38,7 +38,7 @@ export default function Blog() {
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, #22d3ee 1px, transparent 1px), linear-gradient(to bottom, #22d3ee 1px, transparent 1px)",
+            "linear-gradient(to right, var(--color-brand-primary-400) 1px, transparent 1px), linear-gradient(to bottom, var(--color-brand-primary-400) 1px, transparent 1px)",
           backgroundSize: "56px 56px",
           maskImage: "radial-gradient(ellipse at top, black 20%, transparent 70%)",
           WebkitMaskImage: "radial-gradient(ellipse at top, black 20%, transparent 70%)",
@@ -46,7 +46,7 @@ export default function Blog() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-40 top-20 -z-10 h-[400px] w-[400px] rounded-full bg-cyan-500/15 blur-[120px]"
+        className="pointer-events-none absolute -right-40 top-20 -z-10 h-[400px] w-[400px] rounded-full bg-brand-primary-500/15 blur-[120px]"
       />
       <div
         aria-hidden
@@ -54,20 +54,20 @@ export default function Blog() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-primary-400/40 to-transparent"
       />
 
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
         {/* ===================== Section heading ===================== */}
         <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
           <div className="text-center sm:text-left">
-            <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/5 px-3 py-1 text-xs font-medium text-cyan-300">
-              <span className="h-2 w-2 rounded-full bg-cyan-400" />
+            <span className="inline-flex items-center gap-2 rounded-full border border-brand-primary-400/20 bg-brand-primary-400/5 px-3 py-1 text-xs font-medium text-brand-primary-300">
+              <span className="h-2 w-2 rounded-full bg-brand-primary-400" />
               Blog
             </span>
             <h2 id="blog-title" className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">
               Latest{" "}
-              <span className="bg-gradient-to-r from-cyan-300 via-cyan-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(34,211,238,0.35)]">
+              <span className="bg-gradient-to-r from-brand-primary-300 via-brand-primary-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_color-mix(in_srgb,var(--color-brand-primary-400)_35%,transparent)]">
                 Stories
               </span>
             </h2>
@@ -78,7 +78,7 @@ export default function Blog() {
               type="button"
               onClick={() => setShowAll((v) => !v)}
               aria-expanded={showAll}
-              className="group inline-flex items-center gap-2 text-xs font-semibold text-cyan-300 transition-colors hover:text-cyan-200"
+              className="group inline-flex items-center gap-2 text-xs font-semibold text-brand-primary-300 transition-colors hover:text-brand-primary-200"
             >
               {showAll ? "Show less" : "View all"}
               <ArrowRight
@@ -112,8 +112,8 @@ export default function Blog() {
                 }}
                 className={`rounded-full border px-4 py-1.5 text-xs font-semibold transition-all duration-300 ${
                   active
-                    ? "border-cyan-400 bg-cyan-500 text-[#06121a] shadow-[0_0_16px_rgba(6,182,212,0.45)]"
-                    : "border-white/10 text-slate-300 hover:border-cyan-400/50 hover:text-cyan-300"
+                    ? "border-brand-primary-400 bg-brand-primary-500 text-[#06121a] shadow-[0_0_16px_color-mix(in_srgb,var(--color-brand-primary-500)_45%,transparent)]"
+                    : "border-white/10 text-slate-300 hover:border-brand-primary-400/50 hover:text-brand-primary-300"
                 }`}
               >
                 {c}
@@ -158,7 +158,7 @@ function PostVisual({ post, iconClass }: { post: Post; iconClass: string }) {
         className="absolute inset-0 opacity-20"
         style={{
           backgroundImage:
-            "linear-gradient(to right, #22d3ee 1px, transparent 1px), linear-gradient(to bottom, #22d3ee 1px, transparent 1px)",
+            "linear-gradient(to right, var(--color-brand-primary-400) 1px, transparent 1px), linear-gradient(to bottom, var(--color-brand-primary-400) 1px, transparent 1px)",
           backgroundSize: "28px 28px",
           maskImage: "radial-gradient(circle at center, black 20%, transparent 70%)",
           WebkitMaskImage: "radial-gradient(circle at center, black 20%, transparent 70%)",
@@ -166,10 +166,10 @@ function PostVisual({ post, iconClass }: { post: Post; iconClass: string }) {
       />
       <div
         aria-hidden
-        className="absolute h-32 w-32 rounded-full bg-cyan-400/15 blur-3xl transition-all duration-500 group-hover:bg-cyan-400/30"
+        className="absolute h-32 w-32 rounded-full bg-brand-primary-400/15 blur-3xl transition-all duration-500 group-hover:bg-brand-primary-400/30"
       />
       <Icon
-        className={`relative text-cyan-300 drop-shadow-[0_0_18px_rgba(34,211,238,0.6)] transition-transform duration-500 group-hover:scale-110 ${iconClass}`}
+        className={`relative text-brand-primary-300 drop-shadow-[0_0_18px_color-mix(in_srgb,var(--color-brand-primary-400)_60%,transparent)] transition-transform duration-500 group-hover:scale-110 ${iconClass}`}
       />
     </div>
   );
@@ -180,10 +180,10 @@ function FeaturedPost({ post }: { post: Post }) {
     <article className="group relative">
       <div
         aria-hidden
-        className="absolute -inset-3 -z-10 rounded-[2rem] bg-gradient-to-r from-cyan-500/15 via-emerald-500/10 to-transparent blur-2xl"
+        className="absolute -inset-3 -z-10 rounded-[2rem] bg-gradient-to-r from-brand-primary-500/15 via-emerald-500/10 to-transparent blur-2xl"
       />
 
-      <div className="grid overflow-hidden rounded-3xl border border-cyan-400/20 bg-[#0a1119]/90 shadow-[0_0_50px_rgba(6,182,212,0.12)] backdrop-blur transition-all duration-500 hover:border-cyan-400/40 hover:shadow-[0_0_60px_rgba(6,182,212,0.25)] lg:grid-cols-[1.1fr_0.9fr]">
+      <div className="grid overflow-hidden rounded-3xl border border-brand-primary-400/20 bg-[#0a1119]/90 shadow-[0_0_50px_color-mix(in_srgb,var(--color-brand-primary-500)_12%,transparent)] backdrop-blur transition-all duration-500 hover:border-brand-primary-400/40 hover:shadow-[0_0_60px_color-mix(in_srgb,var(--color-brand-primary-500)_25%,transparent)] lg:grid-cols-[1.1fr_0.9fr]">
         <div className="relative min-h-[240px] overflow-hidden lg:min-h-[340px]">
           <PostVisual post={post} iconClass="h-24 w-24 sm:h-32 sm:w-32" />
           <div
@@ -192,13 +192,13 @@ function FeaturedPost({ post }: { post: Post }) {
           />
         </div>
 
-        <div className="flex flex-col justify-center bg-gradient-to-br from-cyan-500/10 via-transparent to-emerald-500/5 p-6 sm:p-10">
+        <div className="flex flex-col justify-center bg-gradient-to-br from-brand-primary-500/10 via-transparent to-emerald-500/5 p-6 sm:p-10">
           {post.tags && (
             <ul className="mb-3 flex flex-wrap gap-x-3 gap-y-1" aria-label="Tags">
               {post.tags.map((t) => (
                 <li
                   key={t}
-                  className="text-[10px] font-bold uppercase tracking-widest text-cyan-400"
+                  className="text-[10px] font-bold uppercase tracking-widest text-brand-primary-400"
                 >
                   #{t}
                 </li>
@@ -206,7 +206,7 @@ function FeaturedPost({ post }: { post: Post }) {
             </ul>
           )}
 
-          <h3 className="text-2xl font-extrabold uppercase leading-tight tracking-tight transition-colors duration-300 group-hover:text-cyan-300 sm:text-3xl">
+          <h3 className="text-2xl font-extrabold uppercase leading-tight tracking-tight transition-colors duration-300 group-hover:text-brand-primary-300 sm:text-3xl">
             {post.title}
           </h3>
 
@@ -223,7 +223,7 @@ function FeaturedPost({ post }: { post: Post }) {
 
           <Link
             href={postHref()}
-            className="group/link mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-cyan-500 px-6 py-3 text-xs font-bold uppercase tracking-widest text-[#06121a] shadow-[0_0_25px_rgba(6,182,212,0.45)] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_35px_rgba(6,182,212,0.75)] active:scale-95"
+            className="group/link mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-brand-primary-500 px-6 py-3 text-xs font-bold uppercase tracking-widest text-[#06121a] shadow-[0_0_25px_color-mix(in_srgb,var(--color-brand-primary-500)_45%,transparent)] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_35px_color-mix(in_srgb,var(--color-brand-primary-500)_75%,transparent)] active:scale-95"
           >
             Read more
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1" />
@@ -236,7 +236,7 @@ function FeaturedPost({ post }: { post: Post }) {
 
 function PostCard({ post }: { post: Post }) {
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/5 bg-[#0a1119]/90 transition-all duration-500 hover:-translate-y-1.5 hover:border-cyan-400/40 hover:shadow-[0_0_35px_rgba(6,182,212,0.22)]">
+    <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/5 bg-[#0a1119]/90 transition-all duration-500 hover:-translate-y-1.5 hover:border-brand-primary-400/40 hover:shadow-[0_0_35px_color-mix(in_srgb,var(--color-brand-primary-500)_22%,transparent)]">
       <div className="relative aspect-[4/3] overflow-hidden">
         <PostVisual post={post} iconClass="h-14 w-14" />
         <div
@@ -246,11 +246,11 @@ function PostCard({ post }: { post: Post }) {
       </div>
 
       <div className="flex flex-1 flex-col p-4">
-        <p className="text-[10px] font-bold uppercase tracking-widest text-cyan-400">
+        <p className="text-[10px] font-bold uppercase tracking-widest text-brand-primary-400">
           {post.category}
         </p>
 
-        <h3 className="mt-1.5 text-base font-bold leading-snug transition-colors duration-300 group-hover:text-cyan-300">
+        <h3 className="mt-1.5 text-base font-bold leading-snug transition-colors duration-300 group-hover:text-brand-primary-300">
           <Link href={postHref()} className="after:absolute after:inset-0">
             {post.title}
           </Link>
@@ -265,7 +265,7 @@ function PostCard({ post }: { post: Post }) {
             <Clock className="h-3 w-3" />
             {post.readTime}
           </span>
-          <span className="inline-flex items-center gap-1.5 font-semibold text-cyan-300">
+          <span className="inline-flex items-center gap-1.5 font-semibold text-brand-primary-300">
             Read more
             <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
           </span>
