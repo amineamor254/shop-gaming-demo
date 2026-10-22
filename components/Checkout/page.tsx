@@ -240,7 +240,7 @@ export default function CheckoutPage() {
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, #22d3ee 1px, transparent 1px), linear-gradient(to bottom, #22d3ee 1px, transparent 1px)",
+            "linear-gradient(to right, var(--color-brand-primary-400) 1px, transparent 1px), linear-gradient(to bottom, var(--color-brand-primary-400) 1px, transparent 1px)",
           backgroundSize: "56px 56px",
           maskImage: "radial-gradient(ellipse at top, black 20%, transparent 70%)",
           WebkitMaskImage: "radial-gradient(ellipse at top, black 20%, transparent 70%)",
@@ -248,7 +248,7 @@ export default function CheckoutPage() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-40 top-0 -z-10 h-[380px] w-[380px] rounded-full bg-cyan-500/15 blur-[120px]"
+        className="pointer-events-none absolute -left-40 top-0 -z-10 h-[380px] w-[380px] rounded-full bg-brand-primary-500/15 blur-[120px]"
       />
       <div
         aria-hidden
@@ -263,17 +263,17 @@ export default function CheckoutPage() {
         >
           <Link
             href="/#home"
-            className="inline-flex items-center gap-1.5 transition-colors hover:text-cyan-300"
+            className="inline-flex items-center gap-1.5 transition-colors hover:text-brand-primary-300"
           >
             <Home className="h-3.5 w-3.5" />
             Home
           </Link>
           <ChevronRight className="h-3 w-3 text-slate-600" />
-          <Link href="/cart" className="transition-colors hover:text-cyan-300">
+          <Link href="/cart" className="transition-colors hover:text-brand-primary-300">
             Cart
           </Link>
           <ChevronRight className="h-3 w-3 text-slate-600" />
-          <span aria-current="page" className="font-semibold text-cyan-300">
+          <span aria-current="page" className="font-semibold text-brand-primary-300">
             Checkout
           </span>
         </nav>
@@ -281,7 +281,7 @@ export default function CheckoutPage() {
         <div className="mb-8 text-center lg:text-left">
           <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
             Secure{" "}
-            <span className="bg-gradient-to-r from-cyan-300 via-cyan-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(34,211,238,0.35)]">
+            <span className="bg-gradient-to-r from-brand-primary-300 via-brand-primary-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_color-mix(in_srgb,var(--color-brand-primary-400)_35%,transparent)]">
               Checkout
             </span>
           </h1>
@@ -552,17 +552,17 @@ export default function CheckoutPage() {
               <div className="relative">
                 <div
                   aria-hidden
-                  className="absolute -inset-3 -z-10 rounded-[2rem] bg-gradient-to-b from-cyan-500/20 via-emerald-500/10 to-transparent blur-2xl"
+                  className="absolute -inset-3 -z-10 rounded-[2rem] bg-gradient-to-b from-brand-primary-500/20 via-emerald-500/10 to-transparent blur-2xl"
                 />
 
-                <div className="space-y-5 rounded-2xl border border-cyan-400/20 bg-[#0a1119]/90 p-5 shadow-[0_0_40px_rgba(6,182,212,0.15)] backdrop-blur">
+                <div className="space-y-5 rounded-2xl border border-brand-primary-400/20 bg-[#0a1119]/90 p-5 shadow-[0_0_40px_color-mix(in_srgb,var(--color-brand-primary-500)_15%,transparent)] backdrop-blur">
                   <div className="flex items-center justify-between">
-                    <h2 className="text-sm font-extrabold uppercase tracking-widest text-cyan-300">
+                    <h2 className="text-sm font-extrabold uppercase tracking-widest text-brand-primary-300">
                       Your order
                     </h2>
                     <Link
                       href="/cart"
-                      className="text-[11px] font-semibold text-slate-400 transition-colors hover:text-cyan-300"
+                      className="text-[11px] font-semibold text-slate-400 transition-colors hover:text-brand-primary-300"
                     >
                       Edit cart
                     </Link>
@@ -582,10 +582,10 @@ export default function CheckoutPage() {
                             />
                           ) : (
                             <div className="absolute inset-0 grid place-items-center">
-                              <Package className="h-5 w-5 text-cyan-400/80" />
+                              <Package className="h-5 w-5 text-brand-primary-400/80" />
                             </div>
                           )}
-                          <span className="absolute -right-0.5 -top-0.5 grid h-4 min-w-4 place-items-center rounded-bl-md bg-cyan-500 px-1 text-[9px] font-bold text-[#06121a]">
+                          <span className="absolute -right-0.5 -top-0.5 grid h-4 min-w-4 place-items-center rounded-bl-md bg-brand-primary-500 px-1 text-[9px] font-bold text-[#06121a]">
                             {item.qty}
                           </span>
                         </div>
@@ -634,15 +634,15 @@ export default function CheckoutPage() {
                         onChange={(e) => setField("terms", e.target.checked)}
                         aria-invalid={!!errors.terms}
                         aria-describedby={errors.terms ? "co-terms-error" : undefined}
-                        className="mt-0.5 h-3.5 w-3.5 shrink-0 accent-cyan-400"
+                        className="mt-0.5 h-3.5 w-3.5 shrink-0 accent-brand-primary-400"
                       />
                       <span>
                         I agree to the{" "}
-                        <a href="/legal/terms" className="text-cyan-300 underline-offset-2 hover:underline" target="_blank">
+                        <a href="/legal/terms" className="text-brand-primary-300 underline-offset-2 hover:underline" target="_blank">
                           terms &amp; conditions
                         </a>{" "}
                         and the{" "}
-                        <a href="/legal/privacy" className="text-cyan-300 underline-offset-2 hover:underline" target="_blank">
+                        <a href="/legal/privacy" className="text-brand-primary-300 underline-offset-2 hover:underline" target="_blank">
                           privacy policy
                         </a>
                         .
@@ -672,7 +672,7 @@ export default function CheckoutPage() {
                     type="submit"
                     form="checkout-form"
                     disabled={status === "placing"}
-                    className="group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-cyan-500 px-6 py-3 text-sm font-bold text-[#06121a] shadow-[0_0_25px_rgba(6,182,212,0.45)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_35px_rgba(6,182,212,0.75)] active:scale-95 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100"
+                    className="group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-brand-primary-500 px-6 py-3 text-sm font-bold text-[#06121a] shadow-[0_0_25px_color-mix(in_srgb,var(--color-brand-primary-500)_45%,transparent)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_35px_color-mix(in_srgb,var(--color-brand-primary-500)_75%,transparent)] active:scale-95 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100"
                   >
                     {status === "placing" ? (
                       <>
@@ -703,8 +703,8 @@ export default function CheckoutPage() {
 /* ===================== Sub components ===================== */
 
 const inputClass = (hasError: boolean) =>
-  `w-full rounded-lg border bg-black/40 px-3.5 py-2.5 text-sm text-white outline-none transition placeholder:text-slate-600 focus:shadow-[0_0_14px_rgba(6,182,212,0.3)] ${
-    hasError ? "border-red-400/60" : "border-white/10 focus:border-cyan-400/60"
+  `w-full rounded-lg border bg-black/40 px-3.5 py-2.5 text-sm text-white outline-none transition placeholder:text-slate-600 focus:shadow-[0_0_14px_color-mix(in_srgb,var(--color-brand-primary-500)_30%,transparent)] ${
+    hasError ? "border-red-400/60" : "border-white/10 focus:border-brand-primary-400/60"
   }`;
 
 function Field({
@@ -750,14 +750,14 @@ function StepCard({
   return (
     <section
       aria-labelledby={`step-${step}`}
-      className="rounded-2xl border border-cyan-400/15 bg-[#0a1119]/90 p-5 shadow-[0_0_40px_rgba(6,182,212,0.08)] backdrop-blur sm:p-6"
+      className="rounded-2xl border border-brand-primary-400/15 bg-[#0a1119]/90 p-5 shadow-[0_0_40px_color-mix(in_srgb,var(--color-brand-primary-500)_8%,transparent)] backdrop-blur sm:p-6"
     >
       <div className="mb-5 flex items-center gap-3">
-        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-cyan-500/15 text-cyan-300 shadow-[0_0_16px_rgba(6,182,212,0.2)]">
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-primary-500/15 text-brand-primary-300 shadow-[0_0_16px_color-mix(in_srgb,var(--color-brand-primary-500)_20%,transparent)]">
           <Icon className="h-5 w-5" />
         </span>
         <h2 id={`step-${step}`} className="text-lg font-extrabold">
-          <span className="mr-2 text-cyan-400">{step}.</span>
+          <span className="mr-2 text-brand-primary-400">{step}.</span>
           {title}
         </h2>
       </div>
@@ -789,13 +789,13 @@ function RadioCard({
       onClick={onSelect}
       className={`group flex items-center gap-3 rounded-2xl border p-4 text-left transition-all duration-300 hover:-translate-y-0.5 ${
         checked
-          ? "border-cyan-400/70 bg-cyan-400/10 shadow-[0_0_30px_rgba(6,182,212,0.25)]"
-          : "border-white/5 bg-black/30 hover:border-cyan-400/30"
+          ? "border-brand-primary-400/70 bg-brand-primary-400/10 shadow-[0_0_30px_color-mix(in_srgb,var(--color-brand-primary-500)_25%,transparent)]"
+          : "border-white/5 bg-black/30 hover:border-brand-primary-400/30"
       }`}
     >
       <span
         className={`grid h-10 w-10 shrink-0 place-items-center rounded-lg transition-colors ${
-          checked ? "bg-cyan-500 text-[#06121a]" : "bg-white/5 text-cyan-300"
+          checked ? "bg-brand-primary-500 text-[#06121a]" : "bg-white/5 text-brand-primary-300"
         }`}
       >
         <Icon className="h-5 w-5" />
@@ -804,13 +804,13 @@ function RadioCard({
         <span className="block text-sm font-bold">{title}</span>
         <span className="block text-[11px] text-slate-400">{subtitle}</span>
       </span>
-      {right && <span className="shrink-0 text-xs font-bold text-cyan-300">{right}</span>}
+      {right && <span className="shrink-0 text-xs font-bold text-brand-primary-300">{right}</span>}
       <span
         aria-hidden
         className={`grid h-5 w-5 shrink-0 place-items-center rounded-full border transition-all duration-300 ${
           checked
-            ? "border-cyan-400 bg-cyan-500 text-[#06121a]"
-            : "border-white/20 text-transparent group-hover:border-cyan-400/50"
+            ? "border-brand-primary-400 bg-brand-primary-500 text-[#06121a]"
+            : "border-white/20 text-transparent group-hover:border-brand-primary-400/50"
         }`}
       >
         <Check className="h-3 w-3" />
@@ -841,16 +841,16 @@ function EmptyCheckout() {
     <div className="relative mx-auto max-w-xl">
       <div
         aria-hidden
-        className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-b from-cyan-500/15 via-emerald-500/5 to-transparent blur-2xl"
+        className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-b from-brand-primary-500/15 via-emerald-500/5 to-transparent blur-2xl"
       />
-      <div className="rounded-3xl border border-cyan-400/20 bg-[#0a1119]/90 px-6 py-14 text-center shadow-[0_0_40px_rgba(6,182,212,0.12)] backdrop-blur">
+      <div className="rounded-3xl border border-brand-primary-400/20 bg-[#0a1119]/90 px-6 py-14 text-center shadow-[0_0_40px_color-mix(in_srgb,var(--color-brand-primary-500)_12%,transparent)] backdrop-blur">
         <div className="relative mx-auto mb-6 grid h-24 w-24 place-items-center">
           <span
             aria-hidden
-            className="absolute inset-0 animate-pulse rounded-full border border-cyan-400/30 motion-reduce:animate-none"
+            className="absolute inset-0 animate-pulse rounded-full border border-brand-primary-400/30 motion-reduce:animate-none"
           />
-          <span aria-hidden className="absolute inset-3 rounded-full bg-cyan-400/10 blur-xl" />
-          <ShoppingCart className="relative h-10 w-10 text-cyan-300 drop-shadow-[0_0_14px_rgba(34,211,238,0.6)]" />
+          <span aria-hidden className="absolute inset-3 rounded-full bg-brand-primary-400/10 blur-xl" />
+          <ShoppingCart className="relative h-10 w-10 text-brand-primary-300 drop-shadow-[0_0_14px_color-mix(in_srgb,var(--color-brand-primary-400)_60%,transparent)]" />
         </div>
         <h2 className="text-xl font-extrabold">Nothing to check out</h2>
         <p className="mx-auto mt-2 max-w-sm text-xs leading-relaxed text-slate-400">
@@ -859,14 +859,14 @@ function EmptyCheckout() {
         <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
           <Link
             href="/#sections"
-            className="inline-flex items-center gap-2 rounded-full bg-cyan-500 px-6 py-3 text-sm font-bold text-[#06121a] shadow-[0_0_25px_rgba(6,182,212,0.45)] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_35px_rgba(6,182,212,0.75)] active:scale-95"
+            className="inline-flex items-center gap-2 rounded-full bg-brand-primary-500 px-6 py-3 text-sm font-bold text-[#06121a] shadow-[0_0_25px_color-mix(in_srgb,var(--color-brand-primary-500)_45%,transparent)] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_35px_color-mix(in_srgb,var(--color-brand-primary-500)_75%,transparent)] active:scale-95"
           >
             Browse products
             <ArrowRight className="h-4 w-4" />
           </Link>
           <Link
             href="/cart"
-            className="inline-flex items-center rounded-full border border-cyan-400/40 px-6 py-3 text-sm font-semibold text-cyan-300 transition-all duration-300 hover:border-cyan-300 hover:bg-cyan-400/10"
+            className="inline-flex items-center rounded-full border border-brand-primary-400/40 px-6 py-3 text-sm font-semibold text-brand-primary-300 transition-all duration-300 hover:border-brand-primary-300 hover:bg-brand-primary-400/10"
           >
             Back to cart
           </Link>
@@ -883,17 +883,17 @@ function OrderSuccess({ order }: { order: Order }) {
     <div className="relative mx-auto max-w-2xl">
       <div
         aria-hidden
-        className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-b from-cyan-500/20 via-emerald-500/10 to-transparent blur-2xl"
+        className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-b from-brand-primary-500/20 via-emerald-500/10 to-transparent blur-2xl"
       />
 
-      <div className="rounded-3xl border border-cyan-400/20 bg-[#0a1119]/90 p-6 shadow-[0_0_50px_rgba(6,182,212,0.15)] backdrop-blur sm:p-10">
+      <div className="rounded-3xl border border-brand-primary-400/20 bg-[#0a1119]/90 p-6 shadow-[0_0_50px_color-mix(in_srgb,var(--color-brand-primary-500)_15%,transparent)] backdrop-blur sm:p-10">
         <div role="status" className="text-center">
           <span className="relative mx-auto mb-5 grid h-20 w-20 place-items-center">
             <span
               aria-hidden
-              className="absolute inset-0 animate-ping rounded-full bg-cyan-400/20 motion-reduce:animate-none"
+              className="absolute inset-0 animate-ping rounded-full bg-brand-primary-400/20 motion-reduce:animate-none"
             />
-            <span className="relative grid h-20 w-20 place-items-center rounded-full bg-cyan-500 text-[#06121a] shadow-[0_0_35px_rgba(6,182,212,0.7)]">
+            <span className="relative grid h-20 w-20 place-items-center rounded-full bg-brand-primary-500 text-[#06121a] shadow-[0_0_35px_color-mix(in_srgb,var(--color-brand-primary-500)_70%,transparent)]">
               <Check className="h-10 w-10" />
             </span>
           </span>
@@ -901,10 +901,10 @@ function OrderSuccess({ order }: { order: Order }) {
           {/* // TODO: Send the real confirmation email here. */}
           <p className="mx-auto mt-3 max-w-md text-xs leading-relaxed text-slate-400">
             A confirmation will be sent to{" "}
-            <span className="font-semibold text-cyan-300">{order.email}</span>. Your build is now in
+            <span className="font-semibold text-brand-primary-300">{order.email}</span>. Your build is now in
             our queue.
           </p>
-          <p className="mt-4 inline-block rounded-lg border border-dashed border-cyan-400/40 bg-cyan-400/5 px-4 py-2 text-sm font-bold tracking-widest text-cyan-300">
+          <p className="mt-4 inline-block rounded-lg border border-dashed border-brand-primary-400/40 bg-brand-primary-400/5 px-4 py-2 text-sm font-bold tracking-widest text-brand-primary-300">
             {order.id}
           </p>
         </div>
@@ -948,7 +948,7 @@ function OrderSuccess({ order }: { order: Order }) {
 
           <div className="grid gap-3 text-xs sm:grid-cols-2">
             <div className="rounded-xl border border-white/5 bg-white/[0.03] p-4">
-              <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-cyan-300">
+              <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-brand-primary-300">
                 Delivery
               </p>
               <p className="font-semibold">{method?.label}</p>
@@ -956,7 +956,7 @@ function OrderSuccess({ order }: { order: Order }) {
               <p className="mt-2 text-slate-400">{order.address}</p>
             </div>
             <div className="rounded-xl border border-white/5 bg-white/[0.03] p-4">
-              <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-cyan-300">
+              <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-brand-primary-300">
                 Payment
               </p>
               <p className="font-semibold">
@@ -969,14 +969,14 @@ function OrderSuccess({ order }: { order: Order }) {
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Link
             href="/#sections"
-            className="group inline-flex items-center gap-2 rounded-full bg-cyan-500 px-6 py-3 text-sm font-bold text-[#06121a] shadow-[0_0_25px_rgba(6,182,212,0.45)] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_35px_rgba(6,182,212,0.75)] active:scale-95"
+            className="group inline-flex items-center gap-2 rounded-full bg-brand-primary-500 px-6 py-3 text-sm font-bold text-[#06121a] shadow-[0_0_25px_color-mix(in_srgb,var(--color-brand-primary-500)_45%,transparent)] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_35px_color-mix(in_srgb,var(--color-brand-primary-500)_75%,transparent)] active:scale-95"
           >
             Continue shopping
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
           <Link
             href="/#home"
-            className="inline-flex items-center rounded-full border border-cyan-400/40 px-6 py-3 text-sm font-semibold text-cyan-300 transition-all duration-300 hover:border-cyan-300 hover:bg-cyan-400/10"
+            className="inline-flex items-center rounded-full border border-brand-primary-400/40 px-6 py-3 text-sm font-semibold text-brand-primary-300 transition-all duration-300 hover:border-brand-primary-300 hover:bg-brand-primary-400/10"
           >
             Back to home
           </Link>
