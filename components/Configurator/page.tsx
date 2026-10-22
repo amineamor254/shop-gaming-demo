@@ -21,6 +21,7 @@ import {
   Zap,
 } from "lucide-react";
 import AddToCartButton from "@/components/Cart/AddToCartButton";
+import { formatConfiguratorMoney as money } from "@/lib/format";
 
 /* ===================== Types ===================== */
 
@@ -305,8 +306,6 @@ const METRICS = [
 
 const BASE_POWER = 100; // Estimated draw for the motherboard, fans, drives, and other components.
 const FINANCE_MONTHS = 12;
-
-const money = (n: number) => `$${n.toLocaleString("en-US")}`;
 
 /* ===================== Section ===================== */
 

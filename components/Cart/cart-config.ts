@@ -41,9 +41,6 @@ export const COUNTRIES = [
 
 /* ===================== Helpers ===================== */
 
-/** Formats a numeric amount as a dollar value. */
-export const money = (n: number) => `$${n.toFixed(2)}`;
-
 /** Calculates shipping from the selected method and discounted subtotal. */
 export function shippingCost(id: ShippingId, afterDiscount: number) {
   if (id === "express") return EXPRESS_SHIPPING;

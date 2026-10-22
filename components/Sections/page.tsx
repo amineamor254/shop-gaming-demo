@@ -20,6 +20,7 @@ import {
   X,
 } from "lucide-react";
 import AddToCartButton from "@/components/Cart/AddToCartButton";
+import { formatProductMoney } from "@/lib/format";
 
 /* ===================== Types and data ===================== */
 
@@ -670,9 +671,9 @@ function ProductCard({ product: p }: { product: Product }) {
         <div className="flex items-end justify-between pt-1">
           <div className="flex items-baseline gap-2">
             {p.oldPrice && (
-              <span className="text-xs text-slate-500 line-through">${p.oldPrice.toFixed(2)}</span>
+              <span className="text-xs text-slate-500 line-through">{formatProductMoney(p.oldPrice)}</span>
             )}
-            <span className="text-lg font-extrabold text-white">${p.price.toFixed(2)}</span>
+            <span className="text-lg font-extrabold text-white">{formatProductMoney(p.price)}</span>
           </div>
 
           <AddToCartButton

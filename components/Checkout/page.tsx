@@ -18,11 +18,11 @@ import {
   Zap,
 } from "lucide-react";
 import { useCart, type CartItem } from "@/components/Cart/CartContext";
+import { formatCartMoney as money } from "@/lib/format";
 import {
   COUNTRIES,
   SHIPPING_METHODS,
   calcTotals,
-  money,
   shippingCost,
   type ShippingId,
 } from "@/components/Cart/cart-config";

@@ -19,12 +19,12 @@ import {
   X,
 } from "lucide-react";
 import { MAX_QTY, useCart, type CartItem } from "@/components/Cart/CartContext";
+import { formatCartMoney as money } from "@/lib/format";
 import {
   FREE_SHIPPING_MIN,
   PROMOS,
   TAX_RATE,
   calcTotals,
-  money,
 } from "@/components/Cart/cart-config";
 
 /* ===================== Page ===================== */
