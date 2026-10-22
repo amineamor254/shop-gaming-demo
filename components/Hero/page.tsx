@@ -2,27 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  Clock,
-  Cpu,
   Flame,
   ShieldCheck,
   ShoppingCart,
   Sparkles,
-  Trophy,
   Truck,
 } from "lucide-react";
 import AddToCartButton from "@/components/Cart/AddToCartButton";
-
-// Set this to an image path in public; leave it empty to show the CSS fallback.
-const PRODUCT_IMAGE = "";
-
-const STATS = [
-  { icon: Trophy, value: "240+", label: "Builds delivered" },
-  { icon: Cpu, value: "Next-gen", label: "Latest GPUs" },
-  { icon: Clock, value: "24", label: "Months warranty" },
-];
-
-const SPECS = ["High-end GPU", "8-Core CPU", "32GB DDR5"];
+import { SITE } from "@/config/site";
+import { FEATURED_PRODUCT } from "@/data/hero";
+import { formatConfiguratorMoney } from "@/lib/format";
 
 /** Introduces the featured gaming PC and links to the builder and product catalog. */
 export default function Hero() {
@@ -101,7 +90,7 @@ export default function Hero() {
           </div>
 
           <div className="mt-10 grid max-w-md grid-cols-3 gap-3 sm:mx-auto lg:mx-0">
-            {STATS.map(({ icon: Icon, value, label }) => (
+            {FEATURED_PRODUCT.stats.map(({ icon: Icon, value, label }) => (
               <div
                 key={label}
                 className="group rounded-xl border border-white/5 bg-white/[0.03] p-3 text-left transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/30 hover:bg-cyan-400/5"
@@ -125,10 +114,10 @@ export default function Hero() {
 
           <article className="group overflow-hidden rounded-2xl border border-cyan-400/20 bg-[#0a1119]/90 shadow-[0_0_40px_rgba(6,182,212,0.15)] backdrop-blur transition-all duration-500 hover:-translate-y-2 hover:border-cyan-400/50 hover:shadow-[0_0_60px_rgba(6,182,212,0.3)]">
             <div className="relative aspect-[4/5] overflow-hidden bg-[#070d14]">
-              {PRODUCT_IMAGE ? (
+              {FEATURED_PRODUCT.image ? (
                 <Image
-                  src={PRODUCT_IMAGE}
-                  alt="Apex Prime gaming PC"
+                  src={FEATURED_PRODUCT.image}
+                  alt={`${FEATURED_PRODUCT.name} gaming PC`}
                   fill
                   priority
                   sizes="(max-width: 1024px) 90vw, 400px"
@@ -166,17 +155,17 @@ export default function Hero() {
             <div className="space-y-4 p-4">
               <div className="flex items-center justify-between rounded-xl border border-white/5 bg-black/40 px-4 py-3">
                 <div className="flex items-baseline gap-1.5">
-                  <span className="text-2xl font-extrabold text-white">1,499</span>
-                  <span className="text-[11px] font-semibold text-cyan-400">$</span>
+                  <span className="text-2xl font-extrabold text-white">{FEATURED_PRODUCT.price.toLocaleString("en-US")}</span>
+                  <span className="text-[11px] font-semibold text-cyan-400">{SITE.currencySymbol}</span>
                 </div>
-                <span className="text-[11px] text-slate-500">from $125/mo</span>
+                <span className="text-[11px] text-slate-500">from {formatConfiguratorMoney(FEATURED_PRODUCT.monthlyPrice)}/mo</span>
               </div>
 
               <div>
-                <h3 className="text-lg font-bold text-white">Apex Prime</h3>
+                <h3 className="text-lg font-bold text-white">{FEATURED_PRODUCT.name}</h3>
 
                 <div className="mt-2 flex flex-wrap gap-1.5">
-                  {SPECS.map((s, i) => (
+                  {FEATURED_PRODUCT.specs.map((s, i) => (
                     <span
                       key={s}
                       className={`rounded-md border px-2 py-0.5 text-[10px] font-semibold ${
@@ -204,9 +193,9 @@ export default function Hero() {
                 <AddToCartButton
                   item={{
                     id: "hero-featured-pc",
-                    name: "Apex Prime",
-                    price: 1499,
-                    variant: SPECS.join(" · "),
+                    name: FEATURED_PRODUCT.name,
+                    price: FEATURED_PRODUCT.price,
+                    variant: FEATURED_PRODUCT.specs.join(" · "),
                   }}
                   addedContent={<>Added ✓</>}
                   className="group/btn relative inline-flex flex-1 items-center justify-center gap-2 overflow-hidden rounded-lg bg-gradient-to-r from-orange-500 to-amber-400 px-4 py-2.5 text-sm font-bold text-[#1a0f00] shadow-[0_0_20px_rgba(249,115,22,0.35)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(249,115,22,0.6)] active:scale-95"

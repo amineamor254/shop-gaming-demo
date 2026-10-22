@@ -9,74 +9,10 @@ import {
   Gift,
   Info,
   Percent,
-  RefreshCw,
-  ShieldCheck,
   Tag,
-  Truck,
-  Undo2,
   Zap,
 } from "lucide-react";
-
-/* ===================== Offer data ===================== */
-
-// TODO: Set the end date for your featured sale; the countdown shows zeros after it expires.
-const FLASH_SALE_END = "2026-12-31T23:59:59";
-
-const FLASH_SALE = {
-  tag: "Flash sale",
-  title: "Up to 30% off",
-  highlight: "Pro builds",
-  text: "Limited-time prices on our best-selling custom gaming PCs. Free delivery and 24 months warranty included.",
-  discount: "-30%",
-};
-
-type Offer = {
-  id: string;
-  icon: React.ComponentType<{ className?: string }>;
-  badge: string;
-  title: string;
-  text: string;
-  /** Promo code the cart accepts. It must exist in PROMOS (components/Cart/cart-config.ts). */
-  code?: string;
-  /** Shown instead of a code when the offer is not a coupon. */
-  note?: string;
-};
-
-// Only offers with a `code` can be copied. Every code listed here must also be defined in PROMOS,
-// otherwise the cart will answer "Invalid promo code".
-// TODO: Wire the offers without a code into your configurator or checkout if you want them applied automatically.
-const OFFERS: Offer[] = [
-  {
-    id: "bundle",
-    icon: Gift,
-    badge: "Save 15%",
-    title: "Starter Bundle",
-    text: "Get a gaming PC with a keyboard, mouse and headset at a special bundle price.",
-    code: "BUNDLE15",
-  },
-  {
-    id: "upgrade",
-    icon: Zap,
-    badge: "Free upgrade",
-    title: "Memory Upgrade",
-    text: "Upgrade from 16GB to 32GB DDR5 on any Pro or Ultimate build at no extra cost.",
-    note: "No code needed. Choose a Pro or Ultimate build in the configurator.",
-  },
-  {
-    id: "tradein",
-    icon: RefreshCw,
-    badge: "Up to $200",
-    title: "Trade-in Bonus",
-    text: "Trade your old graphics card and get instant credit towards your new build.",
-    note: "No code needed. Contact our team to claim your credit.",
-  },
-];
-
-const PERKS = [
-  { icon: Truck, title: "Free delivery", text: "On every custom build" },
-  { icon: ShieldCheck, title: "24 months warranty", text: "Full parts and labour" },
-  { icon: Undo2, title: "30-day returns", text: "No questions asked" },
-];
+import { FLASH_SALE, FLASH_SALE_END, OFFERS, PERKS } from "@/data/offers";
 
 /* ===================== Section ===================== */
 

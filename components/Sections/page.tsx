@@ -21,155 +21,16 @@ import {
 } from "lucide-react";
 import AddToCartButton from "@/components/Cart/AddToCartButton";
 import { formatProductMoney } from "@/lib/format";
+import {
+  CATEGORIES,
+  COLOR_FILTERS,
+  PRODUCTS,
+  SORT_OPTIONS,
+  type Product,
+  type ProductCategory,
+} from "@/data/products";
 
 /* ===================== Types and data ===================== */
-
-type Category = "Audio" | "Monitors" | "Mice" | "Keyboards";
-
-type Product = {
-  id: number;
-  name: string;
-  category: Category;
-  price: number;
-  oldPrice?: number;
-  rating: number;
-  reviews: number;
-  colors: string[]; // Hex color values.
-  inStock: boolean;
-  image?: string; // For example, "/images/products/elite-audio.png".
-};
-
-const PRODUCTS: Product[] = [
-  {
-    id: 1,
-    name: "Elite Audio Gear",
-    category: "Audio",
-    price: 40,
-    oldPrice: 45,
-    rating: 5,
-    reviews: 12,
-    colors: ["#ffffff", "#3b82f6", "#ef4444"],
-    inStock: true,
-  },
-  {
-    id: 2,
-    name: "Elysian Blend",
-    category: "Audio",
-    price: 25,
-    oldPrice: 40,
-    rating: 5,
-    reviews: 8,
-    colors: ["#111827", "#3b82f6", "#ef4444"],
-    inStock: true,
-  },
-  {
-    id: 3,
-    name: "Elysian LCD",
-    category: "Monitors",
-    price: 80,
-    oldPrice: 90,
-    rating: 4,
-    reviews: 21,
-    colors: ["#111827", "#3b82f6"],
-    inStock: true,
-  },
-  {
-    id: 4,
-    name: "Hyper Glide Mouse",
-    category: "Mice",
-    price: 30,
-    oldPrice: 50,
-    rating: 5,
-    reviews: 33,
-    colors: ["#ef4444", "#111827"],
-    inStock: true,
-  },
-  {
-    id: 5,
-    name: "Hyper Glide Pro",
-    category: "Mice",
-    price: 30,
-    oldPrice: 40,
-    rating: 4,
-    reviews: 17,
-    colors: ["#6b7280", "#ef4444", "#3b82f6"],
-    inStock: false,
-  },
-  {
-    id: 6,
-    name: "Key Master Elite",
-    category: "Keyboards",
-    price: 70,
-    oldPrice: 80,
-    rating: 5,
-    reviews: 41,
-    colors: ["#3b82f6", "#ef4444", "#ffffff"],
-    inStock: true,
-  },
-  {
-    id: 7,
-    name: "Sonic Wave X",
-    category: "Audio",
-    price: 55,
-    rating: 4,
-    reviews: 9,
-    colors: ["#111827", "#22c55e"],
-    inStock: true,
-  },
-  {
-    id: 8,
-    name: "Vision Curve 27",
-    category: "Monitors",
-    price: 120,
-    oldPrice: 150,
-    rating: 5,
-    reviews: 26,
-    colors: ["#111827"],
-    inStock: true,
-  },
-  {
-    id: 9,
-    name: "Phantom Click",
-    category: "Mice",
-    price: 22,
-    rating: 4,
-    reviews: 14,
-    colors: ["#ffffff", "#111827"],
-    inStock: true,
-  },
-  {
-    id: 10,
-    name: "Type Storm RGB",
-    category: "Keyboards",
-    price: 90,
-    oldPrice: 110,
-    rating: 5,
-    reviews: 52,
-    colors: ["#111827", "#ef4444", "#22c55e"],
-    inStock: false,
-  },
-  {
-    id: 11,
-    name: "Nova Headset",
-    category: "Audio",
-    price: 65,
-    rating: 4,
-    reviews: 11,
-    colors: ["#ffffff", "#3b82f6"],
-    inStock: true,
-  },
-  {
-    id: 12,
-    name: "Pixel Edge 24",
-    category: "Monitors",
-    price: 95,
-    oldPrice: 105,
-    rating: 4,
-    reviews: 19,
-    colors: ["#111827", "#ef4444"],
-    inStock: true,
-  },
-];
 
 const CATEGORY_ICONS = {
   Audio: Headphones,
@@ -177,15 +38,6 @@ const CATEGORY_ICONS = {
   Mice: Mouse,
   Keyboards: Keyboard,
 } as const;
-
-const COLOR_FILTERS = ["#ffffff", "#111827", "#3b82f6", "#ef4444", "#22c55e", "#6b7280"];
-
-const SORT_OPTIONS = [
-  { value: "alpha-asc", label: "Alphabetically, A-Z" },
-  { value: "alpha-desc", label: "Alphabetically, Z-A" },
-  { value: "price-asc", label: "Price, low to high" },
-  { value: "price-desc", label: "Price, high to low" },
-] as const;
 
 type SortValue = (typeof SORT_OPTIONS)[number]["value"];
 
@@ -203,7 +55,7 @@ const MAX_PRICE = Math.max(...PRODUCTS.map((p) => p.price));
 /** Renders the searchable, filterable, and paginated product catalog. */
 export default function Sections() {
   const [query, setQuery] = useState("");
-  const [category, setCategory] = useState<Category | "All">("All");
+  const [category, setCategory] = useState<ProductCategory | "All">("All");
   const [inStockOnly, setInStockOnly] = useState(false);
   const [outOfStockOnly, setOutOfStockOnly] = useState(false);
   const [maxPrice, setMaxPrice] = useState(MAX_PRICE);
@@ -216,11 +68,10 @@ export default function Sections() {
 
   useEffect(() => {
     // Apply a saved category on mount and listen for selections sent by the header.
-    const valid = ["All", "Audio", "Monitors", "Mice", "Keyboards"];
-
     const apply = (c: string | null) => {
-      if (!c || !valid.includes(c)) return;
-      setCategory(c as Category | "All");
+      const requestedCategory = CATEGORIES.find((validCategory) => validCategory === c);
+      if (!requestedCategory) return;
+      setCategory(requestedCategory);
       setQuery("");
       setInStockOnly(false);
       setOutOfStockOnly(false);
@@ -353,7 +204,7 @@ export default function Sections() {
 
             <FilterGroup title="Product Categories">
               <ul className="space-y-1">
-                {(["All", "Audio", "Monitors", "Mice", "Keyboards"] as const).map((c) => {
+                {CATEGORIES.map((c) => {
                   const active = category === c;
                   const Icon = c === "All" ? LayoutGrid : CATEGORY_ICONS[c];
                   const count =
