@@ -114,7 +114,7 @@ export default function Contact() {
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, #22d3ee 1px, transparent 1px), linear-gradient(to bottom, #22d3ee 1px, transparent 1px)",
+            "linear-gradient(to right, var(--color-brand-primary-400) 1px, transparent 1px), linear-gradient(to bottom, var(--color-brand-primary-400) 1px, transparent 1px)",
           backgroundSize: "56px 56px",
           maskImage: "radial-gradient(ellipse at center, black 20%, transparent 70%)",
           WebkitMaskImage: "radial-gradient(ellipse at center, black 20%, transparent 70%)",
@@ -125,7 +125,7 @@ export default function Contact() {
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.07]"
         style={{
           backgroundImage:
-            "repeating-linear-gradient(115deg, transparent 0 46px, #22d3ee 46px 47px), repeating-linear-gradient(25deg, transparent 0 78px, #22d3ee 78px 79px)",
+            "repeating-linear-gradient(115deg, transparent 0 46px, var(--color-brand-primary-400) 46px 47px), repeating-linear-gradient(25deg, transparent 0 78px, var(--color-brand-primary-400) 78px 79px)",
           maskImage: "radial-gradient(ellipse at 35% 50%, black 10%, transparent 65%)",
           WebkitMaskImage: "radial-gradient(ellipse at 35% 50%, black 10%, transparent 65%)",
         }}
@@ -134,12 +134,12 @@ export default function Contact() {
         aria-hidden
         className="pointer-events-none absolute left-[38%] top-1/2 -z-10 hidden lg:block"
       >
-        <span className="absolute -inset-6 animate-ping rounded-full bg-cyan-400/20 motion-reduce:animate-none" />
-        <span className="relative block h-3 w-3 rounded-full bg-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.9)]" />
+        <span className="absolute -inset-6 animate-ping rounded-full bg-brand-primary-400/20 motion-reduce:animate-none" />
+        <span className="relative block h-3 w-3 rounded-full bg-brand-primary-400 shadow-[0_0_20px_color-mix(in_srgb,var(--color-brand-primary-400)_90%,transparent)]" />
       </div>
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-40 top-10 -z-10 h-[380px] w-[380px] rounded-full bg-cyan-500/15 blur-[120px]"
+        className="pointer-events-none absolute -left-40 top-10 -z-10 h-[380px] w-[380px] rounded-full bg-brand-primary-500/15 blur-[120px]"
       />
       <div
         aria-hidden
@@ -147,7 +147,7 @@ export default function Contact() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-primary-400/40 to-transparent"
       />
 
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24">
@@ -158,19 +158,19 @@ export default function Contact() {
             className="text-center text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-left lg:text-6xl"
           >
             Contact{" "}
-            <span className="bg-gradient-to-r from-cyan-300 via-cyan-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(34,211,238,0.35)]">
+            <span className="bg-gradient-to-r from-brand-primary-300 via-brand-primary-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_color-mix(in_srgb,var(--color-brand-primary-400)_35%,transparent)]">
               Us
             </span>
-            <span className="text-cyan-400 drop-shadow-[0_0_12px_rgba(34,211,238,0.8)]">.</span>
+            <span className="text-brand-primary-400 drop-shadow-[0_0_12px_color-mix(in_srgb,var(--color-brand-primary-400)_80%,transparent)]">.</span>
           </h2>
           <p className="mx-auto mt-4 max-w-md text-center text-sm leading-relaxed text-slate-400 lg:mx-0 lg:text-left">
             Questions about a build, an order or a warranty? Send us a message and our team will get
             back to you within one business day.
           </p>
 
-          <div className="mt-10 space-y-8 border-l-2 border-cyan-400 pl-6 shadow-[-8px_0_20px_-12px_rgba(34,211,238,0.8)]">
+          <div className="mt-10 space-y-8 border-l-2 border-brand-primary-400 pl-6 shadow-[-8px_0_20px_-12px_color-mix(in_srgb,var(--color-brand-primary-400)_80%,transparent)]">
             <div>
-              <h3 className="mb-3 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-cyan-300">
+              <h3 className="mb-3 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-brand-primary-300">
                 <Clock className="h-3.5 w-3.5" />
                 Store hours
               </h3>
@@ -179,7 +179,7 @@ export default function Contact() {
                   <div key={h.days} className="flex max-w-xs justify-between gap-6">
                     <dt className="text-slate-400">{h.days}</dt>
                     <dd
-                      className={`font-semibold ${h.time === "Closed" ? "text-orange-300" : "text-slate-200"}`}
+                      className={`font-semibold ${h.time === "Closed" ? "text-brand-accent-300" : "text-slate-200"}`}
                     >
                       {h.time}
                     </dd>
@@ -189,7 +189,7 @@ export default function Contact() {
             </div>
 
             <div>
-              <h3 className="mb-3 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-cyan-300">
+              <h3 className="mb-3 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-brand-primary-300">
                 <MapPin className="h-3.5 w-3.5" />
                 Address
               </h3>
@@ -201,25 +201,25 @@ export default function Contact() {
             </div>
 
             <div>
-              <h3 className="mb-3 text-[11px] font-bold uppercase tracking-widest text-cyan-300">
+              <h3 className="mb-3 text-[11px] font-bold uppercase tracking-widest text-brand-primary-300">
                 Contacts
               </h3>
               <ul className="space-y-2 text-sm">
                 <li>
                   <a
                     href={`mailto:${SITE.contact.email}`}
-                    className="group inline-flex items-center gap-2.5 text-slate-200 transition-colors hover:text-cyan-300"
+                    className="group inline-flex items-center gap-2.5 text-slate-200 transition-colors hover:text-brand-primary-300"
                   >
-                    <Mail className="h-4 w-4 text-cyan-400 transition-transform duration-300 group-hover:scale-110" />
+                    <Mail className="h-4 w-4 text-brand-primary-400 transition-transform duration-300 group-hover:scale-110" />
                     {SITE.contact.email}
                   </a>
                 </li>
                 <li>
                   <a
                     href={`tel:${SITE.contact.phone.replace(/\s/g, "")}`}
-                    className="group inline-flex items-center gap-2.5 text-slate-200 transition-colors hover:text-cyan-300"
+                    className="group inline-flex items-center gap-2.5 text-slate-200 transition-colors hover:text-brand-primary-300"
                   >
-                    <Phone className="h-4 w-4 text-cyan-400 transition-transform duration-300 group-hover:scale-110" />
+                    <Phone className="h-4 w-4 text-brand-primary-400 transition-transform duration-300 group-hover:scale-110" />
                     {SITE.contact.phone}
                   </a>
                 </li>
@@ -236,7 +236,7 @@ export default function Contact() {
                 <a
                   href={s.href}
                   aria-label={s.label}
-                  className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 text-slate-300 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/50 hover:bg-cyan-400/10 hover:text-cyan-300 hover:shadow-[0_0_14px_rgba(6,182,212,0.35)]"
+                  className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 text-slate-300 transition-all duration-300 hover:-translate-y-1 hover:border-brand-primary-400/50 hover:bg-brand-primary-400/10 hover:text-brand-primary-300 hover:shadow-[0_0_14px_color-mix(in_srgb,var(--color-brand-primary-500)_35%,transparent)]"
                 >
                   {s.icon}
                 </a>
@@ -256,16 +256,16 @@ export default function Contact() {
             <span
               key={pos}
               aria-hidden
-              className={`pointer-events-none absolute h-10 w-10 border-cyan-400 shadow-[0_0_14px_rgba(34,211,238,0.5)] transition-all duration-500 group-focus-within:h-14 group-focus-within:w-14 group-hover:h-14 group-hover:w-14 motion-reduce:transition-none ${pos}`}
+              className={`pointer-events-none absolute h-10 w-10 border-brand-primary-400 shadow-[0_0_14px_color-mix(in_srgb,var(--color-brand-primary-400)_50%,transparent)] transition-all duration-500 group-focus-within:h-14 group-focus-within:w-14 group-hover:h-14 group-hover:w-14 motion-reduce:transition-none ${pos}`}
             />
           ))}
 
-          <div className="relative overflow-hidden rounded-xl border border-white/5 bg-[#0a1119]/90 p-6 shadow-[0_0_40px_rgba(6,182,212,0.12)] backdrop-blur sm:p-8">
+          <div className="relative overflow-hidden rounded-xl border border-white/5 bg-[#0a1119]/90 p-6 shadow-[0_0_40px_color-mix(in_srgb,var(--color-brand-primary-500)_12%,transparent)] backdrop-blur sm:p-8">
             <h3 className="mb-6 text-center text-xl font-extrabold">Contact form</h3>
 
             {status === "success" ? (
               <div role="status" className="py-8 text-center">
-                <span className="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-full bg-cyan-500 text-[#06121a] shadow-[0_0_30px_rgba(6,182,212,0.6)]">
+                <span className="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-full bg-brand-primary-500 text-[#06121a] shadow-[0_0_30px_color-mix(in_srgb,var(--color-brand-primary-500)_60%,transparent)]">
                   <Check className="h-8 w-8" />
                 </span>
                 <p className="text-lg font-extrabold">Message sent!</p>
@@ -275,7 +275,7 @@ export default function Contact() {
                 <button
                   type="button"
                   onClick={() => setStatus("idle")}
-                  className="mt-6 rounded-full border border-cyan-400/40 px-5 py-2 text-xs font-semibold text-cyan-300 transition-all duration-300 hover:border-cyan-300 hover:bg-cyan-400/10"
+                  className="mt-6 rounded-full border border-brand-primary-400/40 px-5 py-2 text-xs font-semibold text-brand-primary-300 transition-all duration-300 hover:border-brand-primary-300 hover:bg-brand-primary-400/10"
                 >
                   Send another message
                 </button>
@@ -348,7 +348,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={status === "sending"}
-                  className="group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-lg bg-cyan-500 px-6 py-3 text-sm font-bold text-[#06121a] shadow-[0_0_25px_rgba(6,182,212,0.45)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_35px_rgba(6,182,212,0.75)] active:scale-95 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100"
+                  className="group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-lg bg-brand-primary-500 px-6 py-3 text-sm font-bold text-[#06121a] shadow-[0_0_25px_color-mix(in_srgb,var(--color-brand-primary-500)_45%,transparent)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_35px_color-mix(in_srgb,var(--color-brand-primary-500)_75%,transparent)] active:scale-95 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100"
                 >
                   {status === "sending" ? (
                     <>
@@ -378,8 +378,8 @@ export default function Contact() {
 /* ===================== Sub components ===================== */
 
 const inputClass = (hasError: boolean) =>
-  `w-full rounded-lg border bg-black/40 px-3.5 py-2.5 text-sm text-white outline-none transition placeholder:text-slate-600 focus:shadow-[0_0_14px_rgba(6,182,212,0.3)] ${
-    hasError ? "border-red-400/60" : "border-white/10 focus:border-cyan-400/60"
+  `w-full rounded-lg border bg-black/40 px-3.5 py-2.5 text-sm text-white outline-none transition placeholder:text-slate-600 focus:shadow-[0_0_14px_color-mix(in_srgb,var(--color-brand-primary-500)_30%,transparent)] ${
+    hasError ? "border-red-400/60" : "border-white/10 focus:border-brand-primary-400/60"
   }`;
 
 function Field({
