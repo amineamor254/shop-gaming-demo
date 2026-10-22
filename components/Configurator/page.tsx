@@ -12,7 +12,6 @@ import {
   Sparkles,
   Truck,
   ShieldCheck,
-  Zap,
 } from "lucide-react";
 import AddToCartButton from "@/components/Cart/AddToCartButton";
 import { formatConfiguratorMoney as money } from "@/lib/format";

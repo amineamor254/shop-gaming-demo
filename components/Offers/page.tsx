@@ -6,7 +6,6 @@ import {
   ArrowRight,
   Check,
   Copy,
-  Gift,
   Info,
   Percent,
   Tag,
