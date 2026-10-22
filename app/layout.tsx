@@ -21,8 +21,8 @@ const orbitron = Orbitron({
 });
 
 export const metadata: Metadata = {
-  title: "MIAN Games",
-  description: "MIAN Games",
+  title: "Your Brand | Gaming PC Store",
+  description: "Discover custom gaming PCs built for performance, reliability, and play.",
 };
 
 /** Provides the shared site shell, fonts, and cart state for every route. */
