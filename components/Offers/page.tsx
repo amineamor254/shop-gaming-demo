@@ -7,6 +7,7 @@ import {
   Check,
   Copy,
   Gift,
+  Info,
   Percent,
   RefreshCw,
   ShieldCheck,
@@ -35,9 +36,15 @@ type Offer = {
   badge: string;
   title: string;
   text: string;
-  code: string;
+  /** Promo code the cart accepts. It must exist in PROMOS (components/Cart/cart-config.ts). */
+  code?: string;
+  /** Shown instead of a code when the offer is not a coupon. */
+  note?: string;
 };
 
+// Only offers with a `code` can be copied. Every code listed here must also be defined in PROMOS,
+// otherwise the cart will answer "Invalid promo code".
+// TODO: Wire the offers without a code into your configurator or checkout if you want them applied automatically.
 const OFFERS: Offer[] = [
   {
     id: "bundle",
@@ -53,7 +60,7 @@ const OFFERS: Offer[] = [
     badge: "Free upgrade",
     title: "Memory Upgrade",
     text: "Upgrade from 16GB to 32GB DDR5 on any Pro or Ultimate build at no extra cost.",
-    code: "RAM32",
+    note: "No code needed. Choose a Pro or Ultimate build in the configurator.",
   },
   {
     id: "tradein",
@@ -61,7 +68,7 @@ const OFFERS: Offer[] = [
     badge: "Up to $200",
     title: "Trade-in Bonus",
     text: "Trade your old graphics card and get instant credit towards your new build.",
-    code: "TRADEIN",
+    note: "No code needed. Contact our team to claim your credit.",
   },
 ];
 
@@ -231,7 +238,9 @@ export default function Offers() {
         <div className="grid gap-4 md:grid-cols-3">
           {OFFERS.map((o) => {
             const Icon = o.icon;
-            const isCopied = copied === o.code;
+            // A local const keeps TypeScript's narrowing valid inside the onClick closure below.
+            const code = o.code;
+            const isCopied = code !== undefined && copied === code;
             return (
               <article
                 key={o.id}
@@ -251,28 +260,36 @@ export default function Offers() {
                 </h3>
                 <p className="mt-2 flex-1 text-xs leading-relaxed text-slate-400">{o.text}</p>
 
-                <div className="mt-5 flex items-center justify-between gap-2 rounded-xl border border-dashed border-cyan-400/30 bg-black/40 px-3 py-2">
-                  <span className="flex items-center gap-2 text-xs font-bold tracking-widest text-cyan-300">
-                    <Tag className="h-3.5 w-3.5" />
-                    {o.code}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => copyCode(o.code)}
-                    aria-label={`Copy code ${o.code}`}
-                    className="inline-flex items-center gap-1.5 rounded-md border border-white/10 px-2 py-1 text-[10px] font-semibold text-slate-300 transition-all duration-300 hover:border-cyan-400/50 hover:text-cyan-300"
-                  >
-                    {isCopied ? (
-                      <>
-                        <Check className="h-3 w-3 text-emerald-400" /> Copied
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="h-3 w-3" /> Copy
-                      </>
-                    )}
-                  </button>
-                </div>
+                {/* Offers with a promo code get a copy button; the others show an explanatory note. */}
+                {code !== undefined ? (
+                  <div className="mt-5 flex items-center justify-between gap-2 rounded-xl border border-dashed border-cyan-400/30 bg-black/40 px-3 py-2">
+                    <span className="flex items-center gap-2 text-xs font-bold tracking-widest text-cyan-300">
+                      <Tag className="h-3.5 w-3.5" />
+                      {code}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => copyCode(code)}
+                      aria-label={`Copy code ${code}`}
+                      className="inline-flex items-center gap-1.5 rounded-md border border-white/10 px-2 py-1 text-[10px] font-semibold text-slate-300 transition-all duration-300 hover:border-cyan-400/50 hover:text-cyan-300"
+                    >
+                      {isCopied ? (
+                        <>
+                          <Check className="h-3 w-3 text-emerald-400" /> Copied
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="h-3 w-3" /> Copy
+                        </>
+                      )}
+                    </button>
+                  </div>
+                ) : (
+                  <p className="mt-5 flex items-start gap-2 rounded-xl border border-white/10 bg-black/40 px-3 py-2.5 text-[11px] leading-relaxed text-slate-400">
+                    <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-cyan-400" />
+                    {o.note ?? "No code needed."}
+                  </p>
+                )}
 
                 <Link
                   href="#sections"

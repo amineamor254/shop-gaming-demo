@@ -36,11 +36,11 @@ const COMPANY_LINKS = [
 
 // TODO: Add destination pages for these policies and replace their placeholder links.
 const SERVICE_LINKS = [
-  { label: "Privacy Policy", href: "#" },
-  { label: "Terms & Conditions", href: "#" },
-  { label: "Shipping Info", href: "#" },
-  { label: "Returns & Refunds", href: "#" },
-  { label: "Warranty", href: "#" },
+  { label: "Privacy Policy", href: "/legal/privacy" },
+  { label: "Terms & Conditions", href: "/legal/terms" },
+  { label: "Shipping Info", href: "/legal/shipping" },
+  { label: "Returns & Refunds", href: "/legal/returns" },
+  { label: "Warranty", href: "/legal/warranty" },
 ];
 
 const BOTTOM_LINKS = [

@@ -638,11 +638,11 @@ export default function CheckoutPage() {
                       />
                       <span>
                         I agree to the{" "}
-                        <a href="#" className="text-cyan-300 underline-offset-2 hover:underline">
+                        <a href="/legal/terms" className="text-cyan-300 underline-offset-2 hover:underline" target="_blank">
                           terms &amp; conditions
                         </a>{" "}
                         and the{" "}
-                        <a href="#" className="text-cyan-300 underline-offset-2 hover:underline">
+                        <a href="/legal/privacy" className="text-cyan-300 underline-offset-2 hover:underline" target="_blank">
                           privacy policy
                         </a>
                         .

@@ -11,7 +11,7 @@ export const FLAT_SHIPPING = 9;
 // Keep these codes aligned with the offers shown in the storefront.
 export const PROMOS: Record<string, number> = {
   FLASH25: 25,
-  BUNDLE20: 20,
+  BUNDLE15: 15,
   STUDENT10: 10,
 };
 
