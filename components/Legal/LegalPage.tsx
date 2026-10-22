@@ -25,7 +25,7 @@ export default function LegalPage({ doc }: { doc: LegalDoc }) {
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, #22d3ee 1px, transparent 1px), linear-gradient(to bottom, #22d3ee 1px, transparent 1px)",
+            "linear-gradient(to right, var(--color-brand-primary-400) 1px, transparent 1px), linear-gradient(to bottom, var(--color-brand-primary-400) 1px, transparent 1px)",
           backgroundSize: "56px 56px",
           maskImage: "radial-gradient(ellipse at top, black 20%, transparent 70%)",
           WebkitMaskImage: "radial-gradient(ellipse at top, black 20%, transparent 70%)",
@@ -33,7 +33,7 @@ export default function LegalPage({ doc }: { doc: LegalDoc }) {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-40 top-0 -z-10 h-[380px] w-[380px] rounded-full bg-cyan-500/15 blur-[120px]"
+        className="pointer-events-none absolute -left-40 top-0 -z-10 h-[380px] w-[380px] rounded-full bg-brand-primary-500/15 blur-[120px]"
       />
       <div
         aria-hidden
@@ -48,13 +48,13 @@ export default function LegalPage({ doc }: { doc: LegalDoc }) {
         >
           <Link
             href="/#home"
-            className="inline-flex items-center gap-1.5 transition-colors hover:text-cyan-300"
+            className="inline-flex items-center gap-1.5 transition-colors hover:text-brand-primary-300"
           >
             <Home className="h-3.5 w-3.5" />
             Home
           </Link>
           <ChevronRight className="h-3 w-3 text-slate-600" />
-          <span aria-current="page" className="font-semibold text-cyan-300">
+          <span aria-current="page" className="font-semibold text-brand-primary-300">
             {doc.title}
           </span>
         </nav>
@@ -62,7 +62,7 @@ export default function LegalPage({ doc }: { doc: LegalDoc }) {
         <header className="mb-8 text-center lg:text-left">
           <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
             {words.join(" ")}{" "}
-            <span className="bg-gradient-to-r from-cyan-300 via-cyan-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(34,211,238,0.35)]">
+            <span className="bg-gradient-to-r from-brand-primary-300 via-brand-primary-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_color-mix(in_srgb,var(--color-brand-primary-400)_35%,transparent)]">
               {lastWord}
             </span>
           </h1>
@@ -87,10 +87,10 @@ export default function LegalPage({ doc }: { doc: LegalDoc }) {
           <aside className="h-fit lg:sticky lg:top-24">
             <nav
               aria-label="On this page"
-              className="rounded-2xl border border-cyan-400/15 bg-[#0a1119]/90 p-4 shadow-[0_0_40px_rgba(6,182,212,0.08)] backdrop-blur"
+              className="rounded-2xl border border-brand-primary-400/15 bg-[#0a1119]/90 p-4 shadow-[0_0_40px_color-mix(in_srgb,var(--color-brand-primary-500)_8%,transparent)] backdrop-blur"
             >
-              <p className="mb-3 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-cyan-300">
-                <span className="h-px w-3 bg-cyan-400/60" />
+              <p className="mb-3 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-brand-primary-300">
+                <span className="h-px w-3 bg-brand-primary-400/60" />
                 On this page
               </p>
               <ol className="space-y-1">
@@ -98,9 +98,9 @@ export default function LegalPage({ doc }: { doc: LegalDoc }) {
                   <li key={s.title}>
                     <a
                       href={`#section-${i + 1}`}
-                      className="group flex items-start gap-2 rounded-lg px-2 py-1.5 text-xs text-slate-400 transition-all duration-300 hover:bg-white/5 hover:text-cyan-300"
+                      className="group flex items-start gap-2 rounded-lg px-2 py-1.5 text-xs text-slate-400 transition-all duration-300 hover:bg-white/5 hover:text-brand-primary-300"
                     >
-                      <span className="mt-px text-[10px] font-bold text-cyan-400">{i + 1}.</span>
+                      <span className="mt-px text-[10px] font-bold text-brand-primary-400">{i + 1}.</span>
                       <span>{s.title}</span>
                     </a>
                   </li>
@@ -110,7 +110,7 @@ export default function LegalPage({ doc }: { doc: LegalDoc }) {
           </aside>
 
           {/* ===================== Content ===================== */}
-          <article className="rounded-2xl border border-white/5 bg-[#0a1119]/90 p-6 shadow-[0_0_40px_rgba(6,182,212,0.06)] backdrop-blur sm:p-8">
+          <article className="rounded-2xl border border-white/5 bg-[#0a1119]/90 p-6 shadow-[0_0_40px_color-mix(in_srgb,var(--color-brand-primary-500)_6%,transparent)] backdrop-blur sm:p-8">
             <p className="text-sm leading-relaxed text-slate-300">{doc.intro}</p>
 
             <div className="mt-8 space-y-9">
@@ -125,7 +125,7 @@ export default function LegalPage({ doc }: { doc: LegalDoc }) {
                     id={`section-title-${i + 1}`}
                     className="mb-3 flex items-center gap-3 text-lg font-extrabold"
                   >
-                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-cyan-500/15 text-sm text-cyan-300">
+                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-brand-primary-500/15 text-sm text-brand-primary-300">
                       {i + 1}
                     </span>
                     {s.title}
@@ -143,7 +143,7 @@ export default function LegalPage({ doc }: { doc: LegalDoc }) {
                         <li key={item} className="flex items-start gap-3">
                           <span
                             aria-hidden
-                            className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]"
+                            className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-primary-400 shadow-[0_0_8px_color-mix(in_srgb,var(--color-brand-primary-400)_80%,transparent)]"
                           />
                           {item}
                         </li>
@@ -155,14 +155,14 @@ export default function LegalPage({ doc }: { doc: LegalDoc }) {
             </div>
 
             {/* contact box */}
-            <div className="mt-10 flex flex-wrap items-center justify-between gap-4 rounded-xl border border-cyan-400/20 bg-cyan-400/5 p-4">
+            <div className="mt-10 flex flex-wrap items-center justify-between gap-4 rounded-xl border border-brand-primary-400/20 bg-brand-primary-400/5 p-4">
               <div>
                 <p className="text-sm font-bold">Still have a question?</p>
                 <p className="text-xs text-slate-400">Our team usually replies within one business day.</p>
               </div>
               <a
                 href={`mailto:${LEGAL_COMPANY.email}`}
-                className="inline-flex items-center gap-2 rounded-full bg-cyan-500 px-5 py-2.5 text-xs font-bold text-[#06121a] shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_30px_rgba(6,182,212,0.7)] active:scale-95"
+                className="inline-flex items-center gap-2 rounded-full bg-brand-primary-500 px-5 py-2.5 text-xs font-bold text-[#06121a] shadow-[0_0_20px_color-mix(in_srgb,var(--color-brand-primary-500)_40%,transparent)] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_30px_color-mix(in_srgb,var(--color-brand-primary-500)_70%,transparent)] active:scale-95"
               >
                 <Mail className="h-4 w-4" />
                 {LEGAL_COMPANY.email}
@@ -175,7 +175,7 @@ export default function LegalPage({ doc }: { doc: LegalDoc }) {
         <section aria-labelledby="related-title" className="mt-10">
           <h2
             id="related-title"
-            className="mb-4 text-[11px] font-bold uppercase tracking-widest text-cyan-300"
+            className="mb-4 text-[11px] font-bold uppercase tracking-widest text-brand-primary-300"
           >
             Other policies
           </h2>
@@ -184,10 +184,10 @@ export default function LegalPage({ doc }: { doc: LegalDoc }) {
               <li key={d.slug}>
                 <Link
                   href={`/legal/${d.slug}`}
-                  className="group flex items-center gap-3 rounded-xl border border-white/5 bg-white/[0.03] p-4 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/40 hover:bg-cyan-400/5"
+                  className="group flex items-center gap-3 rounded-xl border border-white/5 bg-white/[0.03] p-4 transition-all duration-300 hover:-translate-y-1 hover:border-brand-primary-400/40 hover:bg-brand-primary-400/5"
                 >
-                  <FileText className="h-4 w-4 shrink-0 text-cyan-400" />
-                  <span className="text-xs font-semibold transition-colors group-hover:text-cyan-300">
+                  <FileText className="h-4 w-4 shrink-0 text-brand-primary-400" />
+                  <span className="text-xs font-semibold transition-colors group-hover:text-brand-primary-300">
                     {d.title}
                   </span>
                 </Link>
