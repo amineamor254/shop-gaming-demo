@@ -4,43 +4,18 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  BookOpen,
   ChevronDown,
   Cpu,
   Heart,
-  Home,
-  Layers,
   Menu,
-  MessageCircle,
-  Settings,
   ShoppingCart,
-  Sparkles,
   Store,
   X,
 } from "lucide-react";
 import { useCart } from "@/components/Cart/CartContext";
 import { SITE } from "@/config/site";
-import {
-  SHOP_CATEGORIES,
-  requestCategory,
-  type ShopCategoryKey,
-} from "@/components/Shop/shop-filter";
-
-type NavItem = {
-  label: string;
-  id: string; // Match the lowercase id on the corresponding page section.
-  icon: React.ComponentType<{ className?: string }>;
-};
-
-// Add each section here with an id that matches its <section id="...">.
-const NAV_ITEMS: NavItem[] = [
-  { label: "Home", id: "home", icon: Home },
-  { label: "Settings", id: "configurator", icon: Settings },
-  { label: "Sections", id: "sections", icon: Layers },
-  { label: "Blog", id: "blog", icon: BookOpen },
-  { label: "Offers", id: "offers", icon: Sparkles },
-  { label: "Contact", id: "contact", icon: MessageCircle },
-];
+import { NAV_ITEMS, SHOP_CATEGORIES, type ShopCategoryKey } from "@/config/navigation";
+import { requestCategory } from "@/components/Shop/shop-filter";
 
 /** Renders responsive navigation, cart status, and the shop category menu. */
 export default function Header() {

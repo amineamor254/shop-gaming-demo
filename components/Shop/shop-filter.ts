@@ -1,24 +1,10 @@
-import type { ComponentType } from "react";
-import { Headphones, Keyboard, LayoutGrid, Monitor, Mouse } from "lucide-react";
-
 /**
  * Defines shop categories and communicates the selected category to the product section.
  */
 
-export type ShopCategoryKey = "All" | "Audio" | "Monitors" | "Mice" | "Keyboards";
+import type { ShopCategoryKey } from "@/config/navigation";
 
-export const SHOP_CATEGORIES: {
-  key: ShopCategoryKey;
-  label: string;
-  description: string;
-  icon: ComponentType<{ className?: string }>;
-}[] = [
-  { key: "All", label: "All products", description: "Browse the full catalog", icon: LayoutGrid },
-  { key: "Audio", label: "Audio", description: "Headsets and speakers", icon: Headphones },
-  { key: "Monitors", label: "Monitors", description: "High refresh displays", icon: Monitor },
-  { key: "Mice", label: "Mice", description: "Precision gaming mice", icon: Mouse },
-  { key: "Keyboards", label: "Keyboards", description: "Mechanical and RGB", icon: Keyboard },
-];
+export type { ShopCategoryKey } from "@/config/navigation";
 
 export const SHOP_EVENT = "shop:category";
 const STORAGE_KEY = "shop-category";

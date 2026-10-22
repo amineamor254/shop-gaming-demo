@@ -14,34 +14,11 @@ import {
   Wallet,
 } from "lucide-react";
 import { SITE } from "@/config/site";
+import { BOTTOM_LINKS, COMPANY_LINKS, SERVICE_LINKS } from "@/config/navigation";
 
 /* ===================== Store data ===================== */
 
-const COMPANY_LINKS = [
-  { label: "Home", href: "/#home" },
-  { label: "Sections", href: "/#sections" },
-  { label: "PC Configurator", href: "/#configurator" },
-  { label: "Blog", href: "/#blog" },
-  { label: "Contact", href: "/#contact" },
-];
-
 // TODO: Add destination pages for these policies and replace their placeholder links.
-const SERVICE_LINKS = [
-  { label: "Privacy Policy", href: "/legal/privacy" },
-  { label: "Terms & Conditions", href: "/legal/terms" },
-  { label: "Shipping Info", href: "/legal/shipping" },
-  { label: "Returns & Refunds", href: "/legal/returns" },
-  { label: "Warranty", href: "/legal/warranty" },
-];
-
-const BOTTOM_LINKS = [
-  { label: "Home", href: "/#home" },
-  { label: "Shop", href: "/#sections" },
-  { label: "Builder", href: "/#configurator" },
-  { label: "Blog", href: "/#blog" },
-  { label: "Contact us", href: "/#contact" },
-];
-
 // Inline social icons avoid relying on icon names that may vary between library versions.
 const SOCIALS = [
   {
