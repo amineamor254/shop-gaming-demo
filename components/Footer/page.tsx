@@ -17,13 +17,13 @@ import {
 /* ===================== Store data ===================== */
 
 const SITE = {
-  name: "MIAN",
-  tagline: "Games",
+  name: "Your Brand",
+  tagline: "Store",
   description:
     "Custom gaming PCs built for performance and tested for victory. Top-tier FPS, zero lag, zero compromise.",
-  address: "123 Gaming Street, Your City, Country",
-  phone: "+000 123 456 789",
-  email: "hello@yourbrand.com",
+  address: "123 Main Street, Your City, Country",
+  phone: "+1 555 010 0100",
+  email: "hello@example.com",
 };
 
 const COMPANY_LINKS = [
