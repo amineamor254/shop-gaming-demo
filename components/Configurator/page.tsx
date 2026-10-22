@@ -113,7 +113,7 @@ export default function Configurator() {
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, #22d3ee 1px, transparent 1px), linear-gradient(to bottom, #22d3ee 1px, transparent 1px)",
+            "linear-gradient(to right, var(--color-brand-primary-400) 1px, transparent 1px), linear-gradient(to bottom, var(--color-brand-primary-400) 1px, transparent 1px)",
           backgroundSize: "56px 56px",
           maskImage: "radial-gradient(ellipse at top, black 20%, transparent 70%)",
           WebkitMaskImage: "radial-gradient(ellipse at top, black 20%, transparent 70%)",
@@ -121,7 +121,7 @@ export default function Configurator() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-40 top-0 -z-10 h-[400px] w-[400px] rounded-full bg-cyan-500/15 blur-[120px]"
+        className="pointer-events-none absolute -left-40 top-0 -z-10 h-[400px] w-[400px] rounded-full bg-brand-primary-500/15 blur-[120px]"
       />
       <div
         aria-hidden
@@ -131,7 +131,7 @@ export default function Configurator() {
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
         {/* ===================== Section heading ===================== */}
         <div className="mb-8 text-center lg:text-left">
-          <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/5 px-3 py-1 text-xs font-medium text-cyan-300">
+          <span className="inline-flex items-center gap-2 rounded-full border border-brand-primary-400/20 bg-brand-primary-400/5 px-3 py-1 text-xs font-medium text-brand-primary-300">
             <Sparkles className="h-3.5 w-3.5" />
             PC Configurator
           </span>
@@ -140,7 +140,7 @@ export default function Configurator() {
             className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl"
           >
             Build your{" "}
-            <span className="bg-gradient-to-r from-cyan-300 via-cyan-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(34,211,238,0.35)]">
+            <span className="bg-gradient-to-r from-brand-primary-300 via-brand-primary-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_color-mix(in_srgb,var(--color-brand-primary-400)_35%,transparent)]">
               dream PC
             </span>
           </h2>
@@ -162,20 +162,20 @@ export default function Configurator() {
                 aria-pressed={active}
                 className={`group relative overflow-hidden rounded-2xl border p-4 text-left transition-all duration-300 hover:-translate-y-1 ${
                   active
-                    ? "border-cyan-400/60 bg-cyan-400/10 shadow-[0_0_30px_rgba(6,182,212,0.25)]"
-                    : "border-white/5 bg-white/[0.03] hover:border-cyan-400/30"
+                    ? "border-brand-primary-400/60 bg-brand-primary-400/10 shadow-[0_0_30px_color-mix(in_srgb,var(--color-brand-primary-500)_25%,transparent)]"
+                    : "border-white/5 bg-white/[0.03] hover:border-brand-primary-400/30"
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <span className="text-base font-extrabold">{p.name}</span>
                   {active && (
-                    <span className="grid h-5 w-5 place-items-center rounded-full bg-cyan-500 text-[#06121a]">
+                    <span className="grid h-5 w-5 place-items-center rounded-full bg-brand-primary-500 text-[#06121a]">
                       <Check className="h-3 w-3" />
                     </span>
                   )}
                 </div>
                 <p className="mt-1 text-xs text-slate-400">{p.desc}</p>
-                <p className="mt-3 text-sm font-bold text-cyan-300">
+                <p className="mt-3 text-sm font-bold text-brand-primary-300">
                   {money(
                     CATEGORIES.reduce(
                       (sum, c) => sum + (c.parts.find((x) => x.id === p.picks[c.key])?.price ?? 0),
@@ -198,9 +198,9 @@ export default function Configurator() {
               <li key={c.key}>
                 <a
                   href={`#cfg-${c.key}`}
-                  className="group flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium text-slate-300 transition-all duration-300 hover:bg-white/5 hover:text-cyan-300"
+                  className="group flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium text-slate-300 transition-all duration-300 hover:bg-white/5 hover:text-brand-primary-300"
                 >
-                  <span className="grid h-5 w-5 place-items-center rounded-full bg-cyan-500/15 text-[10px] font-bold text-cyan-300 transition group-hover:bg-cyan-500 group-hover:text-[#06121a]">
+                  <span className="grid h-5 w-5 place-items-center rounded-full bg-brand-primary-500/15 text-[10px] font-bold text-brand-primary-300 transition group-hover:bg-brand-primary-500 group-hover:text-[#06121a]">
                     {i + 1}
                   </span>
                   {c.title}
@@ -218,12 +218,12 @@ export default function Configurator() {
               return (
                 <div key={cat.key} id={`cfg-${cat.key}`} className="scroll-mt-36">
                   <div className="mb-4 flex items-start gap-3">
-                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-cyan-500/15 text-cyan-300 shadow-[0_0_16px_rgba(6,182,212,0.2)]">
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-primary-500/15 text-brand-primary-300 shadow-[0_0_16px_color-mix(in_srgb,var(--color-brand-primary-500)_20%,transparent)]">
                       <Icon className="h-5 w-5" />
                     </span>
                     <div>
                       <h3 className="text-lg font-extrabold">
-                        <span className="mr-2 text-cyan-400">{i + 1}.</span>
+                        <span className="mr-2 text-brand-primary-400">{i + 1}.</span>
                         {cat.title}
                       </h3>
                       <p className="text-xs text-slate-400">{cat.hint}</p>
@@ -248,12 +248,12 @@ export default function Configurator() {
                           onClick={() => select(cat.key, part.id)}
                           className={`group relative flex flex-col rounded-2xl border p-4 text-left transition-all duration-300 hover:-translate-y-1 ${
                             active
-                              ? "border-cyan-400/70 bg-cyan-400/10 shadow-[0_0_30px_rgba(6,182,212,0.25)]"
-                              : "border-white/5 bg-[#0a1119]/90 hover:border-cyan-400/30"
+                              ? "border-brand-primary-400/70 bg-brand-primary-400/10 shadow-[0_0_30px_color-mix(in_srgb,var(--color-brand-primary-500)_25%,transparent)]"
+                              : "border-white/5 bg-[#0a1119]/90 hover:border-brand-primary-400/30"
                           }`}
                         >
                           {part.popular && (
-                            <span className="absolute -top-2.5 left-4 inline-flex items-center gap-1 rounded-full border border-orange-400/40 bg-orange-500/20 px-2 py-0.5 text-[10px] font-semibold text-orange-300 backdrop-blur">
+                            <span className="absolute -top-2.5 left-4 inline-flex items-center gap-1 rounded-full border border-brand-accent-400/40 bg-brand-accent-500/20 px-2 py-0.5 text-[10px] font-semibold text-brand-accent-300 backdrop-blur">
                               <Flame className="h-3 w-3" />
                               Popular
                             </span>
@@ -264,8 +264,8 @@ export default function Configurator() {
                             <span
                               className={`grid h-5 w-5 shrink-0 place-items-center rounded-full border transition-all duration-300 ${
                                 active
-                                  ? "border-cyan-400 bg-cyan-500 text-[#06121a]"
-                                  : "border-white/20 text-transparent group-hover:border-cyan-400/50"
+                                  ? "border-brand-primary-400 bg-brand-primary-500 text-[#06121a]"
+                                  : "border-white/20 text-transparent group-hover:border-brand-primary-400/50"
                               }`}
                             >
                               <Check className="h-3 w-3" />
@@ -281,7 +281,7 @@ export default function Configurator() {
                             {!active && (
                               <span
                                 className={`text-[11px] font-semibold ${
-                                  diff > 0 ? "text-orange-300" : "text-emerald-400"
+                                  diff > 0 ? "text-brand-accent-300" : "text-emerald-400"
                                 }`}
                               >
                                 {diff > 0 ? "+" : "-"}
@@ -303,10 +303,10 @@ export default function Configurator() {
             <div className="relative">
               <div
                 aria-hidden
-                className="absolute -inset-3 -z-10 rounded-[2rem] bg-gradient-to-b from-cyan-500/20 via-emerald-500/10 to-transparent blur-2xl"
+                className="absolute -inset-3 -z-10 rounded-[2rem] bg-gradient-to-b from-brand-primary-500/20 via-emerald-500/10 to-transparent blur-2xl"
               />
-              <div className="space-y-5 rounded-2xl border border-cyan-400/20 bg-[#0a1119]/90 p-5 shadow-[0_0_40px_rgba(6,182,212,0.15)] backdrop-blur">
-                <h3 className="text-sm font-extrabold uppercase tracking-widest text-cyan-300">
+              <div className="space-y-5 rounded-2xl border border-brand-primary-400/20 bg-[#0a1119]/90 p-5 shadow-[0_0_40px_color-mix(in_srgb,var(--color-brand-primary-500)_15%,transparent)] backdrop-blur">
+                <h3 className="text-sm font-extrabold uppercase tracking-widest text-brand-primary-300">
                   Your build
                 </h3>
 
@@ -330,18 +330,18 @@ export default function Configurator() {
 
                 <div className="space-y-3 border-t border-white/5 pt-4">
                   <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-slate-400">
-                    <Gauge className="h-3.5 w-3.5 text-cyan-400" />
+                    <Gauge className="h-3.5 w-3.5 text-brand-primary-400" />
                     Performance
                   </p>
                   {performance.map((m) => (
                     <div key={m.label}>
                       <div className="mb-1 flex justify-between text-[11px]">
                         <span className="text-slate-300">{m.label}</span>
-                        <span className="font-bold text-cyan-300">{m.value}%</span>
+                        <span className="font-bold text-brand-primary-300">{m.value}%</span>
                       </div>
                       <div className="h-1.5 overflow-hidden rounded-full bg-white/5">
                         <div
-                          className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-sky-500 shadow-[0_0_10px_rgba(34,211,238,0.6)] transition-all duration-700 motion-reduce:transition-none"
+                          className="h-full rounded-full bg-gradient-to-r from-brand-primary-400 to-sky-500 shadow-[0_0_10px_color-mix(in_srgb,var(--color-brand-primary-400)_60%,transparent)] transition-all duration-700 motion-reduce:transition-none"
                           style={{ width: `${m.value}%` }}
                         />
                       </div>
@@ -358,7 +358,7 @@ export default function Configurator() {
                     {warnings.map((w) => (
                       <li
                         key={w}
-                        className="flex gap-2 rounded-lg border border-orange-400/30 bg-orange-500/10 p-2.5 text-[11px] leading-relaxed text-orange-200"
+                        className="flex gap-2 rounded-lg border border-brand-accent-400/30 bg-brand-accent-500/10 p-2.5 text-[11px] leading-relaxed text-brand-accent-200"
                       >
                         <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0" />
                         {w}
@@ -386,7 +386,7 @@ export default function Configurator() {
                   item={buildItem}
                   disabled={warnings.length > 0}
                   addedContent={<>Added ✓</>}
-                  className="group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-lg bg-gradient-to-r from-orange-500 to-amber-400 px-4 py-3 text-sm font-bold text-[#1a0f00] shadow-[0_0_20px_rgba(249,115,22,0.35)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(249,115,22,0.6)] active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100"
+                  className="group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-lg bg-gradient-to-r from-brand-accent-500 to-amber-400 px-4 py-3 text-sm font-bold text-[#1a0f00] shadow-[0_0_20px_color-mix(in_srgb,var(--color-brand-accent-500)_35%,transparent)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_color-mix(in_srgb,var(--color-brand-accent-500)_60%,transparent)] active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100"
                 >
                   <ShoppingCart className="h-4 w-4" />
                   Add to cart
@@ -397,7 +397,7 @@ export default function Configurator() {
                 <button
                   type="button"
                   onClick={copyConfig}
-                  className="flex w-full items-center justify-center gap-2 rounded-lg border border-cyan-400/30 px-4 py-2.5 text-xs font-semibold text-cyan-300 transition-all duration-300 hover:bg-cyan-400/10"
+                  className="flex w-full items-center justify-center gap-2 rounded-lg border border-brand-primary-400/30 px-4 py-2.5 text-xs font-semibold text-brand-primary-300 transition-all duration-300 hover:bg-brand-primary-400/10"
                 >
                   {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
                   {copied ? "Copied!" : "Copy configuration"}
@@ -419,9 +419,9 @@ export default function Configurator() {
 
       {/* ===================== Mobile summary bar ===================== */}
       {/* Sticky positioning confines this summary to the configurator section. */}
-      <div className="sticky bottom-0 z-40 border-t border-cyan-400/20 bg-[#070d14]/95 px-4 py-3 backdrop-blur-xl lg:hidden">
+      <div className="sticky bottom-0 z-40 border-t border-brand-primary-400/20 bg-[#070d14]/95 px-4 py-3 backdrop-blur-xl lg:hidden">
         {warnings.length > 0 && (
-          <p className="mb-2 flex items-center gap-2 text-[11px] text-orange-300" role="alert">
+          <p className="mb-2 flex items-center gap-2 text-[11px] text-brand-accent-300" role="alert">
             <AlertTriangle className="h-3.5 w-3.5 shrink-0" />
             {warnings[0]}
           </p>
@@ -435,7 +435,7 @@ export default function Configurator() {
             item={buildItem}
             disabled={warnings.length > 0}
             addedContent={<>Added ✓</>}
-            className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-orange-500 to-amber-400 px-5 py-2.5 text-sm font-bold text-[#1a0f00] shadow-[0_0_20px_rgba(249,115,22,0.35)] transition active:scale-95 disabled:cursor-not-allowed disabled:opacity-40"
+            className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand-accent-500 to-amber-400 px-5 py-2.5 text-sm font-bold text-[#1a0f00] shadow-[0_0_20px_color-mix(in_srgb,var(--color-brand-accent-500)_35%,transparent)] transition active:scale-95 disabled:cursor-not-allowed disabled:opacity-40"
           >
             <ShoppingCart className="h-4 w-4" />
             Add to cart
