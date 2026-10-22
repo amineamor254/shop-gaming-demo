@@ -11,9 +11,9 @@ const CONTACT = {
     { days: "Saturday", time: "10:00 - 16:00" },
     { days: "Sunday", time: "Closed" },
   ],
-  address: ["123 Gaming Street", "Your City, Country"],
-  email: "hello@yourbrand.com",
-  phone: "+000 123 456 789",
+  address: ["123 Main Street, Your City, Country"],
+  email: "hello@example.com",
+  phone: "+1 555 010 0100",
 };
 
 // Inline social icons avoid relying on icon names that may vary between library versions.
@@ -212,7 +212,7 @@ export default function Contact() {
 
             <div>
               <h3 className="mb-3 text-[11px] font-bold uppercase tracking-widest text-cyan-300">
-                Contacts
+                Your Brand
               </h3>
               <ul className="space-y-2 text-sm">
                 <li>
