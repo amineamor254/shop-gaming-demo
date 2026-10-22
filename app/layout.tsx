@@ -4,6 +4,7 @@ import { Geist, Geist_Mono, Orbitron } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header/page";
 import Footer from "@/components/Footer/page";
+import { SITE } from "@/config/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,8 +22,8 @@ const orbitron = Orbitron({
 });
 
 export const metadata: Metadata = {
-  title: "Your Brand | Gaming PC Store",
-  description: "Discover custom gaming PCs built for performance, reliability, and play.",
+  title: SITE.titleTemplate,
+  description: SITE.description,
 };
 
 /** Provides the shared site shell, fonts, and cart state for every route. */

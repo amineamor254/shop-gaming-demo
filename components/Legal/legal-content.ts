@@ -28,10 +28,10 @@ export type LegalDoc = {
 /* ===================== Placeholders (edit these) ===================== */
 
 export const LEGAL_COMPANY = {
-  name: "Your Brand",
-  email: "hello@example.com",
-  address: "123 Main Street, Your City, Country",
-  country: "Your Country",
+  name: SITE.name,
+  email: SITE.contact.email,
+  address: SITE.contact.address,
+  country: SITE.contact.country,
 };
 
 // TODO: Set to false once you have replaced the sample text with your own policies.
@@ -320,3 +320,4 @@ export const LEGAL_DOCS: LegalDoc[] = [
 export function getLegalDoc(slug: string): LegalDoc | undefined {
   return LEGAL_DOCS.find((d) => d.slug === slug);
 }
+import { SITE } from "@/config/site";

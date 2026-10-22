@@ -19,6 +19,7 @@ import {
   X,
 } from "lucide-react";
 import { useCart } from "@/components/Cart/CartContext";
+import { SITE } from "@/config/site";
 import {
   SHOP_CATEGORIES,
   requestCategory,
@@ -137,7 +138,7 @@ export default function Header() {
             </svg>
           </span>
           <span className="leading-none">
-            <span className="block text-lg font-extrabold tracking-wider text-white">BRAND</span>
+            <span className="block text-lg font-extrabold tracking-wider text-white">{SITE.logoText}</span>
             <span className="block text-[10px] font-medium uppercase tracking-[0.25em] text-cyan-400/70">
               Store
             </span>
