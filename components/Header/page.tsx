@@ -115,7 +115,7 @@ export default function Header() {
           <span className="leading-none">
             <span className="block text-lg font-extrabold tracking-wider text-white">{SITE.logoText}</span>
             <span className="block text-[10px] font-medium uppercase tracking-[0.25em] text-cyan-400/70">
-              Store
+              {SITE.tagline}
             </span>
           </span>
         </Link>
