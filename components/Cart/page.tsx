@@ -86,7 +86,7 @@ export default function CartPage() {
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, #22d3ee 1px, transparent 1px), linear-gradient(to bottom, #22d3ee 1px, transparent 1px)",
+            "linear-gradient(to right, var(--color-brand-primary-400) 1px, transparent 1px), linear-gradient(to bottom, var(--color-brand-primary-400) 1px, transparent 1px)",
           backgroundSize: "56px 56px",
           maskImage: "radial-gradient(ellipse at top, black 20%, transparent 70%)",
           WebkitMaskImage: "radial-gradient(ellipse at top, black 20%, transparent 70%)",
@@ -94,7 +94,7 @@ export default function CartPage() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-40 top-0 -z-10 h-[380px] w-[380px] rounded-full bg-cyan-500/15 blur-[120px]"
+        className="pointer-events-none absolute -left-40 top-0 -z-10 h-[380px] w-[380px] rounded-full bg-brand-primary-500/15 blur-[120px]"
       />
       <div
         aria-hidden
@@ -109,13 +109,13 @@ export default function CartPage() {
         >
           <Link
             href="/#home"
-            className="inline-flex items-center gap-1.5 transition-colors hover:text-cyan-300"
+            className="inline-flex items-center gap-1.5 transition-colors hover:text-brand-primary-300"
           >
             <Home className="h-3.5 w-3.5" />
             Home
           </Link>
           <ChevronRight className="h-3 w-3 text-slate-600" />
-          <span aria-current="page" className="font-semibold text-cyan-300">
+          <span aria-current="page" className="font-semibold text-brand-primary-300">
             Cart
           </span>
         </nav>
@@ -123,7 +123,7 @@ export default function CartPage() {
         <div className="mb-8 text-center lg:text-left">
           <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
             Shopping{" "}
-            <span className="bg-gradient-to-r from-cyan-300 via-cyan-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(34,211,238,0.35)]">
+            <span className="bg-gradient-to-r from-brand-primary-300 via-brand-primary-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_color-mix(in_srgb,var(--color-brand-primary-400)_35%,transparent)]">
               Cart
             </span>
           </h1>
@@ -149,13 +149,13 @@ export default function CartPage() {
             {/* ===================== Items ===================== */}
             <section
               aria-label="Cart items"
-              className="h-fit overflow-hidden rounded-2xl border border-cyan-400/15 bg-[#0a1119]/90 shadow-[0_0_40px_rgba(6,182,212,0.08)] backdrop-blur"
+              className="h-fit overflow-hidden rounded-2xl border border-brand-primary-400/15 bg-[#0a1119]/90 shadow-[0_0_40px_color-mix(in_srgb,var(--color-brand-primary-500)_8%,transparent)] backdrop-blur"
             >
               <div className="flex items-center justify-between gap-3 border-b border-white/5 px-4 py-3">
-                <h2 className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-cyan-300">
-                  <span className="h-px w-3 bg-cyan-400/60" />
+                <h2 className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-brand-primary-300">
+                  <span className="h-px w-3 bg-brand-primary-400/60" />
                   Your items
-                  <span className="rounded-full bg-cyan-500/15 px-2 py-0.5 text-[10px] text-cyan-200">
+                  <span className="rounded-full bg-brand-primary-500/15 px-2 py-0.5 text-[10px] text-brand-primary-200">
                     {count}
                   </span>
                 </h2>
@@ -183,7 +183,7 @@ export default function CartPage() {
               <div className="border-t border-white/5 px-4 py-3">
                 <Link
                   href="/#sections"
-                  className="group inline-flex items-center gap-2 text-xs font-semibold text-cyan-300 transition-colors hover:text-cyan-200"
+                  className="group inline-flex items-center gap-2 text-xs font-semibold text-brand-primary-300 transition-colors hover:text-brand-primary-200"
                 >
                   <ArrowRight className="h-3.5 w-3.5 rotate-180 transition-transform duration-300 group-hover:-translate-x-1" />
                   Continue shopping
@@ -196,22 +196,22 @@ export default function CartPage() {
               <div className="relative">
                 <div
                   aria-hidden
-                  className="absolute -inset-3 -z-10 rounded-[2rem] bg-gradient-to-b from-cyan-500/20 via-emerald-500/10 to-transparent blur-2xl"
+                  className="absolute -inset-3 -z-10 rounded-[2rem] bg-gradient-to-b from-brand-primary-500/20 via-emerald-500/10 to-transparent blur-2xl"
                 />
 
-                <div className="space-y-5 rounded-2xl border border-cyan-400/20 bg-[#0a1119]/90 p-5 shadow-[0_0_40px_rgba(6,182,212,0.15)] backdrop-blur">
-                  <h2 className="text-sm font-extrabold uppercase tracking-widest text-cyan-300">
+                <div className="space-y-5 rounded-2xl border border-brand-primary-400/20 bg-[#0a1119]/90 p-5 shadow-[0_0_40px_color-mix(in_srgb,var(--color-brand-primary-500)_15%,transparent)] backdrop-blur">
+                  <h2 className="text-sm font-extrabold uppercase tracking-widest text-brand-primary-300">
                     Order summary
                   </h2>
 
                   {/* ===================== Free shipping progress ===================== */}
                   <div>
                     <p className="mb-2 flex items-center gap-2 text-[11px] text-slate-300">
-                      <Truck className="h-3.5 w-3.5 text-cyan-400" />
+                      <Truck className="h-3.5 w-3.5 text-brand-primary-400" />
                       {remainingForFree > 0 ? (
                         <>
                           Add{" "}
-                          <span className="font-bold text-cyan-300">{money(remainingForFree)}</span>{" "}
+                          <span className="font-bold text-brand-primary-300">{money(remainingForFree)}</span>{" "}
                           more for free shipping
                         </>
                       ) : (
@@ -222,7 +222,7 @@ export default function CartPage() {
                     </p>
                     <div className="h-1.5 overflow-hidden rounded-full bg-white/5">
                       <div
-                        className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-sky-500 shadow-[0_0_10px_rgba(34,211,238,0.6)] transition-all duration-700 motion-reduce:transition-none"
+                        className="h-full rounded-full bg-gradient-to-r from-brand-primary-400 to-sky-500 shadow-[0_0_10px_color-mix(in_srgb,var(--color-brand-primary-400)_60%,transparent)] transition-all duration-700 motion-reduce:transition-none"
                         style={{ width: `${progress}%` }}
                       />
                     </div>
@@ -258,11 +258,11 @@ export default function CartPage() {
                             if (promoMsg) setPromoMsg(null);
                           }}
                           placeholder="Promo code"
-                          className="h-10 min-w-0 flex-1 rounded-lg border border-white/10 bg-black/40 px-3 text-xs uppercase text-white outline-none transition placeholder:normal-case placeholder:text-slate-500 focus:border-cyan-400/60 focus:shadow-[0_0_14px_rgba(6,182,212,0.3)]"
+                          className="h-10 min-w-0 flex-1 rounded-lg border border-white/10 bg-black/40 px-3 text-xs uppercase text-white outline-none transition placeholder:normal-case placeholder:text-slate-500 focus:border-brand-primary-400/60 focus:shadow-[0_0_14px_color-mix(in_srgb,var(--color-brand-primary-500)_30%,transparent)]"
                         />
                         <button
                           type="submit"
-                          className="rounded-lg border border-cyan-400/30 px-4 text-xs font-semibold text-cyan-300 transition-all duration-300 hover:bg-cyan-400/10"
+                          className="rounded-lg border border-brand-primary-400/30 px-4 text-xs font-semibold text-brand-primary-300 transition-all duration-300 hover:bg-brand-primary-400/10"
                         >
                           Apply
                         </button>
@@ -309,7 +309,7 @@ export default function CartPage() {
 
                   <Link
                     href="/checkout"
-                    className="group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-cyan-500 px-6 py-3 text-sm font-bold text-[#06121a] shadow-[0_0_25px_rgba(6,182,212,0.45)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_35px_rgba(6,182,212,0.75)] active:scale-95"
+                    className="group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-brand-primary-500 px-6 py-3 text-sm font-bold text-[#06121a] shadow-[0_0_25px_color-mix(in_srgb,var(--color-brand-primary-500)_45%,transparent)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_35px_color-mix(in_srgb,var(--color-brand-primary-500)_75%,transparent)] active:scale-95"
                   >
                     <span className="relative z-10">Proceed to checkout</span>
                     <ArrowRight className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
@@ -330,7 +330,7 @@ export default function CartPage() {
                         key={text}
                         className="flex items-center gap-2.5 rounded-lg border border-white/5 bg-white/[0.03] px-3 py-2"
                       >
-                        <Icon className="h-3.5 w-3.5 shrink-0 text-cyan-400" />
+                        <Icon className="h-3.5 w-3.5 shrink-0 text-brand-primary-400" />
                         {text}
                       </li>
                     ))}
@@ -381,17 +381,17 @@ function CartRow({ item }: { item: CartItem }) {
           />
         ) : (
           <div className="absolute inset-0 grid place-items-center">
-            <Package className="h-7 w-7 text-cyan-400/80 drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
+            <Package className="h-7 w-7 text-brand-primary-400/80 drop-shadow-[0_0_10px_color-mix(in_srgb,var(--color-brand-primary-400)_50%,transparent)]" />
           </div>
         )}
       </div>
 
       <div className="min-w-0 flex-1 basis-40">
-        <h3 className="truncate text-sm font-bold transition-colors group-hover:text-cyan-300">
+        <h3 className="truncate text-sm font-bold transition-colors group-hover:text-brand-primary-300">
           {item.name}
         </h3>
         <div className="mt-1 flex items-baseline gap-2">
-          <span className="text-sm font-extrabold text-cyan-300">{money(item.price)}</span>
+          <span className="text-sm font-extrabold text-brand-primary-300">{money(item.price)}</span>
           {item.oldPrice && item.oldPrice > item.price && (
             <span className="text-xs text-slate-500 line-through">{money(item.oldPrice)}</span>
           )}
@@ -409,7 +409,7 @@ function CartRow({ item }: { item: CartItem }) {
           aria-label="Decrease quantity"
           disabled={item.qty <= 1}
           onClick={() => updateQty(item.id, item.qty - 1)}
-          className="grid h-9 w-9 place-items-center text-slate-300 transition-colors hover:bg-cyan-400/10 hover:text-cyan-300 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-slate-300"
+          className="grid h-9 w-9 place-items-center text-slate-300 transition-colors hover:bg-brand-primary-400/10 hover:text-brand-primary-300 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-slate-300"
         >
           <Minus className="h-3.5 w-3.5" />
         </button>
@@ -432,7 +432,7 @@ function CartRow({ item }: { item: CartItem }) {
           onKeyDown={(e) => {
             if (e.key === "Enter") e.currentTarget.blur();
           }}
-          className="h-9 w-11 border-x border-white/10 bg-transparent text-center text-xs font-bold text-white outline-none focus:bg-cyan-400/5"
+          className="h-9 w-11 border-x border-white/10 bg-transparent text-center text-xs font-bold text-white outline-none focus:bg-brand-primary-400/5"
         />
 
         <button
@@ -440,7 +440,7 @@ function CartRow({ item }: { item: CartItem }) {
           aria-label="Increase quantity"
           disabled={item.qty >= MAX_QTY}
           onClick={() => updateQty(item.id, item.qty + 1)}
-          className="grid h-9 w-9 place-items-center text-slate-300 transition-colors hover:bg-cyan-400/10 hover:text-cyan-300 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-slate-300"
+          className="grid h-9 w-9 place-items-center text-slate-300 transition-colors hover:bg-brand-primary-400/10 hover:text-brand-primary-300 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-slate-300"
         >
           <Plus className="h-3.5 w-3.5" />
         </button>
@@ -468,16 +468,16 @@ function EmptyCart() {
     <div className="relative mx-auto max-w-xl">
       <div
         aria-hidden
-        className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-b from-cyan-500/15 via-emerald-500/5 to-transparent blur-2xl"
+        className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-b from-brand-primary-500/15 via-emerald-500/5 to-transparent blur-2xl"
       />
-      <div className="rounded-3xl border border-cyan-400/20 bg-[#0a1119]/90 px-6 py-14 text-center shadow-[0_0_40px_rgba(6,182,212,0.12)] backdrop-blur">
+      <div className="rounded-3xl border border-brand-primary-400/20 bg-[#0a1119]/90 px-6 py-14 text-center shadow-[0_0_40px_color-mix(in_srgb,var(--color-brand-primary-500)_12%,transparent)] backdrop-blur">
         <div className="relative mx-auto mb-6 grid h-24 w-24 place-items-center">
           <span
             aria-hidden
-            className="absolute inset-0 animate-pulse rounded-full border border-cyan-400/30 motion-reduce:animate-none"
+            className="absolute inset-0 animate-pulse rounded-full border border-brand-primary-400/30 motion-reduce:animate-none"
           />
-          <span aria-hidden className="absolute inset-3 rounded-full bg-cyan-400/10 blur-xl" />
-          <ShoppingCart className="relative h-10 w-10 text-cyan-300 drop-shadow-[0_0_14px_rgba(34,211,238,0.6)]" />
+          <span aria-hidden className="absolute inset-3 rounded-full bg-brand-primary-400/10 blur-xl" />
+          <ShoppingCart className="relative h-10 w-10 text-brand-primary-300 drop-shadow-[0_0_14px_color-mix(in_srgb,var(--color-brand-primary-400)_60%,transparent)]" />
         </div>
 
         <h2 className="text-xl font-extrabold">Your cart is empty</h2>
@@ -488,7 +488,7 @@ function EmptyCart() {
         <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
           <Link
             href="/#sections"
-            className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-cyan-500 px-6 py-3 text-sm font-bold text-[#06121a] shadow-[0_0_25px_rgba(6,182,212,0.45)] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_35px_rgba(6,182,212,0.75)] active:scale-95"
+            className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-brand-primary-500 px-6 py-3 text-sm font-bold text-[#06121a] shadow-[0_0_25px_color-mix(in_srgb,var(--color-brand-primary-500)_45%,transparent)] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_35px_color-mix(in_srgb,var(--color-brand-primary-500)_75%,transparent)] active:scale-95"
           >
             <span className="relative z-10">Browse products</span>
             <ArrowRight className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -496,7 +496,7 @@ function EmptyCart() {
           </Link>
           <Link
             href="/#configurator"
-            className="inline-flex items-center rounded-full border border-cyan-400/40 px-6 py-3 text-sm font-semibold text-cyan-300 transition-all duration-300 hover:border-cyan-300 hover:bg-cyan-400/10 hover:shadow-[0_0_20px_rgba(34,211,238,0.25)]"
+            className="inline-flex items-center rounded-full border border-brand-primary-400/40 px-6 py-3 text-sm font-semibold text-brand-primary-300 transition-all duration-300 hover:border-brand-primary-300 hover:bg-brand-primary-400/10 hover:shadow-[0_0_20px_color-mix(in_srgb,var(--color-brand-primary-400)_25%,transparent)]"
           >
             Build your PC
           </Link>
