@@ -7,6 +7,7 @@ import {
   Undo2,
   Zap,
 } from "lucide-react";
+import type { PromoCode } from "@/data/promos";
 
 export const FLASH_SALE_END = "2026-12-31T23:59:59";
 
@@ -24,7 +25,7 @@ export type Offer = {
   badge: string;
   title: string;
   text: string;
-  code?: string;
+  code?: PromoCode;
   note?: string;
 };
 

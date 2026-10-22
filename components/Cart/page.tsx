@@ -22,10 +22,10 @@ import { MAX_QTY, useCart, type CartItem } from "@/components/Cart/CartContext";
 import { formatCartMoney as money } from "@/lib/format";
 import {
   FREE_SHIPPING_MIN,
-  PROMOS,
   TAX_RATE,
   calcTotals,
 } from "@/components/Cart/cart-config";
+import { PROMOS, type PromoCode } from "@/data/promos";
 
 /* ===================== Page ===================== */
 
@@ -52,7 +52,7 @@ export default function CartPage() {
     e.preventDefault();
     const code = promoInput.trim().toUpperCase();
     if (!code) return;
-    const percent = PROMOS[code];
+    const percent = PROMOS[code as PromoCode];
     if (percent) {
       setPromo({ code, percent });
       setPromoMsg({ type: "success", text: `Code ${code} applied: ${percent}% off.` });

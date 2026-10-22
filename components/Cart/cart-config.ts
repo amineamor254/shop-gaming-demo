@@ -8,13 +8,6 @@ export const TAX_RATE = 0.1; // Set to 0 when listed prices already include tax.
 export const FREE_SHIPPING_MIN = 100; // Standard shipping is free at or above this subtotal.
 export const FLAT_SHIPPING = 9;
 
-// Keep these codes aligned with the offers shown in the storefront.
-export const PROMOS: Record<string, number> = {
-  FLASH25: 25,
-  BUNDLE15: 15,
-  STUDENT10: 10,
-};
-
 export type ShippingId = "standard" | "express";
 
 export const SHIPPING_METHODS: {

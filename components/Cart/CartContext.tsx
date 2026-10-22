@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { PROMOS } from "./cart-config";
+import { PROMOS, type PromoCode } from "@/data/promos";
 
 /* ===================== Types ===================== */
 
@@ -58,7 +58,9 @@ function isValidPromo(x: unknown): x is Promo {
   if (typeof x !== "object" || x === null) return false;
   const p = x as Record<string, unknown>;
   return (
-    typeof p.code === "string" && typeof p.percent === "number" && PROMOS[p.code] === p.percent
+    typeof p.code === "string" &&
+    typeof p.percent === "number" &&
+    PROMOS[p.code as PromoCode] === p.percent
   );
 }
 
