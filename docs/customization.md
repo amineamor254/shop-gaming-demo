@@ -174,6 +174,12 @@ The supported brand tokens are in the `@theme` block in
 | 400 | `#22d3ee` | `#fb923c` |
 | 500 | `#06b6d4` | `#f97316` |
 
+The exact token names are `--color-brand-primary-200`,
+`--color-brand-primary-300`, `--color-brand-primary-400`,
+`--color-brand-primary-500`, and the corresponding
+`--color-brand-accent-200`, `--color-brand-accent-300`,
+`--color-brand-accent-400`, and `--color-brand-accent-500`.
+
 Replace the hex values for the shades you want to recolor. These tokens do not
 control the separate sky and amber gradient ends, semantic red, emerald, amber,
 or pink colors, or the dark surface colors used elsewhere in the UI. A brand
