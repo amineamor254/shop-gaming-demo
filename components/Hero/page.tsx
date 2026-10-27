@@ -154,11 +154,12 @@ export default function Hero() {
 
             <div className="space-y-4 p-4">
               <div className="flex items-center justify-between rounded-xl border border-white/5 bg-black/40 px-4 py-3">
-                <div className="flex items-baseline gap-1.5">
-                  <span className="text-2xl font-extrabold text-white">{FEATURED_PRODUCT.price.toLocaleString("en-US")}</span>
+                <div className="flex items-baseline gap-1">
                   <span className="text-[11px] font-semibold text-brand-primary-400">{SITE.currencySymbol}</span>
+                  <span className="text-2xl font-extrabold text-white">
+                    {FEATURED_PRODUCT.price.toLocaleString("en-US")}
+                  </span>
                 </div>
-                <span className="text-[11px] text-slate-500">from {formatConfiguratorMoney(FEATURED_PRODUCT.monthlyPrice)}/mo</span>
               </div>
 
               <div>

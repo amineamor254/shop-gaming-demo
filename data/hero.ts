@@ -3,7 +3,7 @@ import { Clock, Cpu, Trophy } from "lucide-react";
 
 export const FEATURED_PRODUCT = {
   name: "Apex Prime",
-  image: "",
+  image: "/images/hero/pro-gaming-pc.webp",
   price: 1499,
   monthlyPrice: 125,
   stats: [
