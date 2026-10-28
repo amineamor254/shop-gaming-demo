@@ -117,7 +117,7 @@ export default function Hero() {
               {FEATURED_PRODUCT.image ? (
                 <Image
                   src={FEATURED_PRODUCT.image}
-                  alt={`${FEATURED_PRODUCT.name} gaming PC`}
+                  alt={FEATURED_PRODUCT.name}
                   fill
                   priority
                   sizes="(max-width: 1024px) 90vw, 400px"

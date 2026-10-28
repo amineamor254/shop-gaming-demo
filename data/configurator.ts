@@ -41,9 +41,9 @@ export const CATEGORIES: Category[] = [
     hint: "The brain of your PC. More cores = faster multitasking.",
     icon: Cpu,
     parts: [
-      { id: "cpu-lite", name: "Core Lite 6-Core", spec: "6 cores · 12 threads · 4.6 GHz", price: 180, score: 45, power: 65 },
-      { id: "cpu-pro", name: "Core Pro 8-Core", spec: "8 cores · 16 threads · 5.2 GHz", price: 290, score: 70, power: 105, popular: true },
-      { id: "cpu-elite", name: "Core Elite 16-Core", spec: "16 cores · 32 threads · 5.7 GHz", price: 520, score: 95, power: 170 },
+      { id: "cpu-lite", name: "6-Core Processor", spec: "6 cores · 12 threads · 4.6 GHz", price: 180, score: 45, power: 65 },
+      { id: "cpu-pro", name: "8-Core Processor", spec: "8 cores · 16 threads · 5.2 GHz", price: 290, score: 70, power: 105, popular: true },
+      { id: "cpu-elite", name: "16-Core Processor", spec: "16 cores · 32 threads · 5.7 GHz", price: 520, score: 95, power: 170 },
     ],
   },
   {
@@ -52,10 +52,10 @@ export const CATEGORIES: Category[] = [
     hint: "Decides your FPS and resolution. The most important part for gaming.",
     icon: Monitor,
     parts: [
-      { id: "gpu-8", name: "Nova 8GB", spec: "1080p high settings", price: 280, score: 40, power: 160 },
-      { id: "gpu-12", name: "Nova Pro 12GB", spec: "1440p high settings", price: 520, score: 65, power: 220, popular: true },
-      { id: "gpu-16", name: "Nova Ultra 16GB", spec: "4K ready · Ray tracing", price: 890, score: 85, power: 300 },
-      { id: "gpu-24", name: "Nova Max 24GB", spec: "4K ultra · Creator grade", price: 1450, score: 100, power: 400 },
+      { id: "gpu-8", name: "8GB Graphics Card", spec: "1080p high settings", price: 280, score: 40, power: 160 },
+      { id: "gpu-12", name: "12GB Graphics Card", spec: "1440p high settings", price: 520, score: 65, power: 220, popular: true },
+      { id: "gpu-16", name: "16GB Graphics Card", spec: "4K ready · Ray tracing", price: 890, score: 85, power: 300 },
+      { id: "gpu-24", name: "24GB Graphics Card", spec: "4K ultra · Creator grade", price: 1450, score: 100, power: 400 },
     ],
   },
   {

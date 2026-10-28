@@ -16,7 +16,7 @@ export type Product = {
 export const PRODUCTS: Product[] = [
   {
     id: 1,
-    name: "Pulse Audio Headset",
+    name: "Wireless Gaming Headset",
     category: "Audio",
     price: 40,
     oldPrice: 45,
@@ -27,7 +27,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 2,
-    name: "CoreSound Studio Headphones",
+    name: "Studio Gaming Headphones",
     category: "Audio",
     price: 25,
     oldPrice: 40,
@@ -38,7 +38,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 3,
-    name: "ClearView 27 Monitor",
+    name: "27-inch Gaming Monitor",
     category: "Monitors",
     price: 80,
     oldPrice: 90,
@@ -49,7 +49,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 4,
-    name: "Precision Wireless Mouse",
+    name: "Wireless Gaming Mouse",
     category: "Mice",
     price: 30,
     oldPrice: 50,
@@ -60,7 +60,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 5,
-    name: "Precision Pro Mouse",
+    name: "Lightweight Gaming Mouse",
     category: "Mice",
     price: 30,
     oldPrice: 40,
@@ -71,7 +71,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 6,
-    name: "Mechanical Pro Keyboard",
+    name: "Mechanical Gaming Keyboard",
     category: "Keyboards",
     price: 70,
     oldPrice: 80,
@@ -82,7 +82,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 7,
-    name: "Waveform Gaming Speakers",
+    name: "Stereo Gaming Speakers",
     category: "Audio",
     price: 55,
     rating: 4,
@@ -92,7 +92,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 8,
-    name: "ArcView 27 Monitor",
+    name: "27-inch Curved Monitor",
     category: "Monitors",
     price: 120,
     oldPrice: 150,
@@ -103,7 +103,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 9,
-    name: "Silent Precision Mouse",
+    name: "Silent Click Gaming Mouse",
     category: "Mice",
     price: 22,
     rating: 4,
@@ -113,7 +113,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 10,
-    name: "Aurora RGB Keyboard",
+    name: "RGB Backlit Keyboard",
     category: "Keyboards",
     price: 90,
     oldPrice: 110,
@@ -124,7 +124,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 11,
-    name: "Echo Surround Headset",
+    name: "Surround Sound Headset",
     category: "Audio",
     price: 65,
     rating: 4,
@@ -134,7 +134,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 12,
-    name: "ClearFrame 24 Monitor",
+    name: "24-inch Gaming Monitor",
     category: "Monitors",
     price: 95,
     oldPrice: 105,

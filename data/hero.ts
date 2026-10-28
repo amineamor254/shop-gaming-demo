@@ -2,7 +2,7 @@ import type { ComponentType } from "react";
 import { Clock, Cpu, Trophy } from "lucide-react";
 
 export const FEATURED_PRODUCT = {
-  name: "Apex Prime",
+  name: "Pro Gaming PC",
   image: "/images/hero/pro-gaming-pc.webp",
   price: 1499,
   monthlyPrice: 125,
