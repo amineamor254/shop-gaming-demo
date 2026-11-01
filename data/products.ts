@@ -24,6 +24,7 @@ export const PRODUCTS: Product[] = [
     reviews: 12,
     colors: ["#ffffff", "#3b82f6", "#ef4444"],
     inStock: true,
+    image: "/images/products/wireless-gaming-headset.webp",
   },
   {
     id: 2,
@@ -35,6 +36,7 @@ export const PRODUCTS: Product[] = [
     reviews: 8,
     colors: ["#111827", "#3b82f6", "#ef4444"],
     inStock: true,
+    image :"/images/products/studio-gaming-headphones.webp",
   },
   {
     id: 3,
@@ -46,6 +48,7 @@ export const PRODUCTS: Product[] = [
     reviews: 21,
     colors: ["#111827", "#3b82f6"],
     inStock: true,
+    image: "/images/products/27-inch-gaming-monitor.webp",
   },
   {
     id: 4,
@@ -57,6 +60,7 @@ export const PRODUCTS: Product[] = [
     reviews: 33,
     colors: ["#ef4444", "#111827"],
     inStock: true,
+    image: "/images/products/wireless-gaming-mouse.webp",
   },
   {
     id: 5,
@@ -68,6 +72,7 @@ export const PRODUCTS: Product[] = [
     reviews: 17,
     colors: ["#6b7280", "#ef4444", "#3b82f6"],
     inStock: false,
+    image: "/images/products/lightweight-gaming-mouse.webp",
   },
   {
     id: 6,
@@ -79,6 +84,7 @@ export const PRODUCTS: Product[] = [
     reviews: 41,
     colors: ["#3b82f6", "#ef4444", "#ffffff"],
     inStock: true,
+    image: "/images/products/mechanical-gaming-keyboard.webp",
   },
   {
     id: 7,
@@ -89,6 +95,7 @@ export const PRODUCTS: Product[] = [
     reviews: 9,
     colors: ["#111827", "#22c55e"],
     inStock: true,
+    image: "/images/products/stereo-gaming-speakers.webp",
   },
   {
     id: 8,
@@ -100,6 +107,7 @@ export const PRODUCTS: Product[] = [
     reviews: 26,
     colors: ["#111827"],
     inStock: true,
+    image: "/images/products/27-inch-curved-monitor.webp",
   },
   {
     id: 9,
@@ -110,6 +118,7 @@ export const PRODUCTS: Product[] = [
     reviews: 14,
     colors: ["#ffffff", "#111827"],
     inStock: true,
+    image: "/images/products/silent-click-gaming-mouse.webp",
   },
   {
     id: 10,
@@ -121,6 +130,7 @@ export const PRODUCTS: Product[] = [
     reviews: 52,
     colors: ["#111827", "#ef4444", "#22c55e"],
     inStock: false,
+    image: "/images/products/rgb-backlit-keyboard.webp",
   },
   {
     id: 11,
@@ -131,6 +141,7 @@ export const PRODUCTS: Product[] = [
     reviews: 11,
     colors: ["#ffffff", "#3b82f6"],
     inStock: true,
+    image: "/images/products/surround-sound-headset.webp",
   },
   {
     id: 12,
@@ -142,6 +153,7 @@ export const PRODUCTS: Product[] = [
     reviews: 19,
     colors: ["#111827", "#ef4444"],
     inStock: true,
+    image: "/images/products/24-inch-gaming-monitor.webp",
   },
 ];
 

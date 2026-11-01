@@ -39,6 +39,7 @@ export const POSTS: Post[] = [
     featured: true,
     icon: Cpu,
     gradient: "from-brand-primary-500/30 via-[#0d1824] to-[#070d14]",
+    image: "/images/blog/first cpu with a true ai core.webp",
   },
   {
     id: 2,
@@ -50,6 +51,7 @@ export const POSTS: Post[] = [
     readTime: "9 min read",
     icon: Monitor,
     gradient: "from-brand-accent-500/25 via-[#0d1824] to-[#070d14]",
+    image: "/images/blog/The ultimate PC build guide.webp",
   },
   {
     id: 3,
@@ -61,6 +63,7 @@ export const POSTS: Post[] = [
     readTime: "5 min read",
     icon: Fan,
     gradient: "from-sky-500/25 via-[#0d1824] to-[#070d14]",
+    image: "/images/blog/Air vs liquid cooling explained.webp",
   },
   {
     id: 4,
@@ -72,6 +75,7 @@ export const POSTS: Post[] = [
     readTime: "4 min read",
     icon: Gauge,
     gradient: "from-emerald-500/25 via-[#0d1824] to-[#070d14]",
+    image: "/images/blog/10 settings to boost your FPS.webp",
   },
   {
     id: 5,
@@ -83,6 +87,7 @@ export const POSTS: Post[] = [
     readTime: "5 min read",
     icon: HardDrive,
     gradient: "from-brand-primary-500/25 via-[#0d1824] to-[#070d14]",
+    image: "/images/blog/NVMe storage Gen3 vs Gen4.webp",
   },
   {
     id: 6,
@@ -94,6 +99,7 @@ export const POSTS: Post[] = [
     readTime: "6 min read",
     icon: Zap,
     gradient: "from-brand-accent-500/25 via-[#0d1824] to-[#070d14]",
+    image: "/images/blog/How to choose a power supply.webp",
   },
   {
     id: 7,
@@ -105,6 +111,7 @@ export const POSTS: Post[] = [
     readTime: "4 min read",
     icon: Keyboard,
     gradient: "from-sky-500/25 via-[#0d1824] to-[#070d14]",
+    image: "/images/blog/Mechanical keyboards 101.webp",
   },
   {
     id: 8,
@@ -116,6 +123,7 @@ export const POSTS: Post[] = [
     readTime: "5 min read",
     icon: Headphones,
     gradient: "from-emerald-500/25 via-[#0d1824] to-[#070d14]",
+    image: "/images/blog/Gaming audio that wins matches.webp",
   },
   {
     id: 9,
@@ -127,5 +135,6 @@ export const POSTS: Post[] = [
     readTime: "6 min read",
     icon: Monitor,
     gradient: "from-brand-primary-500/25 via-[#0d1824] to-[#070d14]",
+    image: "/images/blog/Are 4K monitors worth it.webp",
   },
 ];
