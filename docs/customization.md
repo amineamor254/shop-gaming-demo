@@ -33,8 +33,8 @@ After changing product or configurator data, run `npx tsc --noEmit` and
 3. Replace the placeholder `contact.email`, `contact.phone`, `contact.address`,
    and `contact.country`.
 4. Edit each entry in `hours` for the days and hours you actually support.
-5. Replace social `href` values with your real profile URLs; the starter uses
-   `#` placeholders.
+5. Fill in the social `href` URLs in [`config/site.ts`](../config/site.ts); social
+   entries with empty URLs are hidden.
 
 The logo is text configured through `logoText`; this project does not include a
 separate logo-image setting.
