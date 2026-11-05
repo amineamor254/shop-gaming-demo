@@ -87,6 +87,8 @@ const PAYMENTS = [
   { label: "Bank", icon: Landmark },
 ];
 
+const hasSocialLinks = SOCIALS.some((social) => social.href !== "");
+
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /* ===================== Footer ===================== */
@@ -261,24 +263,28 @@ export default function Footer() {
 
         {/* ===================== Social links and footer navigation ===================== */}
         <div className="mt-10 flex flex-col items-center justify-between gap-5 border-t border-white/5 pt-6 md:flex-row">
-          <div className="flex items-center gap-3">
-            <span className="text-[11px] font-bold uppercase tracking-widest text-slate-300">
-              Stay connected
-            </span>
-            <ul className="flex items-center gap-2">
-              {SOCIALS.map((s) => (
-                <li key={s.label}>
-                  <a
-                    href={s.href}
-                    aria-label={s.label}
-                    className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 text-slate-300 transition-all duration-300 hover:-translate-y-1 hover:border-brand-primary-400/50 hover:bg-brand-primary-400/10 hover:text-brand-primary-300 hover:shadow-[0_0_14px_color-mix(in_srgb,var(--color-brand-primary-500)_35%,transparent)]"
-                  >
-                    {s.icon}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {hasSocialLinks && (
+            <div className="flex items-center gap-3">
+              <span className="text-[11px] font-bold uppercase tracking-widest text-slate-300">
+                Stay connected
+              </span>
+              <ul className="flex items-center gap-2">
+                {SOCIALS.filter((s) => s.href !== "").map((s) => (
+                  <li key={s.label}>
+                    <a
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={s.label}
+                      className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 text-slate-300 transition-all duration-300 hover:-translate-y-1 hover:border-brand-primary-400/50 hover:bg-brand-primary-400/10 hover:text-brand-primary-300 hover:shadow-[0_0_14px_color-mix(in_srgb,var(--color-brand-primary-500)_35%,transparent)]"
+                    >
+                      {s.icon}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           <nav aria-label="Footer">
             <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
