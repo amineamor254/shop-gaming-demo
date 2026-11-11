@@ -150,6 +150,13 @@ imports and font setup there, then update any font-family references or CSS
 variables used by the app. Keep the relevant font variables available on the
 root element.
 
+## Add a blog article
+
+Add the post to [`data/posts.ts`](../data/posts.ts) with a `content` array of
+paragraphs. Posts with `content` become clickable article pages automatically.
+Replace the included sample article text with your buyer's own content before
+launching the store.
+
 ## Add a home page section or a route
 
 To add a section to the home page, create a component under `components/` using
