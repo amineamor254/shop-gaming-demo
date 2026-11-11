@@ -8,8 +8,8 @@ import { POSTS, type Post } from "@/data/posts";
 
 const INITIAL_VISIBLE = 4;
 
-// TODO: Replace this placeholder with `/blog/${slug}` after creating article pages.
-const postHref = () => "#blog";
+const postHref = (post: Post) =>
+  post.content && post.content.length > 0 ? `/blog/${post.slug}` : undefined;
 
 /* ===================== Section ===================== */
 
@@ -221,13 +221,15 @@ function FeaturedPost({ post }: { post: Post }) {
             </span>
           </div>
 
-          <Link
-            href={postHref()}
-            className="group/link mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-brand-primary-500 px-6 py-3 text-xs font-bold uppercase tracking-widest text-[#06121a] shadow-[0_0_25px_color-mix(in_srgb,var(--color-brand-primary-500)_45%,transparent)] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_35px_color-mix(in_srgb,var(--color-brand-primary-500)_75%,transparent)] active:scale-95"
-          >
-            Read more
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1" />
-          </Link>
+          {postHref(post) && (
+            <Link
+              href={postHref(post)!}
+              className="group/link mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-brand-primary-500 px-6 py-3 text-xs font-bold uppercase tracking-widest text-[#06121a] shadow-[0_0_25px_color-mix(in_srgb,var(--color-brand-primary-500)_45%,transparent)] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_35px_color-mix(in_srgb,var(--color-brand-primary-500)_75%,transparent)] active:scale-95"
+            >
+              Read more
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1" />
+            </Link>
+          )}
         </div>
       </div>
     </article>
@@ -235,6 +237,8 @@ function FeaturedPost({ post }: { post: Post }) {
 }
 
 function PostCard({ post }: { post: Post }) {
+  const href = postHref(post);
+
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/5 bg-[#0a1119]/90 transition-all duration-500 hover:-translate-y-1.5 hover:border-brand-primary-400/40 hover:shadow-[0_0_35px_color-mix(in_srgb,var(--color-brand-primary-500)_22%,transparent)]">
       <div className="relative aspect-[4/3] overflow-hidden">
@@ -251,9 +255,13 @@ function PostCard({ post }: { post: Post }) {
         </p>
 
         <h3 className="mt-1.5 text-base font-bold leading-snug transition-colors duration-300 group-hover:text-brand-primary-300">
-          <Link href={postHref()} className="after:absolute after:inset-0">
-            {post.title}
-          </Link>
+          {href ? (
+            <Link href={href} className="after:absolute after:inset-0">
+              {post.title}
+            </Link>
+          ) : (
+            post.title
+          )}
         </h3>
 
         <p className="mt-2 line-clamp-2 flex-1 text-xs leading-relaxed text-slate-400">
@@ -265,10 +273,12 @@ function PostCard({ post }: { post: Post }) {
             <Clock className="h-3 w-3" />
             {post.readTime}
           </span>
-          <span className="inline-flex items-center gap-1.5 font-semibold text-brand-primary-300">
-            Read more
-            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-          </span>
+          {href && (
+            <span className="inline-flex items-center gap-1.5 font-semibold text-brand-primary-300">
+              Read more
+              <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+            </span>
+          )}
         </div>
       </div>
     </article>
