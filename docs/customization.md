@@ -9,10 +9,9 @@ After changing product or configurator data, run `npx tsc --noEmit` and
 | What do you want to change? | Which file |
 | --- | --- |
 | Store name, logo text, title, contact details, hours, or currency symbol | [`config/site.ts`](../config/site.ts) |
-| Product names, prices, categories, and product image fields | [`data/products.ts`](../data/products.ts) |
-| Product category filters and colors | [`data/products.ts`](../data/products.ts) |
+| Products, categories, filters, colors and product images | [`data/products.ts`](../data/products.ts) |
 | Hero featured PC, price, specs, or image | [`data/hero.ts`](../data/hero.ts) |
-| Blog preview cards and optional images | [`data/posts.ts`](../data/posts.ts) |
+| Blog posts, article text and images | [`data/posts.ts`](../data/posts.ts) |
 | Offers and sale copy | [`data/offers.ts`](../data/offers.ts) |
 | Promo code values | [`data/promos.ts`](../data/promos.ts) |
 | Configurator parts, compatibility values, and presets | [`data/configurator.ts`](../data/configurator.ts) |
@@ -22,6 +21,7 @@ After changing product or configurator data, run `npx tsc --noEmit` and
 | Fonts | [`app/layout.tsx`](../app/layout.tsx) and [`app/globals.css`](../app/globals.css) |
 | Brand color tokens | [`app/globals.css`](../app/globals.css) |
 | Home page section order | [`app/page.tsx`](../app/page.tsx) |
+| Site icon (browser tab) | [`app/icon.svg`](../app/icon.svg) |
 
 ## Store identity and contact details
 
@@ -68,18 +68,26 @@ its URL path, such as `/images/products/headset.webp`. The file's URL starts
 with `/`; do not include `public` in the URL. See
 [the image guide](../public/images/README.md) for product, blog, and hero images.
 
+Use lowercase letters, digits and hyphens in image file names, with no spaces
+(for example `wireless-headset.webp`). Hosting on Linux, including Vercel, is
+case-sensitive, so `Headset.webp` and `headset.webp` are different files.
+
+
 ## Blog posts
 
 1. Edit or add entries in [`data/posts.ts`](../data/posts.ts).
 2. Provide a unique `id` and `slug`, plus the displayed category, title,
-   excerpt, date, read time, icon, and gradient. `tags`, `featured`, and `image`
-   are optional.
-3. Set `image` to a public URL path (for example, `/images/blog/build-guide.webp`)
-   if you want an image instead of the card's icon and gradient.
+   excerpt, date, read time, icon, and gradient. `tags`, `featured`, `image`,
+   and `content` are optional.
+3. Add a `content` array (one string per paragraph) to turn a card into a
+   clickable article page at `/blog/<slug>`. Posts without `content` stay as
+   plain cards with no link.
+4. Set `image` to a public URL path (for example,
+   `/images/blog/build-guide.webp`) to show an image instead of the card's icon
+   and gradient.
 
-The home page currently shows blog previews. It does not include individual
-article pages; the related TODO in `components/Blog/page.tsx` is documented in
-[the integrations guide](integrations.md).
+The included article text is sample content. Replace it with your own before
+launching the store.
 
 ## Offers and promo codes
 
@@ -150,13 +158,6 @@ imports and font setup there, then update any font-family references or CSS
 variables used by the app. Keep the relevant font variables available on the
 root element.
 
-## Add a blog article
-
-Add the post to [`data/posts.ts`](../data/posts.ts) with a `content` array of
-paragraphs. Posts with `content` become clickable article pages automatically.
-Replace the included sample article text with your buyer's own content before
-launching the store.
-
 ## Add a home page section or a route
 
 To add a section to the home page, create a component under `components/` using
@@ -192,3 +193,10 @@ control the separate sky and amber gradient ends, semantic red, emerald, amber,
 or pink colors, or the dark surface colors used elsewhere in the UI. A brand
 palette needing additional shades can add more `--color-brand-primary-*` or
 `--color-brand-accent-*` entries to the `@theme` block.
+
+
+## Change the site icon
+
+Replace `app/icon.svg` with your own icon (SVG, PNG or ICO). You can also add
+`app/favicon.ico`. Next.js picks these files up automatically. The placeholder
+icon uses fixed colors and does not follow the brand color tokens.
