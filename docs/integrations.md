@@ -14,7 +14,7 @@ The source TODOs are called out here so you can plan the real implementations.
 | Promo code validation | Promo codes are checked in client-side code and can be changed by a browser user. | Re-check the code, eligibility, and discount on the server when creating the order. Never trust the discount amount supplied by the browser. |
 | Cart prices and totals | Product prices, shipping, tax, discounts, and totals are calculated in client-side code. | Load trusted product prices and availability and recalculate discount, shipping, tax, and total on the server before accepting payment. |
 | Footer payment badges | The badges are generic placeholders, not a statement of the payment methods configured for a merchant. | Replace them with accurate payment methods after connecting a provider. |
-| Blog article links | Blog cards are previews; individual article pages have not been created. | Add article routes before linking cards to them. |
+| Blog articles | Posts that have a `content` array open as article pages at `/blog/<slug>`. Posts without `content` stay as plain cards with no link. The sample article text is placeholder content. | Replace the sample articles with your own, or load posts from a CMS or database. Add `content` to each post you want to publish. | Add article routes before linking cards to them. |
 | Policy links | Footer destinations exist, but their legal text is sample content and must be replaced and reviewed. | Publish your own policies and verify each linked legal route before launch. |
 
 ## Source TODO locations
@@ -30,7 +30,6 @@ The source TODOs are called out here so you can plan the real implementations.
   [`components/Cart/page.tsx`](../components/Cart/page.tsx),
   [`components/Cart/CartContext.tsx`](../components/Cart/CartContext.tsx), and
   [`components/Cart/cart-config.ts`](../components/Cart/cart-config.ts)
-- Blog article routes: [`components/Blog/page.tsx`](../components/Blog/page.tsx)
 - Sample legal notice: [`components/Legal/legal-content.ts`](../components/Legal/legal-content.ts)
 
 ## Payment safety
